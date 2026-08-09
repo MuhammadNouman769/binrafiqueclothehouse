@@ -14,76 +14,13 @@ class NewsletterSubscriber(BaseModel):
         return self.email
 
 
-
 class HeroBanner(BaseModel):
     """
-    Simple Hero Banner for homepage
+    Simple Hero Banner - Only Image
     """
-    title = models.CharField(
-        max_length=200,
-        help_text="Main heading for the banner"
-    )
-    
-    description = models.TextField(
-        blank=True,
-        help_text="Description text"
-    )
-    
     image = models.ImageField(
         upload_to='hero_banners/',
         help_text="Banner image (recommended: 1920x800)"
-    )
-    
-    button_text = models.CharField(
-        max_length=50,
-        default="Shop Now",
-        help_text="Button text"
-    )
-    
-    
-    display_order = models.PositiveSmallIntegerField(
-        default=0,
-        help_text="Lower number = higher priority"
-    )
-
-    class Meta:
-        db_table = "hero_banners"
-        verbose_name = "Hero Banner"
-        verbose_name_plural = "Hero Banners"
-        ordering = ["display_order", "-created_at"]
-
-    def __str__(self):
-        return self.title
-class HeroBanner(BaseModel):
-    """
-    Simple Hero Banner for homepage
-    """
-    title = models.CharField(
-        max_length=200,
-        help_text="Main heading for the banner"
-    )
-    
-    description = models.TextField(
-        blank=True,
-        help_text="Description text"
-    )
-    
-    image = models.ImageField(
-        upload_to='hero_banners/',
-        help_text="Banner image (recommended: 1920x800)"
-    )
-    
-    button_text = models.CharField(
-        max_length=50,
-        default="Shop Now",
-        help_text="Button text"
-    )
-    
-    button_url = models.CharField(
-        max_length=200,
-        blank=True,
-        default="#",
-        help_text="Button link URL"
     )
     
     display_order = models.PositiveSmallIntegerField(
@@ -98,4 +35,11 @@ class HeroBanner(BaseModel):
         ordering = ["display_order", "-created_at"]
 
     def __str__(self):
-        return self.title        
+        return f"Banner {self.id}"
+    
+    def image_preview(self):
+        if self.image:
+            return f'<img src="{self.image.url}" width="100" height="50" style="object-fit:cover;" />'
+        return "No Image"
+    image_preview.allow_tags = True
+    image_preview.short_description = "Image Preview"

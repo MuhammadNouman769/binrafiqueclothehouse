@@ -1,9 +1,6 @@
 from django.contrib import admin
-from .models import NewsletterSubscriber
-
+from .models import NewsletterSubscriber, HeroBanner
 from django.utils.safestring import mark_safe
-from apps.main.models import HeroBanner
-
 
 
 @admin.register(NewsletterSubscriber)
@@ -14,30 +11,22 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_editable = ('is_active',)
 
 
-
 @admin.register(HeroBanner)
 class HeroBannerAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'image_preview',
-        'title',
         'display_order',
-        'is_active',
+        'created_at',
     )
     
     list_filter = ('is_active',)
-    search_fields = ('title', 'description')
-    list_editable = ('display_order', 'is_active')
+    list_editable = ('display_order',)
+    search_fields = ('id',)
     
     fieldsets = (
-        ('Content', {
-            'fields': ('title', 'description')
-        }),
         ('Image', {
             'fields': ('image', 'image_preview')
-        }),
-        ('Button', {
-            'fields': ('button_text',)  
         }),
         ('Settings', {
             'fields': ('display_order', 'is_active')
@@ -50,7 +39,13 @@ class HeroBannerAdmin(admin.ModelAdmin):
     def image_preview(self, obj):
         if obj and obj.image and obj.image.url:
             return mark_safe(
-                f'<img src="{obj.image.url}" width="150" height="80" style="object-fit:cover; border-radius:8px;">'
+                f'<img src="{obj.image.url}" width="200" height="120" style="object-fit:cover; border-radius:8px;">'
             )
-        return mark_safe('<span style="color: #999;">No image</span>')
-    image_preview.short_description = 'Preview'    
+        return mark_safe('<span style="color: #999;">No image uploaded</span>')
+    image_preview.short_description = 'Image Preview'
+    
+    def has_add_permission(self, request):
+        # Optional: Limit to only one banner if needed
+        # if HeroBanner.objects.count() >= 5:
+        #     return False
+        return super().has_add_permission(request)

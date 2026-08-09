@@ -13,47 +13,60 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 from decouple import config
 
+
 # ============================================
 # BASE DIRECTORY
 # ============================================
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # ============================================
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY
 # ============================================
+
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
+
+DEBUG = config("DEBUG", default=False, cast=bool)
+
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="127.0.0.1,localhost",
+    cast=lambda v: [s.strip() for s in v.split(",")],
+)
 
 
 # ============================================
 # EMAIL CONFIGURATION
 # ============================================
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
 
 # ============================================
 # INSTALLED APPS
 # ============================================
+
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
+    # Django apps
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+
     # Third-party apps
     "nested_admin",
-    "whitenoise.runserver_nostatic",  # WhiteNoise for static files
-    
+    "whitenoise.runserver_nostatic",
+
     # Local apps
     "apps.utils",
     "apps.main",
@@ -68,27 +81,30 @@ INSTALLED_APPS = [
 # ============================================
 # MIDDLEWARE
 # ============================================
+
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise - MUST be after SecurityMiddleware
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 
 # ============================================
 # URL CONFIGURATION
 # ============================================
-ROOT_URLCONF = 'core.urls'
+
+ROOT_URLCONF = "core.urls"
 
 
 # ============================================
 # TEMPLATES
 # ============================================
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -100,6 +116,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+
+                # Custom context processors
                 "apps.products.context_processors.menu_categories",
                 "apps.whatspp.context_processors.site_settings",
             ],
@@ -111,49 +129,38 @@ TEMPLATES = [
 # ============================================
 # WSGI APPLICATION
 # ============================================
-WSGI_APPLICATION = 'core.wsgi.application'
+
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # ============================================
-# DATABASE - PostgreSQL (PRODUCTION READY)
+# DATABASE - SQLite3
 # ============================================
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='hadisports_db'),
-        'USER': config('DB_USER', default='hadisports_user'),
-        'PASSWORD': config('DB_PASSWORD', default='hadisports@gmail.com'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-# ============================================
-# DATABASE - SQLite3 (Development - Commented)
-# ============================================
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # ============================================
 # PASSWORD VALIDATION
 # ============================================
+
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -161,47 +168,56 @@ AUTH_PASSWORD_VALIDATORS = [
 # ============================================
 # INTERNATIONALIZATION
 # ============================================
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Karachi'  # Changed to Pakistan time
+
+LANGUAGE_CODE = "en-us"
+
+TIME_ZONE = "Asia/Karachi"
+
 USE_I18N = True
+
 USE_TZ = True
 
 
 # ============================================
-# STATIC FILES (CSS, JavaScript, Images)
+# STATIC FILES
 # ============================================
+
 STATIC_URL = "/static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# WhiteNoise Storage for static files (production)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WhiteNoise storage
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 
 # ============================================
-# MEDIA FILES (Uploaded by users)
+# MEDIA FILES
 # ============================================
-MEDIA_URL = "media/"
+
+MEDIA_URL = "/media/"
+
 MEDIA_ROOT = BASE_DIR / "media"
-
-
 
 
 # ============================================
 # DEFAULT PRIMARY KEY FIELD TYPE
 # ============================================
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# settings.py ke end mein
+# ============================================
+# WHITENOISE / MEDIA SUPPORT
+# ============================================
+
 if not DEBUG:
-    # Whitenoise media files support (optional)
     WHITENOISE_USE_FINDERS = True
-    
-    # For media files (not recommended, but works)
+
     STATICFILES_DIRS = [
-        BASE_DIR / 'static',
-        BASE_DIR / 'media',  # Media files ko bhi serve karega
+        BASE_DIR / "static",
+        BASE_DIR / "media",
     ]

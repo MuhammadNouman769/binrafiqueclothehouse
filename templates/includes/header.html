@@ -64,190 +64,29 @@
                             <i class="fas fa-home me-1" aria-hidden="true"></i> Home
                         </a>
                         
-                        <!-- Products Mega Menu -->
-                        <div class="nav-item mega-dropdown" id="productsMegaMenu">
-                            <div class="mobile-menu-head">
-                                <a href="{% url 'products:product-list' %}" 
-                                   class="nav-link {% if 'product' in request.path %}active{% endif %}">
-                                    <i class="fas fa-box me-1" aria-hidden="true"></i> Products
-                                </a>
-                                <button type="button" 
-                                        class="submenu-btn d-xl-none" 
-                                        aria-label="Toggle products submenu"
-                                        aria-expanded="false"
-                                        data-target="productsMegaMenu">
-                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            
-                            {% if menu_categories %}
-                            <div class="dropdown-menu mega-menu" role="menu">
-                                <div class="row g-2">
-                                    {% for category in menu_categories %}
-                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                        <div class="mega-category">
-                                            <div class="mega-category-title">
-                                                <i class="fas fa-tag" aria-hidden="true"></i> 
-                                                {{ category.title }}
-                                            </div>
-                                            
-                                            {% for child in category.children.all|slice:":6" %}
-                                            <a href="{% url 'products:product-list' %}?category={{ child.slug }}" 
-                                               class="mega-link"
-                                               role="menuitem">
-                                                {{ child.title }}
-                                            </a>
-                                            {% endfor %}
-                                            
-                                            {% if category.children.count > 6 %}
-                                            <a href="{% url 'products:product-list' %}?category={{ category.slug }}" 
-                                               class="mega-link view-more"
-                                               role="menuitem">
-                                                View More →
-                                            </a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="dropdown-menu mega-menu">
-                                <div class="text-muted p-3 text-center">No categories available</div>
-                            </div>
-                            {% endif %}
-                        </div>
+                        <!-- Products - Simple link without mega menu -->
+                        <a href="{% url 'products:product-list' %}" 
+                           class="nav-item nav-link {% if 'product' in request.path %}active{% endif %}">
+                            <i class="fas fa-box me-1" aria-hidden="true"></i> Products
+                        </a>
+                        
+                        <!-- Footwear - Simple link -->
+                        <a href="{% url 'products:product-list' %}?category=footwear" 
+                           class="nav-item nav-link">
+                            <i class="fas fa-shoe-prints me-1" aria-hidden="true"></i> Footwear
+                        </a>
 
-                        <!-- Footwear Dropdown -->
-                        <div class="nav-item dropdown-simple">
-                            <a href="#" 
-                               class="nav-link dropdown-toggle" 
-                               data-bs-toggle="dropdown" 
-                               role="button"
-                               aria-expanded="false"
-                               aria-haspopup="true">
-                                <i class="fas fa-shoe-prints me-1" aria-hidden="true"></i> Footwear
-                            </a>
-                            <div class="dropdown-menu" role="menu">
-                                {% for category in menu_categories %}
-                                    {% for child in category.children.all %}
-                                        {% if 'footwear' in child.slug or 'shoe' in child.slug or 'boot' in child.slug %}
-                                        <a href="{% url 'products:product-list' %}?category={{ child.slug }}" 
-                                           class="dropdown-item"
-                                           role="menuitem">
-                                            <i class="fas fa-shoe-prints me-2 text-primary" aria-hidden="true"></i> 
-                                            {{ child.title }}
-                                        </a>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% empty %}
-                                <span class="dropdown-item text-muted">No footwear available</span>
-                                {% endfor %}
-                            </div>
-                        </div>
+                        <!-- Accessories - Simple link -->
+                        <a href="{% url 'products:product-list' %}?category=accessories" 
+                           class="nav-item nav-link">
+                            <i class="fas fa-cog me-1" aria-hidden="true"></i> Accessories
+                        </a>
 
-                        <!-- Accessories Mega Menu -->
-                        <div class="nav-item mega-dropdown" id="accessoriesMegaMenu">
-                            <div class="mobile-menu-head">
-                                <a href="#" 
-                                   class="nav-link dropdown-toggle d-xl-block d-none"
-                                   data-bs-toggle="dropdown"
-                                   role="button"
-                                   aria-expanded="false">
-                                    <i  aria-hidden="true"></i> Accessories
-                                </a>
-                                <a href="#" 
-                                   class="nav-link d-xl-none">
-                                    <i  aria-hidden="true"></i> Accessories
-                                </a>
-                                <button type="button" 
-                                        class="submenu-btn d-xl-none" 
-                                        aria-label="Toggle accessories submenu"
-                                        aria-expanded="false"
-                                        data-target="accessoriesMegaMenu">
-                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                            
-                            {% if menu_categories %}
-                            <div class="dropdown-menu mega-menu" role="menu">
-                                <div class="row g-2">
-                                    {% with accessory_slugs='accessor bag cap watch goggle towel bottle sock tool' %}
-                                    {% for category in menu_categories %}
-                                        {% with category_slug=category.slug|lower %}
-                                        {% if 'accessor' in category_slug or 'bag' in category_slug or 'cap' in category_slug or 'watch' in category_slug or 'goggle' in category_slug or 'towel' in category_slug or 'bottle' in category_slug or 'sock' in category_slug or 'tool' in category_slug %}
-                                        <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                            <div class="mega-category">
-                                                <div class="mega-category-title">
-                                                    <i class="fas fa-tag" aria-hidden="true"></i> 
-                                                    {{ category.title }}
-                                                </div>
-                                                
-                                                {% for child in category.children.all|slice:":6" %}
-                                                <a href="{% url 'products:product-list' %}?category={{ child.slug }}" 
-                                                   class="mega-link"
-                                                   role="menuitem">
-                                                    {{ child.title }}
-                                                </a>
-                                                {% endfor %}
-                                                
-                                                {% if category.children.count > 6 %}
-                                                <a href="{% url 'products:product-list' %}?category={{ category.slug }}" 
-                                                   class="mega-link view-more"
-                                                   role="menuitem">
-                                                    View More →
-                                                </a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% endwith %}
-                                    {% endfor %}
-                                    {% endwith %}
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="dropdown-menu mega-menu">
-                                <div class="text-muted p-3 text-center">No accessories available</div>
-                            </div>
-                            {% endif %}
-                        </div>
-
-                        <!-- Services Dropdown -->
-                        <div class="nav-item dropdown-simple">
-                            <a href="{% url 'main:services' %}" 
-                               class="nav-link dropdown-toggle" 
-                               data-bs-toggle="dropdown"
-                               role="button"
-                               aria-expanded="false"
-                               aria-haspopup="true">
-                                <i class="fas fa-tools me-1" aria-hidden="true"></i> Services
-                            </a>
-                            <div class="dropdown-menu" style="min-width: 250px;" role="menu">
-                                <a href="{% url 'main:services' %}#cricket" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-cricket-ball me-2 text-primary" aria-hidden="true"></i> Cricket Services
-                                </a>
-                                <a href="{% url 'main:services' %}#racket" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-table-tennis me-2 text-primary" aria-hidden="true"></i> Racket Sports
-                                </a>
-                                <a href="{% url 'main:services' %}#football" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-futbol me-2 text-primary" aria-hidden="true"></i> Football Services
-                                </a>
-                                <a href="{% url 'main:services' %}#hockey" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-hockey-stick me-2 text-primary" aria-hidden="true"></i> Hockey Services
-                                </a>
-                                <a href="{% url 'main:services' %}#boxing" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-fist-raised me-2 text-primary" aria-hidden="true"></i> Boxing/MMA Services
-                                </a>
-                                <div class="dropdown-divider" role="separator"></div>
-                                <a href="{% url 'main:services' %}#custom" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-paint-brush me-2 text-primary" aria-hidden="true"></i> Custom Services
-                                </a>
-                                <a href="{% url 'contact:contact' %}" class="dropdown-item" role="menuitem">
-                                    <i class="fas fa-headset me-2 text-primary" aria-hidden="true"></i> Book Appointment
-                                </a>
-                            </div>
-                        </div>
+                        <!-- Services - Simple link -->
+                        <a href="{% url 'main:services' %}" 
+                           class="nav-item nav-link {% if 'services' in request.path %}active{% endif %}">
+                            <i class="fas fa-tools me-1" aria-hidden="true"></i> Services
+                        </a>
 
                         <!-- Contact Us -->
                         <a href="{% url 'contact:contact' %}" 
@@ -374,79 +213,21 @@
     </div>
 </header>
 
-
 <!-- ======================================== -->
-<!-- SEARCH JAVASCRIPT - FIXED VERSION -->
+<!-- SEARCH JAVASCRIPT - SIMPLIFIED -->
 <!-- ======================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
     
-    // ============================
-    // SPINNER HANDLING
-    // ============================
+    // Spinner handling
     const spinner = document.getElementById('spinner');
     if (spinner) {
         spinner.classList.remove('show');
         spinner.classList.add('d-none');
     }
 
-    // ============================
-    // SUBMENU BUTTON TOGGLE (Fixed)
-    // ============================
-    document.querySelectorAll(".submenu-btn").forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Toggle button active state
-            this.classList.toggle("active");
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.style.transform = this.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
-            }
-            
-            // Find parent mega-dropdown and toggle
-            const parent = this.closest(".mega-dropdown");
-            if (parent) {
-                parent.classList.toggle("show");
-                
-                // Update aria-expanded
-                const isExpanded = parent.classList.contains('show');
-                this.setAttribute('aria-expanded', isExpanded);
-                
-                // Find and toggle the mega menu
-                const menu = parent.querySelector(".mega-menu");
-                if (menu) {
-                    menu.style.display = isExpanded ? 'block' : 'none';
-                }
-            }
-        });
-    });
-
-    // ============================
-    // DROPDOWN TOGGLE FOR MOBILE
-    // ============================
-    document.querySelectorAll('.dropdown-simple .dropdown-toggle').forEach(function(toggle) {
-        toggle.addEventListener('click', function(e) {
-            if (window.innerWidth <= 991.98) {
-                e.preventDefault();
-                const parent = this.closest('.dropdown-simple');
-                if (parent) {
-                    parent.classList.toggle('show');
-                    const menu = parent.querySelector('.dropdown-menu');
-                    if (menu) {
-                        menu.style.display = parent.classList.contains('show') ? 'block' : 'none';
-                    }
-                    this.setAttribute('aria-expanded', parent.classList.contains('show'));
-                }
-            }
-        });
-    });
-
-    // ============================
-    // SEARCH FUNCTIONALITY - FIXED
-    // ============================
+    // Search functionality
     const searchInput = document.getElementById('headerSearchInput');
     const suggestionsDiv = document.getElementById('searchSuggestions');
     const suggestionsList = document.getElementById('suggestionsList');
@@ -552,15 +333,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ========================================
-    // FETCH SUGGESTIONS - FIXED URL
-    // ========================================
+    // Fetch suggestions
     function fetchSuggestions(query) {
         if (isProcessing) return;
         isProcessing = true;
         
-        // FIXED: Use the correct URL pattern name with underscore
-        // Using a dynamic approach to avoid template tag issues in JavaScript
         const searchUrl = window.searchSuggestionsUrl || '/products/search-suggestions/';
         const url = searchUrl + '?q=' + encodeURIComponent(query);
         
@@ -605,9 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ========================================
-    // RENDER SUGGESTIONS
-    // ========================================
+    // Render suggestions
     function renderSuggestions(suggestions) {
         let html = '';
         
@@ -660,9 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ========================================
-    // HIGHLIGHT SEARCH TERM
-    // ========================================
+    // Highlight search term
     function highlightName(name) {
         const query = searchInput.value.trim();
         if (!query) return name;
@@ -675,9 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ========================================
-    // UPDATE SELECTED ITEM
-    // ========================================
+    // Update selected item
     function updateSelectedItem(items, index) {
         items.forEach(function(item, i) {
             if (i === index) {
@@ -693,9 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ========================================
-    // UTILITY FUNCTIONS
-    // ========================================
+    // Utility functions
     function escapeHtml(text) {
         if (!text) return '';
         const div = document.createElement('div');
@@ -709,9 +478,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ========================================
-// SET SEARCH URL IN WINDOW OBJECT
-// This avoids Django template tag issues in JavaScript
-// ========================================
+// Set search URL in window object
 window.searchSuggestionsUrl = "{% url 'products:search_suggestions' %}";
 </script>
