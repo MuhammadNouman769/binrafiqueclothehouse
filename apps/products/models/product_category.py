@@ -5,12 +5,33 @@ from apps.utils.models import SlugModel
 
 """
 ===============================================================================
-                            PRODUCT CATEGORY
+                        PRODUCT CATEGORY
+===============================================================================
+
+Product category hierarchy.
+
+Example:
+
+Sports
+├── Cricket
+│   ├── Cricket Bats
+│   └── Cricket Gloves
+│
+└── Badminton
+    ├── Badminton Rackets
+    └── Badminton Shoes
+
+When a parent category is deleted:
+• Its child categories are deleted.
+• Products belonging to those categories are deleted.
+• Related objects will follow their own on_delete rules.
+
 ===============================================================================
 """
 
 
 class ProductCategory(SlugModel):
+
     title = models.CharField(
         max_length=150,
         db_index=True,
@@ -23,7 +44,7 @@ class ProductCategory(SlugModel):
 
     parent = models.ForeignKey(
         "self",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="children",
         blank=True,
         null=True,
@@ -80,7 +101,9 @@ class ProductCategory(SlugModel):
             from django.core.exceptions import ValidationError
 
             raise ValidationError(
-                {"parent": "Category cannot be its own parent."}
+                {
+                    "parent": "Category cannot be its own parent."
+                }
             )
 
     # ------------------------------------------------------------------
@@ -97,4 +120,5 @@ class ProductCategory(SlugModel):
     def __str__(self):
         if self.parent:
             return f"{self.parent.title} → {self.title}"
+
         return self.title

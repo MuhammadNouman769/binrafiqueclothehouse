@@ -11,18 +11,16 @@ from apps.products.models.product_category import ProductCategory
 
 Stores only product-level information.
 
-Examples
---------
-Nike Air Max
-Adidas Football
-Yonex Astrox 99
+Examples:
+• Nike Air Max
+• Adidas Football
+• Yonex Astrox 99
 
 Variant-specific data like:
-
-    • Price
-    • Color
-    • Size
-    • Images
+• Price
+• Color
+• Size
+• Images
 
 belongs to ProductVariant.
 
@@ -31,9 +29,10 @@ belongs to ProductVariant.
 
 
 class Product(SlugModel):
+
     category = models.ForeignKey(
         ProductCategory,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="products",
     )
 
@@ -59,13 +58,15 @@ class Product(SlugModel):
     is_featured = models.BooleanField(
         default=False,
     )
+
     is_new_arrival = models.BooleanField(
         default=False,
-        help_text="Check this to show product in New Arrivals section"
+        help_text="Check this to show product in New Arrivals section",
     )
+
     is_bestseller = models.BooleanField(
         default=False,
-        help_text="Check this to show product in Bestseller section"
+        help_text="Check this to show product in Bestseller section",
     )
 
     class Meta:
