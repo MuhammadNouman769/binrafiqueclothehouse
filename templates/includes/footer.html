@@ -1,9 +1,10 @@
 {% load static %}
 
 <style>
-.logo-img{
-    height: 80px!important;
+.logo-img {
+    height: 75px !important;
     width: auto;
+    filter: brightness(0) invert(1); /* Makes logo white for dark footer */
 }
 
 /* ========================================
@@ -15,7 +16,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     z-index: 99999;
     display: none;
@@ -30,14 +31,14 @@
 
 .newsletter-popup {
     background: #ffffff;
-    border-radius: 24px;
+    border-radius: 20px;
     padding: 50px 40px;
     max-width: 450px;
     width: 90%;
     text-align: center;
     position: relative;
     animation: slideUp 0.4s ease;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
 }
 
 @keyframes fadeIn {
@@ -59,14 +60,14 @@
 .newsletter-popup .icon-wrapper {
     width: 80px;
     height: 80px;
-    background: #f0fdf4;
+    background: #f8f4eb;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
     font-size: 40px;
-    color: #81c408;
+    color: #c9a84c;
 }
 
 .newsletter-popup .icon-wrapper.error {
@@ -77,19 +78,19 @@
 .newsletter-popup h3 {
     font-size: 24px;
     font-weight: 700;
-    color: #1a202c;
+    color: #1a1a1a;
     margin-bottom: 10px;
 }
 
 .newsletter-popup p {
-    color: #6c757d;
+    color: #666;
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 25px;
 }
 
 .newsletter-popup .btn-close-popup {
-    background: #81c408;
+    background: #1a1a1a;
     color: #ffffff;
     border: none;
     padding: 12px 40px;
@@ -101,9 +102,10 @@
 }
 
 .newsletter-popup .btn-close-popup:hover {
-    background: #6a9e06;
+    background: #c9a84c;
+    color: #1a1a1a;
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(129, 196, 8, 0.3);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
 }
 
 .newsletter-popup .btn-close-popup.error {
@@ -127,7 +129,7 @@
 }
 
 .newsletter-popup .close-icon:hover {
-    color: #1a202c;
+    color: #1a1a1a;
     transform: rotate(90deg);
 }
 
@@ -148,23 +150,28 @@
 }
 
 /* ========================================
-   FOOTER STYLES
+   FOOTER STYLES (Exclusive Luxury Black & Gold Theme)
 ======================================== */
 .footer {
-    background: #1a202c;
-    color: rgba(255, 255, 255, 0.7);
+    background: #111111; /* Deep Black */
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Inter', sans-serif;
+    border-top: 2px solid #c9a84c; /* Premium Gold Border Top */
 }
 
 .footer .border-bottom {
-    border-color: rgba(129, 196, 8, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .footer .footer-item h4 {
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 20px;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
 }
 
 .footer .footer-item h4::after {
@@ -172,34 +179,34 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px;
+    width: 30px;
     height: 2px;
-    background: #81c408;
+    background: #c9a84c; /* Gold Underline */
 }
 
 .footer .footer-item p {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     line-height: 1.8;
     font-size: 14px;
 }
 
 .footer .btn-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    padding: 5px 0;
+    padding: 6px 0;
     display: inline-block;
     transition: all 0.3s ease;
     font-size: 14px;
 }
 
 .footer .btn-link:hover {
-    color: #81c408;
+    color: #c9a84c;
     padding-left: 8px;
 }
 
 .footer .btn-link i {
     margin-right: 8px;
-    color: #81c408;
+    color: #c9a84c;
     font-size: 12px;
 }
 
@@ -217,11 +224,11 @@
 }
 
 .footer .social-icons .btn:hover {
-    background: #81c408;
-    border-color: #81c408;
-    color: #ffffff;
+    background: #c9a84c;
+    border-color: #c9a84c;
+    color: #111111;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(129, 196, 8, 0.3);
+    box-shadow: 0 5px 15px rgba(201, 168, 76, 0.3);
 }
 
 .footer .newsletter-input {
@@ -235,7 +242,7 @@
 
 .footer .newsletter-input:focus {
     background: rgba(255, 255, 255, 0.08);
-    border-color: #81c408;
+    border-color: #c9a84c;
     box-shadow: none;
     color: #ffffff;
 }
@@ -245,62 +252,63 @@
 }
 
 .footer .newsletter-btn {
-    background: #81c408;
+    background: #c9a84c;
     border: none;
-    color: #ffffff;
+    color: #111111;
     padding: 12px 25px;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .footer .newsletter-btn:hover {
-    background: #6a9e06;
+    background: #b8973a;
+    color: #111111;
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(129, 196, 8, 0.3);
+    box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
 }
 
 .footer .contact-item {
-    
+    display: flex;
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 12px;
 }
 
 .footer .contact-item i {
-    color: #81c408;
+    color: #c9a84c;
     font-size: 18px;
     margin-top: 3px;
     min-width: 20px;
 }
 
 .footer .contact-item .text {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
     line-height: 1.6;
 }
 
 /* Copyright */
 .copyright {
-    background: #141a24;
+    background: #080808;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 20px 0;
+    padding: 25px 0;
 }
 
 .copyright .text {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 14px;
 }
 
 .copyright .text a {
-    color: #81c408;
+    color: #c9a84c;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 .copyright .text a:hover {
-    color: #6a9e06;
+    color: #b8973a;
 }
 
 .copyright .text .heart {
@@ -315,8 +323,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #81c408;
-    color: #ffffff;
+    background: #c9a84c;
+    color: #111111;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -326,7 +334,7 @@
     transition: all 0.3s ease;
     z-index: 999;
     border: none;
-    box-shadow: 0 5px 20px rgba(129, 196, 8, 0.3);
+    box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
 }
 
 .back-to-top.show {
@@ -335,10 +343,10 @@
 }
 
 .back-to-top:hover {
-    background: #6a9e06;
-    color: #ffffff;
+    background: #b8973a;
+    color: #111111;
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(129, 196, 8, 0.4);
+    box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
 }
 
 /* Responsive */
@@ -384,12 +392,12 @@
     <div class="container-fluid footer pt-5">
         <div class="container py-5">
             <!-- Top Section -->
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(129, 196, 8, 0.3);">
+            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
                 <div class="row g-4 align-items-center">
                     <!-- Logo -->
                     <div class="col-lg-3 col-md-12 text-center text-lg-start">
                         <a href="{% url 'products:home-view' %}">
-                            <img src="{% static 'logos/logo-.png' %}" class="logo-img" alt="Hadi Sports">
+                            <img src="{% static 'logos/logo-.png' %}" class="logo-img" alt="Bin Rafique Clothe House">
                         </a>
                     </div>
                     
@@ -418,19 +426,19 @@
                     <!-- Social Icons -->
                     <div class="col-lg-3 col-md-12">
                         <div class="social-icons d-flex justify-content-center justify-content-lg-end">
-                            <a class="btn" style="color: #ffc107; border: 1px solid #ffc107; border-radius: 50%;" href="#" aria-label="Facebook">
+                            <a class="btn" href="#" aria-label="Facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a class="btn" style="color: #ffc107; border: 1px solid #ffc107;border-radius: 50%;" href="#" aria-label="Twitter">
+                            <a class="btn" href="#" aria-label="Twitter">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a class="btn" style="color: #ffc107; border: 1px solid #ffc107; border-radius: 50%;" href="#" aria-label="Instagram">
+                            <a class="btn" href="#" aria-label="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a class="btn" style="color: #ffc107; border: 1px solid #ffc107; border-radius: 50%;" href="#" aria-label="YouTube">
+                            <a class="btn" href="#" aria-label="YouTube">
                                 <i class="fab fa-youtube"></i>
                             </a>
-                            <a class="btn" style="color: #ffc107; border: 1px solid #ffc107; border-radius: 50%;" href="#" aria-label="LinkedIn">
+                            <a class="btn" href="#" aria-label="LinkedIn">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
@@ -443,8 +451,8 @@
                 <!-- About -->
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
-                        <h4>About Hadi Sports</h4>
-                        <p>Hadi Sports is Pakistan's leading sports retailer, offering high-quality sports equipment, footwear, and accessories for athletes and sports enthusiasts.</p>
+                        <h4>About Us</h4>
+                        <p>Bin Rafique Clothe House is a premier fashion destination, offering high-quality unstitched fabrics, ready-to-wear collections, and premium accessories for men, women, and teens.</p>
                         <a href="#" class="btn-link">
                             <i class="fas fa-arrow-right"></i> Read More
                         </a>
@@ -501,7 +509,7 @@
                         <h4>Get In Touch</h4>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span class="text">info@hadisports.com</span>
+                            <span class="text">info@binrafique.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone-alt"></i>
@@ -509,7 +517,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <span class="text">Mon - Sat: 9:00 AM - 9:00 PM</span>
+                            <span class="text">Mon - Sat: 10:00 AM - 9:00 PM</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
@@ -529,7 +537,7 @@
                 <div class="col-md-6 text-center text-md-start">
                     <span class="text">
                         <i class="fas fa-copyright me-1"></i>
-                        2026 <a href="{% url 'products:home-view' %}">Hadi Sports</a>. 
+                        2026 <a href="{% url 'products:home-view' %}">Bin Rafique Clothe House</a>. 
                         All Rights Reserved.
                     </span>
                 </div>
@@ -562,7 +570,7 @@
             <i class="fas fa-check-circle"></i>
         </div>
         <h3 id="popupTitle">🎉 Subscribed Successfully!</h3>
-        <p id="popupMessage">Thank you for subscribing to our newsletter. You'll receive the latest updates and offers.</p>
+        <p id="popupMessage">Thank you for subscribing to Bin Rafique Clothe House. You'll receive the latest fashion updates and exclusive offers.</p>
         <button class="btn-close-popup" id="popupButton" onclick="closeNewsletterPopup()">
             <i class="fas fa-thumbs-up me-2"></i> Great!
         </button>
