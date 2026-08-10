@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 
 from apps.products.models.product import Product
 from apps.products.models.product_category import ProductCategory
@@ -12,7 +13,6 @@ from apps.products.models.product_variant import ProductVariant
 from apps.products.models.variant_image import VariantImage
 from apps.testimonials.models.testimonial import Testimonial
 from apps.main.models import HeroBanner
-from django.views.decorators.http import require_GET
 
 
 """ ========================= Home View ========================= """
@@ -23,7 +23,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         # ------------------------------------------------------
-        # Variant Query
+        # Variant & Product Queries
         # ------------------------------------------------------
 
         variant_queryset = (
@@ -39,10 +39,6 @@ class HomeView(TemplateView):
             .order_by("-is_default", "position", "id")
         )
 
-        # ------------------------------------------------------
-        # Product Query
-        # ------------------------------------------------------
-
         product_queryset = (
             Product.objects.filter(is_active=True)
             .select_related("category")
@@ -52,9 +48,8 @@ class HomeView(TemplateView):
         )
 
         # ------------------------------------------------------
-        # Parent Categories (for featured tabs only)
+        # Parent Categories (for header tabs)
         # ------------------------------------------------------
-
         parent_categories = (
             ProductCategory.objects.filter(
                 parent__isnull=True,
@@ -76,70 +71,72 @@ class HomeView(TemplateView):
         context["parent_categories"] = featured_parent_categories
 
         # ======================================================
-        # 1. FEATURED PRODUCTS
+        # 1. TRENDING PRODUCTS
         # ======================================================
-
-        context["featured_products"] = (
-            product_queryset.filter(is_featured=True)
+        context["trending_products"] = (
+            product_queryset.filter(trending=True)
             .order_by("-created_at")[:8]
         )
 
         # ======================================================
         # 2. CATEGORY WISE PRODUCTS (for tabs)
         # ======================================================
-
         category_products_list = []
-
         for category in featured_parent_categories:
             category_ids = [category.id]
             category_ids.extend(
                 category.children.filter(is_active=True).values_list("id", flat=True)
             )
-
             products = (
                 product_queryset.filter(category_id__in=category_ids)
                 .distinct()
                 .order_by("-created_at")[:8]
             )
-
             category_products_list.append({
                 "category": category,
                 "products": products,
             })
-
         context["category_products_list"] = category_products_list
 
         # ======================================================
-        # 3. NEW ARRIVALS
+        # 3. NEW ARRIVALS (DUAL LOGIC FOR DEBUGGING)
         # ======================================================
-
-        context["new_arrivals"] = (
-            product_queryset
-            .order_by("-created_at")[:8]
+        
+        # 3a. Strictly marked as New Arrival
+        new_arrivals_strict = list(
+            product_queryset.filter(is_new_arrival=True)
+            .order_by("-created_at")
         )
+        
+        # 3b. Fallback (Latest 8 products if strict count is low)
+        new_arrivals_fallback = list(
+            product_queryset.order_by("-created_at")[:8]
+        )
+
+        if new_arrivals_strict:
+            context["new_arrivals"] = new_arrivals_strict[:8]
+            print(f" DEBUG: Found {len(new_arrivals_strict)} New Arrival products!") # Check terminal
+        else:
+            context["new_arrivals"] = new_arrivals_fallback
+            print(f" DEBUG: No 'is_new_arrival' products found. Showing {len(new_arrivals_fallback)} Latest products instead.") # Check terminal
 
         # ======================================================
         # 4. BESTSELLER PRODUCTS
         # ======================================================
-        
-        # Get products marked as bestseller
         bestseller_products = list(
-            product_queryset.filter(
-                is_bestseller=True
-            ).order_by("-created_at")[:6]
+            product_queryset.filter(is_bestseller=True)
+            .order_by("-created_at")[:6]
         )
 
-        # If less than 6 bestsellers, fill with featured products
         if len(bestseller_products) < 6:
             needed = 6 - len(bestseller_products)
             additional = product_queryset.filter(
-                is_featured=True
+                trending=True
             ).exclude(
                 id__in=[p.id for p in bestseller_products]
             ).order_by("-created_at")[:needed]
             bestseller_products.extend(additional)
 
-        # If still less than 6, get latest products
         if len(bestseller_products) < 6:
             needed = 6 - len(bestseller_products)
             additional = product_queryset.exclude(
@@ -148,44 +145,23 @@ class HomeView(TemplateView):
             bestseller_products.extend(additional)
 
         context["bestseller_products"] = bestseller_products
-
-        # Get remaining products for second row of bestsellers
-        remaining_products = product_queryset.exclude(
+        context["bestseller_remaining"] = product_queryset.exclude(
             id__in=[p.id for p in bestseller_products]
         ).order_by("-created_at")[:4]
 
-        context["bestseller_remaining"] = remaining_products
+        # ======================================================
+        # 5. TESTIMONIALS & BANNERS
+        # ======================================================
+        context["testimonials"] = Testimonial.objects.filter(
+            is_active=True
+        ).order_by("display_order", "-created_at")[:10]
 
-        # ======================================================
-        # 5. LATEST PRODUCTS
-        # ======================================================
-
-        context["latest_products"] = (
-            product_queryset.order_by("-created_at")[:12]
-        )
-
-        # ======================================================
-        # TESTIMONIALS
-        # ======================================================
-        context["testimonials"] = (
-            Testimonial.objects.filter(
-                is_active=True
-            )
-            .order_by("display_order", "-created_at")[:10]
-        )
-
-
-        # ======================================================
-        # HERO BANNERS - Simple
-        # ======================================================
         context["hero_banners"] = HeroBanner.objects.filter(
             is_active=True
         ).order_by("display_order", "-created_at")
         
         return context
 
-
-        return context
 
 """ ========================= Product List View ========================= """
 class ProductListView(ListView):
@@ -216,11 +192,14 @@ class ProductListView(ListView):
             )
         )
 
-        # Category Filter
-        category_slug = self.request.GET.get("category")
-        if category_slug:
+        #  FIX: Category Filter (Handles both Slug and Title)
+        category_param = self.request.GET.get("category")
+        if category_param:
             try:
-                category = ProductCategory.objects.get(slug=category_slug, is_active=True)
+                category = ProductCategory.objects.get(
+                    Q(slug=category_param) | Q(title__iexact=category_param),
+                    is_active=True
+                )
                 category_ids = [category.id]
                 category_ids.extend(
                     category.children.filter(is_active=True).values_list("id", flat=True)
@@ -261,8 +240,8 @@ class ProductListView(ListView):
         context["category_slug"] = self.request.GET.get("category", "")
         return context
 
-""" ========================= Product Detail View ========================= """
 
+""" ========================= Product Detail View ========================= """
 class ProductDetailView(DetailView):
     model = Product
     template_name = "products/product_detail.html"
@@ -331,9 +310,8 @@ class ProductDetailView(DetailView):
 
         return context
 
+
 """ ========================= AJAX Search Suggestions View ========================="""
-
-
 @require_GET
 def search_suggestions(request):
     """

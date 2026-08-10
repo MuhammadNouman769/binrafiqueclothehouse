@@ -22,6 +22,7 @@ def menu_categories(request):
         .order_by("display_order", "title")
     )
     
+    #  FIX: Rename 'menu_categories' to 'header_categories' to avoid conflict
     return {
-        "menu_categories": categories,
+        "header_categories": categories,
     }

@@ -71,6 +71,7 @@ class ProductVariantInline(admin.TabularInline):
         "option2",
         "option3",
         "price",
+        "discount_price",  # ✅ Added
         "is_default",
         "position",
         "is_active",
@@ -89,6 +90,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
         "product",
         "variant_name",
         "price",
+        "discount_price",  # ✅ Added
         "image_preview",
         "is_default",
         "is_active",
@@ -113,6 +115,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
 
     list_editable = (
         "price",
+        "discount_price",  # ✅ Added
         "is_default",
         "is_active",
     )
@@ -151,6 +154,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "price",
+                    "discount_price",  # ✅ Added
                 ),
             },
         ),
@@ -159,6 +163,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
             "Settings",
             {
                 "fields": (
+                    "variant_name",    # ✅ Added to show cleanly in edit page
                     "position",
                     "is_default",
                     "is_active",

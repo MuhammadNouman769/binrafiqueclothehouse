@@ -1,483 +1,155 @@
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/header.css' %}">
+<!-- Fonts & Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<header>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status">
+<style>
+    /* SPINNER */
+    #spinner { z-index: 99999; }
+    .tr-header-wrapper { font-family: 'Inter', sans-serif; background: #ffffff; position: relative; border-bottom: 1px solid #e5e5e5; }
+    .tr-header-wrapper a { text-decoration: none; transition: color 0.2s ease; }
+    .tr-header-top { padding: 25px 0 15px 0; display: flex; align-items: center; justify-content: space-between; position: relative; }
+    .tr-nav-left { display: flex; gap: 25px; padding-left: 0; }
+    .tr-nav-left a { color: #1a1a1a; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .tr-nav-left a:hover { color: #000000; }
+    .tr-logo-center { position: absolute; left: 50%; transform: translateX(-50%); top: 12px; }
+    .tr-logo-center img { height: 55px; width: auto; max-width: 200px; object-fit: contain; }
+    .tr-nav-right { display: flex; gap: 25px; align-items: center; padding-right: 0; }
+    .tr-nav-right a, .tr-nav-right button { color: #1a1a1a; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; }
+    .tr-nav-right a:hover, .tr-nav-right button:hover { color: #000000; }
+    .tr-nav-right button i { font-size: 16px; }
+    .tr-bag-count { background: #c9a84c; color: #ffffff; border-radius: 50%; padding: 0 6px; font-size: 10px; height: 18px; min-width: 18px; display: inline-flex; align-items: center; justify-content: center; margin-left: -8px; margin-top: -12px; font-weight: 700; }
+    .tr-header-bottom { padding: 12px 0; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f0f0f0; }
+    .tr-flag { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #1a1a1a; text-transform: uppercase; }
+    .tr-flag img { height: 16px; width: auto; display: block; }
+    .tr-nav-sub { display: flex; gap: 30px; margin: 0 auto; }
+    .tr-nav-sub a { color: #1a1a1a; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tr-nav-sub a:hover { color: #000000; }
+    
+    .tr-mobile-toggle { display: none; background: none; border: none; font-size: 24px; color: #1a1a1a; padding: 5px; }
+    .tr-mobile-menu { display: none; flex-direction: column; padding: 10px 0; background: #ffffff; border-top: 1px solid #f0f0f0; }
+    .tr-mobile-menu.open { display: flex; }
+    .tr-mobile-menu a { padding: 12px 15px; color: #1a1a1a; font-weight: 500; text-transform: uppercase; font-size: 14px; border-bottom: 1px solid #f5f5f5; }
+
+    @media (max-width: 991px) {
+        .tr-nav-left, .tr-nav-right, .tr-nav-sub, .tr-flag { display: none; }
+        .tr-mobile-toggle { display: block; position: absolute; right: 15px; top: 22px; }
+        .tr-logo-center { position: relative; left: 0; transform: none; top: 0; margin: 0 auto; }
+        .tr-logo-center img { height: 45px; }
+        .tr-header-top { flex-direction: column; padding: 15px 0; gap: 10px; }
+        .tr-header-bottom { display: none; }
+    }
+
+    .tr-modal-content { border-radius: 12px; border: none; box-shadow: 0 15px 50px rgba(0,0,0,0.1); }
+    .tr-modal-header { border-bottom: 1px solid #f0f0f0; padding: 15px 20px; }
+    .tr-modal-body { padding: 20px; }
+    .tr-search-btn { background: #1a1a1a; color: #fff; border-radius: 0 50px 50px 0; padding: 10px 25px; border: none; }
+    .tr-search-input { border-radius: 50px 0 0 50px; border: 1px solid #e5e5e5; padding: 12px 20px; font-size: 15px; }
+    .tr-search-input:focus { box-shadow: none; border-color: #1a1a1a; }
+</style>
+
+<!-- ========================================================== -->
+<!-- HEADER HTML -->
+<!-- ========================================================== -->
+<header class="tr-header-wrapper">
+    
+    <!-- Spinner -->
+    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center" style="z-index: 99999;">
+        <div class="spinner-grow text-dark" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    <!-- Spinner End -->
 
-    <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
-        <div class="container topbar bg-color d-none d-lg-block">
-            <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
-                    <small class="me-3">
-                        <i class="fas fa-map-marker-alt me-2 i-s" aria-hidden="true"></i>
-                        <span class="text-white">Address: 297-C, P.I.A. Main Boulevard Road, Lahore Pakistan.</span>
-                    </small>
-                    <small class="me-3">
-                        <i class="fas fa-envelope me-2 i-s" aria-hidden="true"></i>
-                        <a href="mailto:Email@Example.com" class="text-white">Email@Example.com</a>
-                    </small>
+    <div class="container-fluid bg-white">
+        <div class="container position-relative">
+            <div class="tr-header-top">
+                <!-- Mobile Toggle -->
+                <button class="tr-mobile-toggle" id="trMobileToggle"><i class="fas fa-bars"></i></button>
+                
+                <!-- Left Nav -->
+                <nav class="tr-nav-left">
+                    <a href="{% url 'products:product-list' %}?category=women">Women</a>
+                    <a href="{% url 'products:product-list' %}?category=men">Men</a>
+                    <a href="{% url 'products:product-list' %}?category=GEN Z"> GEN Z</a>
+                    <a href="{% url 'products:product-list' %}?category=teens">Teens</a>
+                </nav>
+
+                <!-- Center Logo -->
+                <div class="tr-logo-center">
+                    <a href="{% url 'products:home-view' %}"><img src="{% static 'logos/logo-.png' %}" alt="Tahir Rafique"></a>
                 </div>
-                <div class="top-link pe-2">
-                    <a href="{% url 'main:privacy-policy' %}" class="text-white">
-                        <small class="text-white mx-2">Privacy Policy</small>
-                    </a>
-                    <span class="text-white">/</span>
-                    <a href="{% url 'main:terms-of-use' %}" class="text-white">
-                        <small class="text-white mx-2">Terms of Use</small>
-                    </a>
+
+                <!-- Right Icons -->
+                <div class="tr-nav-right">
+                    <button data-bs-toggle="modal" data-bs-target="#trSearchModal">SEARCH <i class="fas fa-search"></i></button>
                 </div>
             </div>
-        </div>
 
-        <div class="container px-0">
-            <nav class="navbar navbar-light bg-white navbar-expand-xl" aria-label="Main Navigation">
-                <a href="{% url 'products:home-view' %}" class="navbar-brand" aria-label="Home">
-                    <h1 class="text-primary display-6">
-                        <img src="{% static 'logos/logo-.png' %}" class="logo-img" alt="Company Logo">
-                    </h1>
-                </a>
-
-                <button class="navbar-toggler py-2 px-3" 
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse"
-                        aria-controls="navbarCollapse"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="fa fa-bars text-primary" aria-hidden="true"></span>
-                </button>
-
-                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <!-- Home -->
-                        <a href="{% url 'products:home-view' %}" 
-                           class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">
-                            <i class="fas fa-home me-1" aria-hidden="true"></i> Home
-                        </a>
-                        
-                        <!-- Products - Simple link without mega menu -->
-                        <a href="{% url 'products:product-list' %}" 
-                           class="nav-item nav-link {% if 'product' in request.path %}active{% endif %}">
-                            <i class="fas fa-box me-1" aria-hidden="true"></i> Products
-                        </a>
-                        
-                        <!-- Footwear - Simple link -->
-                        <a href="{% url 'products:product-list' %}?category=footwear" 
-                           class="nav-item nav-link">
-                            <i class="fas fa-shoe-prints me-1" aria-hidden="true"></i> Footwear
-                        </a>
-
-                        <!-- Accessories - Simple link -->
-                        <a href="{% url 'products:product-list' %}?category=accessories" 
-                           class="nav-item nav-link">
-                            <i class="fas fa-cog me-1" aria-hidden="true"></i> Accessories
-                        </a>
-
-                        <!-- Services - Simple link -->
-                        <a href="{% url 'main:services' %}" 
-                           class="nav-item nav-link {% if 'services' in request.path %}active{% endif %}">
-                            <i class="fas fa-tools me-1" aria-hidden="true"></i> Services
-                        </a>
-
-                        <!-- Contact Us -->
-                        <a href="{% url 'contact:contact' %}" 
-                           class="nav-item nav-link {% if 'contact' in request.path %}active{% endif %}">
-                            <i class="fas fa-envelope me-1" aria-hidden="true"></i> Contact Us
-                        </a>
-                    </div>
-
-                    <!-- Search Button -->
-                    <div class="d-flex m-3 me-0">
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white"
-                                data-bs-toggle="modal"
-                                data-bs-target="#searchModal"
-                                aria-label="Open search">
-                            <i class="fas fa-search bg-color" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            <!-- Mobile Menu (Hidden on desktop) -->
+            <div class="tr-mobile-menu" id="trMobileMenu">
+                <a href="{% url 'products:product-list' %}?category=women">Women</a>
+                <a href="{% url 'products:product-list' %}?category=men">Men</a>
+                <a href="{% url 'products:product-list' %}?category=GEN Z">GEN Z</a>
+                <a href="{% url 'products:product-list' %}?category=teens">Teens</a>
+                <a href="{% url 'products:product-list' %}" style="border-top:2px solid #000000; margin-top:5px;">All Products</a>
+            </div>
         </div>
     </div>
-    <!-- Navbar End -->
 
-    <!-- ======================================== -->
-    <!-- SEARCH MODAL -->
-    <!-- ======================================== -->
-    <div class="modal fade" 
-         id="searchModal" 
-         tabindex="-1" 
-         aria-labelledby="searchModalLabel" 
-         aria-hidden="true"
-         role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content rounded-0">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="searchModalLabel">
-                        <i class="fas fa-search me-2 text-primary" aria-hidden="true"></i>Search Products
-                    </h5>
-                    <button type="button" 
-                            class="btn-close" 
-                            data-bs-dismiss="modal" 
-                            aria-label="Close search"></button>
+    <!-- Bottom Thin Row (Desktop Only) -->
+    <div class="container-fluid bg-white">
+        <div class="container">
+            <div class="tr-header-bottom">
+                
+                <!-- ✅ Direct SVG Flag -->
+                <div class="tr-flag" style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" 
+                         alt="PK" 
+                         style="height: 20px; width: 30px; display: block; border: 1px solid #eee;">
+                    <span style="font-size: 14px;">PK</span>
                 </div>
-                <div class="modal-body">
-                    <form action="{% url 'products:product-list' %}" 
-                          method="GET" 
-                          id="headerSearchForm" 
-                          autocomplete="off"
-                          role="search">
-                        <div class="position-relative">
-                            <div class="input-group">
-                                <label for="headerSearchInput" class="visually-hidden">Search for products</label>
-                                <input type="search" 
-                                       class="form-control form-control-lg" 
-                                       name="q" 
-                                       id="headerSearchInput"
-                                       placeholder="Search for products, brands, categories..." 
-                                       aria-label="Search for products, brands, categories"
-                                       autocomplete="off">
-                                <button class="btn btn-primary px-4" 
-                                        type="submit" 
-                                        id="searchSubmitBtn"
-                                        aria-label="Submit search">
-                                    <i class="fas fa-search me-2" aria-hidden="true"></i> Search
-                                </button>
-                            </div>
-                            
-                            <!-- Live Search Suggestions -->
-                            <div id="searchSuggestions" 
-                                 class="position-absolute w-100 bg-white shadow-lg rounded-3 mt-1 d-none" 
-                                 style="z-index: 9999; max-height: 400px; overflow-y: auto; border: 1px solid #e9ecef;"
-                                 role="listbox">
-                                <div id="suggestionsList"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- Loading Spinner -->
-                        <div id="searchLoader" class="text-center mt-2 d-none">
-                            <div class="spinner-border text-primary" role="status" style="width: 30px; height: 30px;">
-                                <span class="visually-hidden">Loading search results...</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Popular Searches -->
-                        <div id="popularSearches" class="mt-4">
-                            <small class="text-muted">Popular Searches:</small>
-                            <div class="d-flex flex-wrap gap-2 mt-2">
-                                <a href="{% url 'products:product-list' %}?q=badminton" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for badminton">
-                                    <i class="fas fa-shuttlecock me-1" aria-hidden="true"></i> Badminton
-                                </a>
-                                <a href="{% url 'products:product-list' %}?q=tennis" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for tennis">
-                                    <i class="fas fa-table-tennis me-1" aria-hidden="true"></i> Tennis
-                                </a>
-                                <a href="{% url 'products:product-list' %}?q=cricket" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for cricket">
-                                    <i class="fas fa-baseball-ball me-1" aria-hidden="true"></i> Cricket
-                                </a>
-                                <a href="{% url 'products:product-list' %}?q=football" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for football">
-                                    <i class="fas fa-futbol me-1" aria-hidden="true"></i> Football
-                                </a>
-                                <a href="{% url 'products:product-list' %}?q=shoes" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for shoes">
-                                    <i class="fas fa-shoe-prints me-1" aria-hidden="true"></i> Shoes
-                                </a>
-                                <a href="{% url 'products:product-list' %}?q=bags" 
-                                   class="badge bg-light text-dark p-2 text-decoration-none"
-                                   aria-label="Search for bags">
-                                    <i class="fas fa-bag me-1" aria-hidden="true"></i> Bags
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
+                <!-- Sub Navigation -->
+                <nav class="tr-nav-sub">
+                    <a href="{% url 'products:home-view' %}">New In</a>
+                    <a href="{% url 'products:product-list' %}">All Collection</a>
+                    <a href="{% url 'products:product-list' %}?category=unstitched">Unstitched</a>
+                    <a href="{% url 'products:product-list' %}?category=formals">Formals</a>
+                    <a href="{% url 'products:product-list' %}?category=special-kurta">SPECIAL KURTA</a>
+                    <a href="{% url 'products:product-list' %}?category=sherwani">SHERWANI</a>
+                </nav>
+
+                <!-- Balancing spacer (Industry standard) -->
+                <div style="width: 50px;"></div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- ======================================== -->
-<!-- SEARCH JAVASCRIPT - SIMPLIFIED -->
-<!-- ======================================== -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    'use strict';
-    
-    // Spinner handling
-    const spinner = document.getElementById('spinner');
-    if (spinner) {
-        spinner.classList.remove('show');
-        spinner.classList.add('d-none');
-    }
-
-    // Search functionality
-    const searchInput = document.getElementById('headerSearchInput');
-    const suggestionsDiv = document.getElementById('searchSuggestions');
-    const suggestionsList = document.getElementById('suggestionsList');
-    const popularSearches = document.getElementById('popularSearches');
-    const searchLoader = document.getElementById('searchLoader');
-    const searchModal = document.getElementById('searchModal');
-    let searchTimeout;
-    let isProcessing = false;
-    let selectedIndex = -1;
-
-    if (!searchInput) return;
-
-    // Auto focus on modal open
-    if (searchModal) {
-        searchModal.addEventListener('shown.bs.modal', function () {
-            setTimeout(function() {
-                searchInput.focus();
-                searchInput.select();
-            }, 500);
-        });
-        
-        searchModal.addEventListener('hidden.bs.modal', function () {
-            searchInput.value = '';
-            suggestionsDiv.classList.add('d-none');
-            popularSearches.classList.remove('d-none');
-            selectedIndex = -1;
-        });
-    }
-
-    // Input event - live search
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        
-        clearTimeout(searchTimeout);
-        selectedIndex = -1;
-        
-        if (query.length === 0) {
-            suggestionsDiv.classList.add('d-none');
-            popularSearches.classList.remove('d-none');
-            return;
-        }
-        
-        if (query.length < 2) {
-            suggestionsDiv.classList.add('d-none');
-            popularSearches.classList.remove('d-none');
-            return;
-        }
-        
-        searchLoader.classList.remove('d-none');
-        popularSearches.classList.add('d-none');
-        
-        searchTimeout = setTimeout(function() {
-            fetchSuggestions(query);
-        }, 350);
-    });
-    
-    // Keyboard navigation
-    searchInput.addEventListener('keydown', function(e) {
-        const items = suggestionsList.querySelectorAll('.suggestion-item');
-        
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (items.length > 0) {
-                selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
-                updateSelectedItem(items, selectedIndex);
-            }
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (items.length > 0) {
-                selectedIndex = Math.max(selectedIndex - 1, 0);
-                updateSelectedItem(items, selectedIndex);
-            }
-        } else if (e.key === 'Enter') {
-            if (selectedIndex >= 0 && items.length > 0) {
-                e.preventDefault();
-                const selectedItem = items[selectedIndex];
-                const url = selectedItem.dataset.url;
-                if (url) {
-                    window.location.href = url;
-                } else {
-                    const query = selectedItem.dataset.query;
-                    if (query) {
-                        searchInput.value = query;
-                        document.getElementById('headerSearchForm').submit();
-                    }
-                }
-            }
-        } else if (e.key === 'Escape') {
-            suggestionsDiv.classList.add('d-none');
-            popularSearches.classList.remove('d-none');
-            selectedIndex = -1;
-        }
-    });
-    
-    // Click outside to close
-    document.addEventListener('click', function(e) {
-        const searchContainer = document.querySelector('.position-relative');
-        if (searchContainer && !searchContainer.contains(e.target) && e.target !== searchInput) {
-            suggestionsDiv.classList.add('d-none');
-            if (!searchInput.value.trim()) {
-                popularSearches.classList.remove('d-none');
-            }
-        }
-    });
-    
-    // Fetch suggestions
-    function fetchSuggestions(query) {
-        if (isProcessing) return;
-        isProcessing = true;
-        
-        const searchUrl = window.searchSuggestionsUrl || '/products/search-suggestions/';
-        const url = searchUrl + '?q=' + encodeURIComponent(query);
-        
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            }
-        })
-        .then(function(response) {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(function(data) {
-            searchLoader.classList.add('d-none');
-            isProcessing = false;
-            
-            if (data.suggestions && data.suggestions.length > 0) {
-                renderSuggestions(data.suggestions);
-                suggestionsDiv.classList.remove('d-none');
-                popularSearches.classList.add('d-none');
-            } else {
-                suggestionsDiv.classList.remove('d-none');
-                suggestionsList.innerHTML = `
-                    <div class="suggestion-empty">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                        <div>No results found for "<strong>${escapeHtml(query)}</strong>"</div>
-                        <small class="text-muted">Try searching with different keywords</small>
+<!-- ========================================================== -->
+<!-- ✅ SEARCH MODAL (Fixed: Preserves Category & Submits properly) -->
+<!-- ========================================================== -->
+<div class="modal fade" id="trSearchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content tr-modal-content">
+            <div class="modal-header tr-modal-header">
+                <h5 class="modal-title fw-bold"><i class="fas fa-search me-2"></i>Search</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body tr-modal-body">
+                <form action="{% url 'products:product-list' %}" method="GET" id="trHeaderSearchForm">
+                    <div class="input-group">
+                        <input type="search" class="form-control tr-search-input" name="q" id="trSearchInput" placeholder="Search products..." autocomplete="off">
+                        <button class="tr-search-btn" type="submit"><i class="fas fa-search me-2"></i> Search</button>
                     </div>
-                `;
-                popularSearches.classList.add('d-none');
-            }
-        })
-        .catch(function(error) {
-            console.error('Search error:', error);
-            searchLoader.classList.add('d-none');
-            isProcessing = false;
-            suggestionsDiv.classList.add('d-none');
-            popularSearches.classList.remove('d-none');
-        });
-    }
-    
-    // Render suggestions
-    function renderSuggestions(suggestions) {
-        let html = '';
-        
-        suggestions.forEach(function(item, index) {
-            const icon = item.icon || 'fas fa-tag';
-            const url = item.url || '';
-            
-            html += `
-                <div class="suggestion-item" 
-                     data-query="${escapeHtml(item.name)}" 
-                     data-url="${escapeHtml(url)}" 
-                     data-index="${index}"
-                     role="option"
-                     aria-selected="false">
-                    <div class="suggestion-icon">
-                        <i class="${escapeHtml(icon)}" aria-hidden="true"></i>
-                    </div>
-                    <div class="suggestion-text">
-                        <div>
-                            <strong>${highlightName(escapeHtml(item.name))}</strong>
-                            ${item.category ? `<small class="text-muted ms-2">${escapeHtml(item.category)}</small>` : ''}
-                        </div>
-                    </div>
-                    <div class="suggestion-category">${escapeHtml(item.type || 'Product')}</div>
-                </div>
-            `;
-        });
-        
-        suggestionsList.innerHTML = html;
-        
-        suggestionsList.querySelectorAll('.suggestion-item').forEach(function(item) {
-            item.addEventListener('click', function() {
-                const url = this.dataset.url;
-                if (url) {
-                    window.location.href = url;
-                } else {
-                    const query = this.dataset.query;
-                    if (query) {
-                        searchInput.value = query;
-                        document.getElementById('headerSearchForm').submit();
-                    }
-                }
-            });
-            
-            item.addEventListener('mouseenter', function() {
-                const items = suggestionsList.querySelectorAll('.suggestion-item');
-                const idx = parseInt(this.dataset.index);
-                updateSelectedItem(items, idx);
-            });
-        });
-    }
-    
-    // Highlight search term
-    function highlightName(name) {
-        const query = searchInput.value.trim();
-        if (!query) return name;
-        
-        try {
-            const regex = new RegExp('(' + escapeRegExp(query) + ')', 'gi');
-            return name.replace(regex, '<span class="highlight">$1</span>');
-        } catch (e) {
-            return name;
-        }
-    }
-    
-    // Update selected item
-    function updateSelectedItem(items, index) {
-        items.forEach(function(item, i) {
-            if (i === index) {
-                item.style.background = '#f0fdf4';
-                item.style.paddingLeft = '25px';
-                item.setAttribute('aria-selected', 'true');
-                item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            } else {
-                item.style.background = '';
-                item.style.paddingLeft = '';
-                item.setAttribute('aria-selected', 'false');
-            }
-        });
-    }
-    
-    // Utility functions
-    function escapeHtml(text) {
-        if (!text) return '';
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-    
-    function escapeRegExp(string) {
-        if (!string) return '';
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-});
-
-// Set search URL in window object
-window.searchSuggestionsUrl = "{% url 'products:search_suggestions' %}";
-</script>
+                    
+                    <!-- ✅ FIX: Preserve the current category when searching -->
+                    {% if request.GET.category %}
+                        <input type="hidden" name="category" value="{{ request.GET.category }}">
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

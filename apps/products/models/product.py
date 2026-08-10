@@ -8,23 +8,6 @@ from apps.products.models.product_category import ProductCategory
 ===============================================================================
                                 PRODUCT
 ===============================================================================
-
-Stores only product-level information.
-
-Examples:
-• Nike Air Max
-• Adidas Football
-• Yonex Astrox 99
-
-Variant-specific data like:
-• Price
-• Color
-• Size
-• Images
-
-belongs to ProductVariant.
-
-===============================================================================
 """
 
 
@@ -55,7 +38,7 @@ class Product(SlugModel):
         blank=True,
     )
 
-    is_featured = models.BooleanField(
+    trending = models.BooleanField(
         default=False,
     )
 
@@ -83,7 +66,9 @@ class Product(SlugModel):
             models.Index(fields=["category"]),
             models.Index(fields=["brand"]),
             models.Index(fields=["name"]),
-            models.Index(fields=["is_featured"]),
+            models.Index(fields=["trending"]),            # ✅ Fixed: is_featured → trending
+            models.Index(fields=["is_new_arrival"]),      # ✅ Added for speed
+            models.Index(fields=["is_bestseller"]),       # ✅ Added for speed
             models.Index(fields=["is_active"]),
             models.Index(fields=["created_at"]),
         ]

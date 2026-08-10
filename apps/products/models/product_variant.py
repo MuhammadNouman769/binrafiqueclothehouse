@@ -68,6 +68,12 @@ class ProductVariant(BaseModel):
         max_digits=12,
         decimal_places=2,
     )
+    discount_price = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
 
     is_default = models.BooleanField(
         default=False,

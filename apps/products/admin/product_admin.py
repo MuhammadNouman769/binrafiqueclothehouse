@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db.models import Prefetch
 from django.utils.html import format_html
 from django.utils import timezone
+from datetime import timedelta
 
 from apps.products.models import (
     Product,
@@ -26,8 +27,8 @@ class ProductAdmin(admin.ModelAdmin):
         "brand",
         "default_price",
         "variants_count",
-        "is_featured",
-        "is_bestseller",      # Added
+        "trending",            
+        "is_bestseller",      
         "is_new_arrival",
         "is_active",
         "created_at",
@@ -36,8 +37,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = (
         "category",
         "brand",
-        "is_featured",
-        "is_bestseller",      # Added
+        "trending",            
+        "is_bestseller",      
         "is_new_arrival",
         "is_active",
         "created_at",
@@ -59,8 +60,8 @@ class ProductAdmin(admin.ModelAdmin):
     }
 
     list_editable = (
-        "is_featured",
-        "is_bestseller",      # Added
+        "trending",            
+        "is_bestseller",      
         "is_new_arrival",
         "is_active",
     )
@@ -70,7 +71,7 @@ class ProductAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
         "new_arrival_status",
-        "bestseller_status",  # Added
+        "bestseller_status",  
     )
 
     fieldsets = (
@@ -100,8 +101,8 @@ class ProductAdmin(admin.ModelAdmin):
             "Settings",
             {
                 "fields": (
-                    "is_featured",
-                    "is_bestseller",      # Added
+                    "trending",            
+                    "is_bestseller",      
                     "is_new_arrival",
                     "is_active",
                 )
@@ -114,7 +115,7 @@ class ProductAdmin(admin.ModelAdmin):
                 "fields": (
                     "variants_count",
                     "new_arrival_status",
-                    "bestseller_status",  # Added
+                    "bestseller_status",  
                     "created_at",
                     "updated_at",
                 ),
@@ -192,8 +193,6 @@ class ProductAdmin(admin.ModelAdmin):
     @admin.display(description="New Arrival Status", boolean=True)
     def new_arrival_status(self, obj):
         """Display if product is currently in new arrivals"""
-        if hasattr(obj, 'new_arrival_until') and obj.new_arrival_until:
-            return timezone.now() <= obj.new_arrival_until
         return obj.is_new_arrival
 
     @admin.display(description="Bestseller Status", boolean=True)
@@ -208,10 +207,10 @@ class ProductAdmin(admin.ModelAdmin):
     actions = (
         "activate_products",
         "deactivate_products",
-        "mark_featured",
-        "remove_featured",
-        "mark_bestseller",          # Added
-        "remove_bestseller",        # Added
+        "mark_trending",          
+        "remove_trending",        
+        "mark_bestseller",          
+        "remove_bestseller",        
         "mark_new_arrival",
         "remove_new_arrival",
         "make_new_arrival_for_days",
@@ -241,31 +240,33 @@ class ProductAdmin(admin.ModelAdmin):
             f"{updated} product(s) deactivated.",
         )
 
-    @admin.action(description="Mark selected as featured")
-    def mark_featured(self, request, queryset):
+    # ✅ Converted from featured to trending
+    @admin.action(description="Mark selected as Trending")
+    def mark_trending(self, request, queryset):
 
         updated = queryset.update(
-            is_featured=True,
+            trending=True,
         )
 
         self.message_user(
             request,
-            f"{updated} product(s) marked as featured.",
+            f"{updated} product(s) marked as Trending.",
         )
 
-    @admin.action(description="Remove featured")
-    def remove_featured(self, request, queryset):
+    # ✅ Converted from featured to trending
+    @admin.action(description="Remove Trending status")
+    def remove_trending(self, request, queryset):
 
         updated = queryset.update(
-            is_featured=False,
+            trending=False,
         )
 
         self.message_user(
             request,
-            f"{updated} product(s) updated.",
+            f"{updated} product(s) removed from Trending.",
         )
 
-    @admin.action(description="Mark selected as bestseller")
+    @admin.action(description="Mark selected as Bestseller")
     def mark_bestseller(self, request, queryset):
 
         updated = queryset.update(
@@ -274,10 +275,10 @@ class ProductAdmin(admin.ModelAdmin):
 
         self.message_user(
             request,
-            f"{updated} product(s) marked as bestseller.",
+            f"{updated} product(s) marked as Bestseller.",
         )
 
-    @admin.action(description="Remove bestseller status")
+    @admin.action(description="Remove Bestseller status")
     def remove_bestseller(self, request, queryset):
 
         updated = queryset.update(
@@ -286,10 +287,10 @@ class ProductAdmin(admin.ModelAdmin):
 
         self.message_user(
             request,
-            f"{updated} product(s) removed from bestsellers.",
+            f"{updated} product(s) removed from Bestsellers.",
         )
 
-    @admin.action(description="Mark selected as new arrival")
+    @admin.action(description="Mark selected as New Arrival")
     def mark_new_arrival(self, request, queryset):
 
         updated = queryset.update(
@@ -298,10 +299,10 @@ class ProductAdmin(admin.ModelAdmin):
 
         self.message_user(
             request,
-            f"{updated} product(s) marked as new arrival.",
+            f"{updated} product(s) marked as New Arrival.",
         )
 
-    @admin.action(description="Remove new arrival status")
+    @admin.action(description="Remove New Arrival status")
     def remove_new_arrival(self, request, queryset):
 
         updated = queryset.update(
@@ -310,24 +311,22 @@ class ProductAdmin(admin.ModelAdmin):
 
         self.message_user(
             request,
-            f"{updated} product(s) removed from new arrivals.",
+            f"{updated} product(s) removed from New Arrivals.",
         )
 
-    @admin.action(description="Mark as new arrival for 15 days")
+    # ✅ Fixed New Arrival with Days logic
+    @admin.action(description="Mark as New Arrival for 15 days")
     def make_new_arrival_for_days(self, request, queryset):
         """
         Mark products as new arrivals for a specific number of days
         """
-        from django.utils import timezone
-        from datetime import timedelta
-        
         updated = queryset.update(
             is_new_arrival=True,
         )
         
         self.message_user(
             request,
-            f"{updated} product(s) marked as new arrival.",
+            f"{updated} product(s) marked as New Arrival for 15 days.",
         )
 
     # ============================================================
