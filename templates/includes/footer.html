@@ -4,7 +4,7 @@
 .logo-img {
     height: 75px !important;
     width: auto;
-    filter: brightness(0) invert(1); /* Makes logo white for dark footer */
+   
 }
 
 /* ========================================
@@ -153,10 +153,10 @@
    FOOTER STYLES (Exclusive Luxury Black & Gold Theme)
 ======================================== */
 .footer {
-    background: #111111; /* Deep Black */
+    background: linear-gradient(135deg, #f8f4f0 0%, #ebe7dd 100%); /* Deep Black */
     color: rgba(255, 255, 255, 0.8);
     font-family: 'Inter', sans-serif;
-    border-top: 2px solid #c9a84c; /* Premium Gold Border Top */
+    border-top: 2px solid #b8a776; /* Premium Gold Border Top */
 }
 
 .footer .border-bottom {
@@ -164,7 +164,7 @@
 }
 
 .footer .footer-item h4 {
-    color: #ffffff;
+    color: #000000;
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 1px;
@@ -181,11 +181,11 @@
     left: 0;
     width: 30px;
     height: 2px;
-    background: #c9a84c; /* Gold Underline */
+    background: #000000; /* Gold Underline */
 }
 
 .footer .footer-item p {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     line-height: 1.8;
     font-size: 14px;
 }
@@ -200,13 +200,13 @@
 }
 
 .footer .btn-link:hover {
-    color: #c9a84c;
+    color: #000000;
     padding-left: 8px;
 }
 
 .footer .btn-link i {
     margin-right: 8px;
-    color: #c9a84c;
+    color: #000000;
     font-size: 12px;
 }
 
@@ -217,8 +217,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgb(0, 0, 0);
+    color: rgba(0, 0, 0, 0.851);
     transition: all 0.3s ease;
     margin-right: 8px;
 }
@@ -233,7 +233,7 @@
 
 .footer .newsletter-input {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(2, 2, 2);
     color: #ffffff;
     border-radius: 50px;
     padding: 12px 20px;
@@ -244,11 +244,11 @@
     background: rgba(255, 255, 255, 0.08);
     border-color: #c9a84c;
     box-shadow: none;
-    color: #ffffff;
+    color: #000000;
 }
 
 .footer .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .footer .newsletter-btn {
@@ -277,27 +277,27 @@
 }
 
 .footer .contact-item i {
-    color: #c9a84c;
+    color: #000000;
     font-size: 18px;
     margin-top: 3px;
     min-width: 20px;
 }
 
 .footer .contact-item .text {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgb(0, 0, 0);
     font-size: 14px;
     line-height: 1.6;
 }
 
 /* Copyright */
 .copyright {
-    background: #080808;
+    background: linear-gradient(135deg, #f8f4f0 0%, #ebe7dd 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 25px 0;
 }
 
 .copyright .text {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
 }
 
@@ -452,7 +452,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
                         <h4>About Us</h4>
-                        <p>Bin Rafique Clothe House is a premier fashion destination, offering high-quality unstitched fabrics, ready-to-wear collections, and premium accessories for men, women, and teens.</p>
+                        <p>Tahir Rafique Clothe House is a premier fashion destination, offering high-quality unstitched fabrics, ready-to-wear collections, and premium accessories for men, women, and teens.</p>
                         <a href="#" class="btn-link">
                             <i class="fas fa-arrow-right"></i> Read More
                         </a>
@@ -464,19 +464,10 @@
                     <div class="footer-item">
                         <h4>Quick Links</h4>
                         <a class="btn-link" href="{% url 'products:home-view' %}">
-                            <i class="fas fa-chevron-right"></i> Home
+                            <i class="fas fa-chevron-right"></i> New Arrivals
                         </a> <br>
                         <a class="btn-link" href="{% url 'products:product-list' %}">
-                            <i class="fas fa-chevron-right"></i> Products
-                        </a> <br>
-                        <a class="btn-link" href="{% url 'main:services' %}">
-                            <i class="fas fa-chevron-right"></i> Services
-                        </a> <br>
-                        <a class="btn-link" href="{% url 'main:faqs' %}">
-                            <i class="fas fa-chevron-right"></i> FAQ
-                        </a> <br>
-                        <a class="btn-link" href="{% url 'contact:contact' %}">
-                            <i class="fas fa-chevron-right"></i> Contact Us
+                            <i class="fas fa-chevron-right"></i> All Collections
                         </a>
                     </div>
                 </div>
@@ -489,16 +480,13 @@
                             <i class="fas fa-chevron-right"></i> Privacy Policy
                         </a> <br>
                         <a class="btn-link" href="{% url 'main:terms-of-use' %}">
-                            <i class="fas fa-chevron-right"></i> Terms & Conditions
+                            <i class="fas fa-chevron-right"></i> Terms of Use
                         </a> <br>
-                        <a class="btn-link" href="#">
-                            <i class="fas fa-chevron-right"></i> Returns Policy
+                        <a class="btn-link" href="{% url 'main:faqs' %}">
+                            <i class="fas fa-chevron-right"></i> FAQs
                         </a> <br>
-                        <a class="btn-link" href="#">
-                            <i class="fas fa-chevron-right"></i> Shipping Policy
-                        </a> <br>
-                        <a class="btn-link" href="{% url 'main:sitemap' %}">
-                            <i class="fas fa-chevron-right"></i> Sitemap
+                        <a class="btn-link" href="{% url 'contact:contact' %}">
+                            <i class="fas fa-chevron-right"></i> Contact Us
                         </a>
                     </div>
                 </div>
@@ -513,15 +501,15 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone-alt"></i>
-                            <span class="text">+92 300 1234567</span>
+                            <span class="text">+92 308 9272829</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <span class="text">Mon - Sat: 10:00 AM - 9:00 PM</span>
+                            <span class="text">Mon - Sun: 9:00 AM - 9:00 PM</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="text">297-C, P.I.A. Main Boulevard Road, Lahore, Pakistan</span>
+                            <span class="text">Shakhah Wala Bazar, Nazad HabibBank,Farooqabad, Pakistan</span>
                         </div>
                     </div>
                 </div>

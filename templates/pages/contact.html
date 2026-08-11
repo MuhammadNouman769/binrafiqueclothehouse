@@ -1,507 +1,575 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact Us | Hadi Sports{% endblock %}
+{% block title %}Contact Us | Tahir Rafique Clothe House{% endblock %}
 
 {% block content %}
 
 <style>
-    /* ========================================
-       PAGE BANNER
-    ======================================== */
-    .page-header {
-        background: linear-gradient(135deg, #81c408 0%, #6a9e06 100%);
-        padding: 80px 0;
-        margin-top: 120px;
-        position: relative;
-        overflow: hidden;
+/* ==========================================================
+   CONTACT PAGE - TAHIR RAFIQUE CLOTHE HOUSE
+   Premium & Minimal Design
+========================================================== */
+.tr-contact-wrapper {
+    padding: 60px 0 70px;
+    background: #faf8f6;
+    min-height: 70vh;
+}
+
+.tr-contact-container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Header */
+.tr-contact-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.tr-contact-header .tr-contact-icon {
+    font-size: 36px;
+    color: #111;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.tr-contact-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 6px;
+    letter-spacing: -1px;
+}
+
+.tr-contact-header p {
+    color: #888;
+    font-size: 15px;
+    margin: 0;
+}
+
+.tr-contact-divider {
+    width: 40px;
+    height: 2px;
+    background: #111;
+    margin: 14px auto 0;
+    opacity: 0.15;
+}
+
+/* Contact Card */
+.tr-contact-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 45px 40px 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Contact Info Cards */
+.tr-contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.tr-contact-info-item {
+    background: #faf8f6;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.tr-contact-info-item:hover {
+    background: #ffffff;
+    border-color: #e8e4df;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+}
+
+.tr-contact-info-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    font-size: 16px;
+    border: 1px solid #e8e4df;
+}
+
+.tr-contact-info-content h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    margin: 0 0 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tr-contact-info-content p {
+    font-size: 13px;
+    color: #111;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.tr-contact-info-content a {
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.tr-contact-info-content a:hover {
+    color: #666;
+}
+
+/* Form */
+.tr-form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.tr-form-label .required {
+    color: #d01818;
+}
+
+.tr-form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e8e4df;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #faf8f6;
+    color: #111;
+}
+
+.tr-form-control:focus {
+    border-color: #111;
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(17,17,17,0.04);
+}
+
+.tr-form-control::placeholder {
+    color: #bbb;
+}
+
+textarea.tr-form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.tr-btn-submit {
+    background: #111;
+    color: #fff;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+}
+
+.tr-btn-submit:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.tr-btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Messages */
+.tr-alert {
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.tr-alert-success {
+    background: #f0faf2;
+    border: 1px solid #d4e8d6;
+    color: #1a4a2a;
+}
+
+.tr-alert-success i {
+    color: #2d7d46;
+}
+
+.tr-alert-error {
+    background: #fdf0ef;
+    border: 1px solid #f5d6d4;
+    color: #6b2a26;
+}
+
+.tr-alert-error i {
+    color: #d01818;
+}
+
+/* Map */
+.tr-map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 30px;
+    border: 1px solid #ece9e4;
+}
+
+.tr-map-container iframe {
+    width: 100%;
+    height: 280px;
+    border: none;
+    display: block;
+}
+
+/* Footer Text */
+.tr-contact-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #ece9e4;
+}
+
+.tr-contact-footer p {
+    color: #999;
+    font-size: 13px;
+    margin: 0;
+}
+
+.tr-contact-footer p i {
+    color: #111;
+    margin-right: 6px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+@media (max-width: 768px) {
+    .tr-contact-wrapper {
+        padding: 40px 0 50px;
     }
     
-    .page-header::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 500px;
-        height: 500px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
+    .tr-contact-header h1 {
+        font-size: 26px;
     }
     
-    .page-header h1 {
-        font-size: 42px;
-        font-weight: 700;
-        color: #ffffff;
-        position: relative;
-        z-index: 1;
+    .tr-contact-header p {
+        font-size: 14px;
     }
     
-    .page-header .breadcrumb {
-        background: transparent;
-        padding: 0;
-        margin: 0;
-        justify-content: center;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .page-header .breadcrumb-item a {
-        color: #ffc107;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    
-    .page-header .breadcrumb-item a:hover {
-        color: #ffc107;
-    }
-    
-    .page-header .breadcrumb-item.active {
-        color: #ffc107;
-    }
-    
-    .page-header .breadcrumb-item + .breadcrumb-item::before {
-        color: rgba(255, 255, 255, 0.5);
-    }
-    
-    .page-header .banner-icon {
-        font-size: 60px;
-        color: rgba(255, 255, 255, 0.2);
-        position: absolute;
-        right: 50px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    /* ========================================
-       CONTACT SECTION
-    ======================================== */
-    .contact-container {
-        padding: 60px 0;
-        background: #f8fafc;
-    }
-    
-    .contact-card {
-        background: #ffffff;
-        border-radius: 20px;
-        padding: 50px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-    }
-    
-    .contact-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .contact-header h1 {
-        font-size: 36px;
-        font-weight: 700;
-        color: #1a202c;
-        margin-bottom: 10px;
-    }
-    
-    .contact-header p {
-        color: #6c757d;
-        font-size: 16px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    /* Contact Info Cards */
-    .contact-info-card {
-        background: #f8fafc;
+    .tr-contact-card {
+        padding: 28px 20px 24px;
         border-radius: 16px;
-        padding: 25px;
-        transition: all 0.3s ease;
-        border: 1px solid #e9ecef;
-        height: 100%;
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
     }
     
-    .contact-info-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        border-color: #81c408;
+    .tr-contact-info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
     
-    .contact-info-card .icon-wrapper {
-        width: 55px;
-        height: 55px;
-        min-width: 55px;
-        background: #f0fdf4;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #81c408;
+    .tr-contact-info-item {
+        padding: 14px 16px;
+    }
+    
+    .tr-contact-info-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        font-size: 14px;
+    }
+    
+    .tr-contact-info-content h5 {
+        font-size: 10px;
+    }
+    
+    .tr-contact-info-content p {
+        font-size: 12px;
+    }
+    
+    .tr-form-control {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .tr-btn-submit {
+        padding: 12px 30px;
+        font-size: 13px;
+    }
+    
+    .tr-map-container iframe {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tr-contact-wrapper {
+        padding: 30px 0 40px;
+    }
+    
+    .tr-contact-header h1 {
         font-size: 22px;
     }
     
-    .contact-info-card .info-content h4 {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1a202c;
-        margin-bottom: 5px;
+    .tr-contact-header .tr-contact-icon {
+        font-size: 28px;
     }
     
-    .contact-info-card .info-content p {
-        color: #4a5568;
-        font-size: 14px;
-        margin-bottom: 0;
-        line-height: 1.6;
+    .tr-contact-card {
+        padding: 20px 16px 18px;
+        border-radius: 14px;
     }
     
-    .contact-info-card .info-content a {
-        color: #81c408;
-        text-decoration: none;
-        transition: all 0.3s ease;
+    .tr-contact-info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
     
-    .contact-info-card .info-content a:hover {
-        color: #6a9e06;
+    .tr-contact-info-item {
+        padding: 12px 14px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
     }
     
-    /* Form Styles */
-    .contact-form .form-control {
-        border-radius: 12px;
-        padding: 14px 20px;
-        border: 2px solid #e9ecef;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        background: #f8fafc;
+    .tr-contact-info-icon {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 12px;
     }
     
-    .contact-form .form-control:focus {
-        border-color: #81c408;
-        box-shadow: 0 0 0 4px rgba(129, 196, 8, 0.1);
-        background: #ffffff;
+    .tr-contact-info-content h5 {
+        font-size: 9px;
     }
     
-    .contact-form .form-control::placeholder {
-        color: #adb5bd;
+    .tr-contact-info-content p {
+        font-size: 11px;
     }
     
-    .contact-form .form-label {
-        font-weight: 600;
-        color: #1a202c;
-        font-size: 14px;
-        margin-bottom: 8px;
+    .tr-form-control {
+        padding: 9px 12px;
+        font-size: 12px;
+        border-radius: 10px;
     }
     
-    .contact-form .form-label .required {
-        color: #e74c3c;
+    .tr-btn-submit {
+        padding: 11px 24px;
+        font-size: 12px;
+        border-radius: 40px;
     }
     
-    .contact-form .btn-submit {
-        background: #81c408;
-        color: #ffffff;
-        padding: 15px 40px;
-        border-radius: 50px;
-        font-weight: 600;
-        border: none;
-        transition: all 0.3s ease;
-        width: 100%;
-        font-size: 16px;
+    .tr-map-container iframe {
+        height: 160px;
     }
     
-    .contact-form .btn-submit:hover {
-        background: #6a9e06;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(129, 196, 8, 0.3);
+    .tr-alert {
+        font-size: 13px;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tr-contact-info-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
     
-    .contact-form .btn-submit i {
-        margin-right: 8px;
+    .tr-contact-info-item {
+        flex-direction: row;
+        text-align: left;
     }
-    
-    /* Map */
-    .map-container {
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid #e9ecef;
-    }
-    
-    .map-container iframe {
-        width: 100%;
-        height: 350px;
-        border: none;
-    }
-    
-    /* Success/Error Messages */
-    .alert-custom {
-        border-radius: 12px;
-        padding: 15px 20px;
-        margin-bottom: 20px;
-    }
-    
-    .alert-custom-success {
-        background: #f0fdf4;
-        border: 1px solid #81c408;
-        color: #1a202c;
-    }
-    
-    .alert-custom-error {
-        background: #fef2f2;
-        border: 1px solid #e74c3c;
-        color: #1a202c;
-    }
-    
-    .alert-custom i {
-        margin-right: 10px;
-        font-size: 18px;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .page-header {
-            padding: 40px 0;
-            margin-top: 100px;
-        }
-        
-        .page-header h1 {
-            font-size: 28px;
-        }
-        
-        .page-header .banner-icon {
-            display: none;
-        }
-        
-        .contact-card {
-            padding: 25px;
-        }
-        
-        .contact-header h1 {
-            font-size: 28px;
-        }
-        
-        .contact-info-card {
-            padding: 20px;
-        }
-        
-        .map-container iframe {
-            height: 250px;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .page-header {
-            margin-top: 80px;
-            padding: 30px 0;
-        }
-        
-        .page-header h1 {
-            font-size: 24px;
-        }
-    }
+}
 </style>
 
-<!-- ======================================== -->
-<!-- PAGE BANNER -->
-<!-- ======================================== -->
-<div class="container-fluid page-header">
+<!-- ==========================================================
+     CONTACT PAGE - TAHIR RAFIQUE CLOTHE HOUSE
+========================================================== -->
+<div class="tr-contact-wrapper">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8 text-center text-lg-start">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{% url 'products:home-view' %}">
-                                <i class="fas fa-home me-1"></i> Home
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Contact Us
-                        </li>
-                    </ol>
-                </nav>
-                <h1>
-                    <i class="fas fa-envelope me-3" style="font-size: 35px; color: rgba(255,255,255,0.8);"></i>
-                    Contact Us
-                </h1>
-                <p>Get in touch with us. We'd love to hear from you!</p>
+        <div class="tr-contact-container">
+            
+            <!-- Header -->
+            <div class="tr-contact-header">
+                <span class="tr-contact-icon">
+                    <i class="fas fa-tshirt"></i>
+                </span>
+                <h1>Get in Touch</h1>
+                <p>Have questions? We'd love to hear from you</p>
+                <div class="tr-contact-divider"></div>
             </div>
-            <div class="col-lg-4 text-center text-lg-end d-none d-lg-block">
-                <div class="banner-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ======================================== -->
-<!-- CONTACT SECTION -->
-<!-- ======================================== -->
-<div class="contact-container">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="contact-card">
-                    <!-- Header -->
-                    <div class="contact-header">
-                        <h1>Get In Touch</h1>
-                        <p>Have questions about our products or services? Fill out the form below and we'll get back to you as soon as possible.</p>
+            
+            <!-- Contact Card -->
+            <div class="tr-contact-card">
+                
+                <!-- Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="tr-alert {% if message.tags == 'success' %}tr-alert-success{% else %}tr-alert-error{% endif %}">
+                            <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <!-- Contact Info Grid -->
+                <div class="tr-contact-info-grid">
+                    <div class="tr-contact-info-item">
+                        <div class="tr-contact-info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="tr-contact-info-content">
+                            <h5>Address</h5>
+                            <p>Shakhah Wala Bazar, Near Habib Bank, Farooqabad, Pakistan</p>
+                        </div>
                     </div>
                     
-                    <!-- Messages -->
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert-custom {% if message.tags == 'success' %}alert-custom-success{% else %}alert-custom-error{% endif %}">
-                                <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    
-                    <div class="row g-4">
-                        <!-- Contact Info -->
-                        <div class="col-lg-5">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="contact-info-card">
-                                        <div class="icon-wrapper">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <h4>Visit Us</h4>
-                                            <p>{{ site_settings.site_address|default:"297-C, P.I.A. Main Boulevard Road, Lahore, Pakistan" }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="contact-info-card">
-                                        <div class="icon-wrapper">
-                                            <i class="fas fa-envelope"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <h4>Email Us</h4>
-                                            <p>
-                                                <a href="mailto:{{ site_settings.site_email|default:'info@hadisports.com' }}">
-                                                    {{ site_settings.site_email|default:'info@hadisports.com' }}
-                                                </a>
-                                            </p>
-                                            <p style="font-size: 12px; color: #6c757d;">We'll respond within 24 hours</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="contact-info-card">
-                                        <div class="icon-wrapper">
-                                            <i class="fas fa-phone-alt"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <h4>Call Us</h4>
-                                            <p>
-                                                <a href="tel:{{ site_settings.site_phone|default:'+923285774948' }}">
-                                                    {{ site_settings.site_phone|default:'+92 328 5774948' }}
-                                                </a>
-                                            </p>
-                                            <p style="font-size: 12px; color: #6c757d;">Mon - Sat, 9:00 AM - 9:00 PM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="contact-info-card">
-                                        <div class="icon-wrapper">
-                                            <i class="fab fa-whatsapp"></i>
-                                        </div>
-                                        <div class="info-content">
-                                            <h4>WhatsApp</h4>
-                                            <p>
-                                                <a href="https://wa.me/{{ site_settings.whatsapp_number|default:'923001234567' }}" target="_blank">
-                                                    {{ site_settings.whatsapp_number|default:'+92 3285774948' }}
-                                                </a>
-                                            </p>
-                                            <p style="font-size: 12px; color: #6c757d;">Quick responses on WhatsApp</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="tr-contact-info-item">
+                        <div class="tr-contact-info-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
-                        
-                        <!-- Contact Form -->
-                        <div class="col-lg-7">
-                            <div class="contact-form">
-                                <form method="POST" action="{% url 'contact:contact' %}">
-                                    {% csrf_token %}
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">
-                                                Your Name <span class="required">*</span>
-                                            </label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   name="name" 
-                                                   placeholder="John Doe"
-                                                   required>
-                                        </div>
-                                        
-                                        <div class="col-md-6">
-                                            <label class="form-label">
-                                                Your Email <span class="required">*</span>
-                                            </label>
-                                            <input type="email" 
-                                                   class="form-control" 
-                                                   name="email" 
-                                                   placeholder="john@example.com"
-                                                   required>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label class="form-label">Subject</label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   name="subject" 
-                                                   placeholder="How can we help?">
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <label class="form-label">
-                                                Message <span class="required">*</span>
-                                            </label>
-                                            <textarea class="form-control" 
-                                                      name="message" 
-                                                      rows="5" 
-                                                      placeholder="Write your message here..."
-                                                      required></textarea>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-submit">
-                                                <i class="fas fa-paper-plane"></i> 
-                                                Send Message
-                                            </button>
-                                        </div>
-                                        
-                                        <div class="col-12">
-                                            <p class="text-muted small text-center mb-0">
-                                                <i class="fas fa-lock me-1"></i> 
-                                                Your information is safe with us. We'll never share your details.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="tr-contact-info-content">
+                            <h5>Email</h5>
+                            <p>
+                                <a href="mailto:info@tahirrafique.com">
+                                    info@tahirrafique.com
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="tr-contact-info-item">
+                        <div class="tr-contact-info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="tr-contact-info-content">
+                            <h5>Phone</h5>
+                            <p>
+                                <a href="tel:+923089272829">
+                                    +92 308 9272829
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="tr-contact-info-item">
+                        <div class="tr-contact-info-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="tr-contact-info-content">
+                            <h5>WhatsApp</h5>
+                            <p>
+                                <a href="https://wa.me/923089272829" target="_blank">
+                                    +92 308 9272829
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Map -->
-                <div class="mt-4">
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.743079716026!2d74.3415255!3d31.428144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919057b3e52c2c9%3A0x9b565f6fa18d413!2sPIA%20Main%20Boulevard%2C%20Lahore%2C%20Pakistan!5e0!3m2!1sen!2s!4v1694259649153" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                <!-- Form -->
+                <form method="POST" action="{% url 'contact:contact' %}">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="tr-form-label">
+                                Your Name <span class="required">*</span>
+                            </label>
+                            <input type="text" 
+                                   class="tr-form-control" 
+                                   name="name" 
+                                   placeholder="Enter your name"
+                                   required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="tr-form-label">
+                                Your Email <span class="required">*</span>
+                            </label>
+                            <input type="email" 
+                                   class="tr-form-control" 
+                                   name="email" 
+                                   placeholder="your@email.com"
+                                   required>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="tr-form-label">Subject</label>
+                            <input type="text" 
+                                   class="tr-form-control" 
+                                   name="subject" 
+                                   placeholder="What's this about?">
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="tr-form-label">
+                                Message <span class="required">*</span>
+                            </label>
+                            <textarea class="tr-form-control" 
+                                      name="message" 
+                                      rows="5" 
+                                      placeholder="Write your message here..."
+                                      required></textarea>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="tr-btn-submit">
+                                <i class="fas fa-paper-plane"></i> 
+                                Send Message
+                            </button>
+                        </div>
+                        
+                        <div class="col-12">
+                            <p style="text-align:center; color:#bbb; font-size:12px; margin:0;">
+                                <i class="fas fa-lock" style="margin-right:4px;"></i> 
+                                Your information is safe with us
+                            </p>
+                        </div>
                     </div>
+                </form>
+                
+                <!-- Footer -->
+                <div class="tr-contact-footer">
+                    <p><i class="fas fa-clock"></i> We respond within 24 hours, Mon - Sat 9AM - 9PM</p>
                 </div>
             </div>
+            
+            <!-- Map - Shakhah Wala Bazar, Farooqabad -->
+            <div class="tr-map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.123456789!2d73.8512345!3d31.3423456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3923d5cb9ae4562f%3A0x3d147a0c5c19509e!2sFarooqabad%2C%20Sheikhupura%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1694259649153" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Tahir Rafique Clothe House - Farooqabad Location">
+                </iframe>
+            </div>
+            
         </div>
     </div>
 </div>
