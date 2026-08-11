@@ -5,7 +5,7 @@
 
 <style>
     /* ==========================================================
-       EXACT SCREENSHOT DESIGN (NO CHANGES)
+       PRODUCT PAGE STYLES
     ========================================================== */
     * { box-sizing: border-box; }
 
@@ -15,6 +15,185 @@
         min-height: 80vh;
     }
 
+    /* ==========================================================
+       SEARCH & FILTER BAR (New Design)
+    ========================================================== */
+    .filter-bar {
+        background: #f5f5f5;
+        padding: 20px 25px;
+        margin-bottom: 30px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .filter-bar .filter-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .filter-bar h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    /* Search Box */
+    .search-box {
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 0 15px;
+        flex: 1;
+        min-width: 200px;
+        max-width: 400px;
+        transition: all 0.3s ease;
+    }
+
+    .search-box:focus-within {
+        border-color: #1a1a1a;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    }
+
+    .search-box i {
+        color: #999;
+        font-size: 16px;
+    }
+
+    .search-box input {
+        border: none;
+        padding: 10px 12px;
+        font-size: 14px;
+        width: 100%;
+        outline: none;
+        background: transparent;
+    }
+
+    .search-box input::placeholder {
+        color: #aaa;
+    }
+
+    .search-box .btn-search {
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .search-box .btn-search:hover {
+        background: #cc0000;
+    }
+
+    /* Filter Right */
+    .filter-bar .filter-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .filter-right .form-select {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 9px 35px 9px 15px;
+        font-size: 13px;
+        background: #ffffff;
+        cursor: pointer;
+        min-width: 150px;
+    }
+
+    .filter-bar .filter-right .form-select:focus {
+        border-color: #1a1a1a;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    }
+
+    .filter-bar .btn-clear {
+        color: #999;
+        font-size: 13px;
+        border: none;
+        background: transparent;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 6px;
+    }
+
+    .filter-bar .btn-clear:hover {
+        color: #1a1a1a;
+        background: rgba(0,0,0,0.05);
+    }
+
+    /* Price Range Filter */
+    .price-filter {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 4px 12px;
+    }
+
+    .price-filter label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
+        white-space: nowrap;
+    }
+
+    .price-filter input {
+        border: none;
+        padding: 6px 4px;
+        font-size: 13px;
+        width: 60px;
+        outline: none;
+        background: transparent;
+    }
+
+    .price-filter input::placeholder {
+        color: #bbb;
+        font-size: 11px;
+    }
+
+    .price-filter .price-sep {
+        color: #ccc;
+        font-size: 12px;
+    }
+
+    .price-filter .btn-price-filter {
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .price-filter .btn-price-filter:hover {
+        background: #cc0000;
+    }
+
+    /* ==========================================================
+       PRODUCT CARDS
+    ========================================================== */
     .product-card {
         background: #ffffff;
         border: none !important;
@@ -26,18 +205,17 @@
         transform: translateY(-3px);
     }
 
-    /* Image Wrapper - Grey background, no borders */
     .product-img-wrap {
         position: relative;
         width: 100%;
-        height: 380px; /* Exact height from screenshot */
-        background: #f2f2f2; /* Exact light grey */
+        height: 380px;
+        background: #f2f2f2;
         overflow: hidden;
     }
 
     .product-img-default {
         width: 100%;
-        height: 105%;
+        height: 100%;
         object-fit: cover;
         transition: opacity 0.3s ease;
     }
@@ -47,7 +225,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 105%;
+        height: 100%;
         object-fit: cover;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -56,22 +234,20 @@
     .product-card:hover .product-img-default { opacity: 0; }
     .product-card:hover .product-img-hover { opacity: 1; }
 
-    /* Exact Red Square Badge */
     .badge-discount {
         position: absolute;
         top: 12px;
         left: 12px;
-        background-color: #cc0000 !important; /* Exact Red */
+        background-color: #cc0000 !important;
         color: #ffffff !important;
         padding: 4px 12px;
         font-size: 13px;
         font-weight: 700;
-        border-radius: 0 !important; /* Square edges */
+        border-radius: 0 !important;
         z-index: 5;
         letter-spacing: 0.5px;
     }
 
-    /* Exact Text & Price Layout */
     .product-details-wrap {
         padding: 12px 0 0 0;
         text-align: left;
@@ -79,13 +255,12 @@
 
     .product-title {
         font-size: 15px;
-        font-weight: 700; /* Bold */
+        font-weight: 700;
         color: #1a1a1a;
         margin-bottom: 6px;
         line-height: 1.4;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        /* Prevent overflow and limit to 2 lines */
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -100,72 +275,15 @@
     }
 
     .price-current {
-        color: #cc0000 !important; /* Exact Red */
+        color: #cc0000 !important;
         font-weight: 700;
     }
 
     .price-compare {
-        color: #1a1a1a; /* Exact Black */
+        color: #1a1a1a;
         text-decoration: line-through;
         font-size: 14px;
         font-weight: 500;
-    }
-
-    /* ==========================================================
-       MINIMALIST SEARCH & SORT BAR (Clean Version)
-    ========================================================== */
-    .filter-bar {
-        background: #ffffff;
-        padding: 15px 0;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 15px;
-        border-bottom: 1px solid #e5e5e5;
-    }
-
-    .filter-bar h1 {
-        font-size: 24px;
-        font-weight: 700;
-        color: #1a1a1a;
-        margin: 0;
-    }
-
-    .filter-bar .form-control, .filter-bar .form-select {
-        border: 1px solid #e5e5e5;
-        border-radius: 4px;
-        padding: 8px 15px;
-        font-size: 14px;
-        background: #fafafa;
-        box-shadow: none;
-    }
-    .filter-bar .form-control:focus, .filter-bar .form-select:focus {
-        border-color: #1a1a1a;
-        background: #ffffff;
-        box-shadow: none;
-    }
-    .filter-bar .btn-search {
-        background: #1a1a1a;
-        color: #fff;
-        border-radius: 4px;
-        padding: 8px 18px;
-        border: none;
-        transition: 0.3s;
-    }
-    .filter-bar .btn-search:hover {
-        background: #cc0000;
-        color: #fff;
-    }
-    .filter-bar .btn-clear {
-        color: #666;
-        font-size: 13px;
-        border: none;
-        background: transparent;
-    }
-    .filter-bar .btn-clear:hover {
-        color: #1a1a1a;
     }
 
     /* ==========================================================
@@ -190,28 +308,944 @@
     }
 
     /* ==========================================================
-       RESPONSIVE GRID (4 Columns on Desktop)
+       RESPONSIVE MEDIA QUERIES
     ========================================================== */
-    @media (min-width: 1200px) { .col-xl-3 { flex: 0 0 auto; width: 25%; } }
-    @media (min-width: 992px) and (max-width: 1199px) { .col-lg-4 { flex: 0 0 auto; width: 33.33333333%; } }
-    @media (min-width: 768px) and (max-width: 991px) { .col-md-6 { flex: 0 0 auto; width: 50%; } }
-    @media (max-width: 767px) { .col-6 { flex: 0 0 auto; width: 50%; } }
 
-    /* Responsive Height Adjustments */
-    @media (max-width: 1200px) { .product-img-wrap { height: 300px; } }
-    @media (max-width: 992px) { .product-img-wrap { height: 250px; } }
-    @media (max-width: 768px) {
-        .filter-bar { flex-direction: column; align-items: stretch; text-align: center; }
-        .filter-bar h1 { text-align: center; margin-bottom: 10px; }
-        .product-img-wrap { height: 220px; }
-        .product-title { font-size: 13px; min-height: 36px; }
+    /* ===== LARGE DESKTOP (1200px and above) ===== */
+    @media (min-width: 1200px) {
+        .col-xl-3 {
+            flex: 0 0 auto;
+            width: 25%;
+        }
+        .product-img-wrap {
+            height: 380px;
+        }
     }
+
+    /* ===== DESKTOP (992px to 1199px) ===== */
+    @media (min-width: 992px) and (max-width: 1199px) {
+        .col-lg-4 {
+            flex: 0 0 auto;
+            width: 33.33333333%;
+        }
+        .product-img-wrap {
+            height: 330px;
+        }
+        .product-title {
+            font-size: 14px;
+        }
+        .price-wrap {
+            font-size: 14px;
+        }
+    }
+
+    /* ===== TABLET (768px to 991px) ===== */
+    @media (min-width: 768px) and (max-width: 991px) {
+        .col-md-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        .product-img-wrap {
+            height: 280px;
+        }
+        .product-title {
+            font-size: 13px;
+            min-height: 36px;
+        }
+        .price-wrap {
+            font-size: 13px;
+        }
+        .price-compare {
+            font-size: 12px;
+        }
+        .badge-discount {
+            font-size: 11px;
+            padding: 3px 10px;
+        }
+    }
+
+    /* ===== SMALL TABLET / LARGE PHONE (576px to 767px) ===== */
+    @media (min-width: 576px) and (max-width: 767px) {
+        .col-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        .product-img-wrap {
+            height: 240px;
+        }
+        .product-title {
+            font-size: 12px;
+            min-height: 34px;
+        }
+        .price-wrap {
+            font-size: 12px;
+            gap: 6px;
+        }
+        .price-compare {
+            font-size: 11px;
+        }
+        .filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+            text-align: center;
+            padding: 15px;
+        }
+        .filter-bar .filter-left {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar h1 {
+            text-align: center;
+        }
+        .search-box {
+            max-width: 100%;
+        }
+        .filter-bar .filter-right {
+            justify-content: center;
+            width: 100%;
+        }
+        .badge-discount {
+            font-size: 10px;
+            padding: 3px 8px;
+            top: 10px;
+            left: 10px;
+        }
+        .page-link {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        .product-details-wrap {
+            padding: 8px 0 0 0;
+        }
+    }
+
+    /* ===== MOBILE (414px to 575px) ===== */
+    @media (min-width: 414px) and (max-width: 575px) {
+        .col-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        .product-img-wrap {
+            height: 200px;
+        }
+        .product-title {
+            font-size: 11px;
+            min-height: 30px;
+        }
+        .price-wrap {
+            font-size: 11px;
+            gap: 5px;
+        }
+        .price-current {
+            font-size: 11px;
+        }
+        .price-compare {
+            font-size: 10px;
+        }
+        .filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 15px;
+        }
+        .filter-bar .filter-left {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar h1 {
+            font-size: 18px;
+            text-align: center;
+        }
+        .search-box {
+            max-width: 100%;
+        }
+        .search-box input {
+            font-size: 13px;
+            padding: 8px 10px;
+        }
+        .search-box .btn-search {
+            padding: 6px 14px;
+            font-size: 12px;
+        }
+        .filter-bar .filter-right {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar .filter-right .form-select {
+            width: 100%;
+            min-width: unset;
+        }
+        .price-filter {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 6px 12px;
+        }
+        .price-filter input {
+            width: 50px;
+        }
+        .badge-discount {
+            font-size: 9px;
+            padding: 3px 8px;
+            top: 8px;
+            left: 8px;
+        }
+        .page-link {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        .product-details-wrap {
+            padding: 6px 0 0 0;
+        }
+        .product-card {
+            margin-bottom: 20px;
+        }
+        .filter-bar .btn-clear {
+            font-size: 12px;
+            text-align: center;
+        }
+        .product-img-default {
+            width: 100%;
+            height: 119%!important;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+    }
+}
+
+    /* ===== IPHONE (375px to 413px) ===== */
+    @media (min-width: 360px) and (max-width: 412px) {
+        .col-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        .product-img-wrap {
+            height: 170px;
+        }
+        .product-title {
+            font-size: 10px;
+            min-height: 26px;
+        }
+        .price-wrap {
+            font-size: 10px;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .price-current {
+            font-size: 10px;
+        }
+        .price-compare {
+            font-size: 9px;
+        }
+        .filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 10px 12px;
+        }
+        .filter-bar .filter-left {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar h1 {
+            font-size: 16px;
+            text-align: center;
+        }
+        .search-box {
+            max-width: 100%;
+        }
+        .search-box input {
+            font-size: 12px;
+            padding: 6px 8px;
+        }
+        .search-box .btn-search {
+            padding: 5px 12px;
+            font-size: 11px;
+        }
+        .search-box i {
+            font-size: 14px;
+        }
+        .filter-bar .filter-right {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar .filter-right .form-select {
+            width: 100%;
+            min-width: unset;
+            font-size: 12px;
+            padding: 7px 30px 7px 12px;
+        }
+        .price-filter {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 4px 10px;
+            gap: 4px;
+        }
+        .price-filter label {
+            font-size: 10px;
+        }
+        .price-filter input {
+            width: 40px;
+            font-size: 11px;
+            padding: 4px 2px;
+        }
+        .price-filter .price-sep {
+            font-size: 10px;
+        }
+        .price-filter .btn-price-filter {
+            font-size: 10px;
+            padding: 3px 10px;
+        }
+        .badge-discount {
+            font-size: 8px;
+            padding: 2px 6px;
+            top: 6px;
+            left: 6px;
+        }
+        .page-link {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+        .product-details-wrap {
+            padding: 4px 0 0 0;
+        }
+        .product-card {
+            margin-bottom: 15px;
+        }
+        .filter-bar .btn-clear {
+            font-size: 11px;
+            text-align: center;
+        }
+        .product-img-default {
+            width: 100%;
+            height: 140%!important;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+}
+    }
+
+    /* ===== VERY SMALL (up to 374px) ===== */
+    @media (max-width: 374px) {
+        .col-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+        .product-img-wrap {
+            height: 140px;
+        }
+        .product-title {
+            font-size: 9px;
+            min-height: 22px;
+        }
+        .price-wrap {
+            font-size: 9px;
+            gap: 3px;
+            flex-wrap: wrap;
+        }
+        .price-current {
+            font-size: 9px;
+        }
+        .price-compare {
+            font-size: 8px;
+        }
+        .filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 8px 10px;
+        }
+        .filter-bar .filter-left {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar h1 {
+            font-size: 14px;
+            text-align: center;
+        }
+        .search-box {
+            max-width: 100%;
+            padding: 0 10px;
+        }
+        .search-box input {
+            font-size: 11px;
+            padding: 5px 6px;
+        }
+        .search-box .btn-search {
+            padding: 4px 10px;
+            font-size: 10px;
+        }
+        .search-box i {
+            font-size: 12px;
+        }
+        .filter-bar .filter-right {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+        .filter-bar .filter-right .form-select {
+            width: 100%;
+            min-width: unset;
+            font-size: 11px;
+            padding: 6px 25px 6px 10px;
+        }
+        .price-filter {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 3px 8px;
+            gap: 3px;
+        }
+        .price-filter label {
+            font-size: 9px;
+        }
+        .price-filter input {
+            width: 35px;
+            font-size: 10px;
+            padding: 3px 2px;
+        }
+        .price-filter .price-sep {
+            font-size: 9px;
+        }
+        .price-filter .btn-price-filter {
+            font-size: 9px;
+            padding: 2px 8px;
+        }
+        .badge-discount {
+            font-size: 7px;
+            padding: 2px 5px;
+            top: 5px;
+            left: 5px;
+        }
+        .page-link {
+            padding: 3px 6px;
+            font-size: 10px;
+        }
+        .product-details-wrap {
+            padding: 3px 0 0 0;
+        }
+        .product-card {
+            margin-bottom: 12px;
+        }
+        .filter-bar .btn-clear {
+            font-size: 10px;
+            text-align: center;
+        }
+
+    }
+    
+
+    /* ==========================================================
+       PAGINATION RESPONSIVE
+    ========================================================== */
     @media (max-width: 576px) {
-        .product-img-wrap { height: 180px; }
-        .product-details-wrap { padding: 8px 0 0 0; }
-        .product-title { font-size: 12px; min-height: 32px; }
-        .price-wrap { font-size: 13px; }
+        .pagination {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .page-link {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        .page-item {
+            margin-bottom: 4px;
+        }
     }
+    /* ==========================================================
+   EXACT 768px ONLY (iPad Mini / Small Tablet)
+========================================================== */
+@media (width: 768px) {
+    /* Filter Bar */
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .filter-bar .filter-left {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .filter-bar h1 {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .search-box {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .search-box input {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .search-box .btn-search {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .filter-bar .filter-right {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .filter-bar .filter-right .form-select {
+        width: 100%;
+        min-width: unset;
+        padding: 9px 35px 9px 15px;
+    }
+
+    .price-filter {
+        justify-content: center;
+        padding: 6px 12px;
+        flex-wrap: wrap;
+    }
+
+    .price-filter input {
+        width: 60px;
+    }
+
+    .filter-bar .btn-clear {
+        text-align: center;
+        padding: 8px;
+    }
+
+    /* Product Grid - 2 Columns */
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    /* Product Images */
+    .product-img-wrap {
+        height: 280px;
+    }
+
+    .product-title {
+        font-size: 13px;
+        min-height: 36px;
+    }
+
+    .price-wrap {
+        font-size: 13px;
+    }
+
+    .price-compare {
+        font-size: 12px;
+    }
+
+    .badge-discount {
+        font-size: 11px;
+        padding: 3px 10px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .page-link {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ==========================================================
+   EXACT 1024px ONLY (iPad Pro / Small Desktop)
+========================================================== */
+@media (width: 1024px) {
+    /* Filter Bar */
+    .filter-bar {
+        padding: 18px 20px;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .filter-left {
+        flex: 1;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar h1 {
+        font-size: 20px;
+    }
+
+    .search-box {
+        max-width: 320px;
+        min-width: 180px;
+        flex: 1;
+    }
+
+    .search-box input {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .search-box .btn-search {
+        padding: 7px 16px;
+        font-size: 12px;
+    }
+
+    .filter-bar .filter-right {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .filter-right .form-select {
+        min-width: 130px;
+        font-size: 13px;
+        padding: 8px 30px 8px 12px;
+    }
+
+    .price-filter {
+        padding: 4px 10px;
+    }
+
+    .price-filter label {
+        font-size: 12px;
+    }
+
+    .price-filter input {
+        width: 50px;
+        font-size: 12px;
+        padding: 5px 4px;
+    }
+
+    .price-filter .btn-price-filter {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+
+    .filter-bar .btn-clear {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    /* Product Grid - 3 Columns */
+    .col-lg-4 {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    /* Product Images */
+    .product-img-wrap {
+        height: 300px;
+    }
+
+    .product-title {
+        font-size: 14px;
+        min-height: 38px;
+    }
+
+    .price-wrap {
+        font-size: 14px;
+    }
+
+    .price-compare {
+        font-size: 13px;
+    }
+
+    .badge-discount {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .page-link {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
+
+/* ==========================================================
+   EXACT 1366px ONLY (Standard Laptop)
+========================================================== */
+@media (width: 1366px) {
+    /* Filter Bar */
+    .filter-bar {
+        padding: 20px 25px;
+        gap: 15px;
+    }
+
+    .filter-bar .filter-left {
+        gap: 15px;
+    }
+
+    .filter-bar h1 {
+        font-size: 22px;
+    }
+
+    .search-box {
+        max-width: 350px;
+        min-width: 200px;
+    }
+
+    .search-box input {
+        font-size: 14px;
+        padding: 9px 12px;
+    }
+
+    .search-box .btn-search {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+
+    .filter-bar .filter-right {
+        gap: 12px;
+    }
+
+    .filter-bar .filter-right .form-select {
+        min-width: 140px;
+        font-size: 13px;
+        padding: 9px 32px 9px 14px;
+    }
+
+    .price-filter {
+        padding: 5px 12px;
+    }
+
+    .price-filter label {
+        font-size: 12px;
+    }
+
+    .price-filter input {
+        width: 55px;
+        font-size: 13px;
+        padding: 6px 4px;
+    }
+
+    .price-filter .btn-price-filter {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .filter-bar .btn-clear {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+
+    /* Product Grid - 4 Columns */
+    .col-xl-3 {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+
+    /* Product Images */
+    .product-img-wrap {
+        height: 350px;
+    }
+
+    .product-title {
+        font-size: 15px;
+        min-height: 40px;
+    }
+
+    .price-wrap {
+        font-size: 15px;
+    }
+
+    .price-compare {
+        font-size: 14px;
+    }
+
+    .badge-discount {
+        font-size: 13px;
+        padding: 4px 12px;
+    }
+
+    .page-link {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ==========================================================
+   RANGE: 768px TO 1024px ONLY
+========================================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Filter Bar */
+    .filter-bar {
+        flex-wrap: wrap;
+        padding: 18px 20px;
+    }
+
+    .filter-bar .filter-left {
+        flex: 1 1 100%;
+        gap: 12px;
+    }
+
+    .filter-bar h1 {
+        font-size: 20px;
+    }
+
+    .search-box {
+        max-width: 380px;
+        flex: 1;
+    }
+
+    .filter-bar .filter-right {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .filter-bar .filter-right .form-select {
+        min-width: 150px;
+    }
+
+    .price-filter {
+        padding: 4px 12px;
+    }
+
+    /* Product Grid - 3 Columns */
+    .col-lg-4 {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .product-img-wrap {
+        height: 300px;
+    }
+
+    .product-title {
+        font-size: 14px;
+        min-height: 38px;
+    }
+
+    .price-wrap {
+        font-size: 14px;
+    }
+
+    .price-compare {
+        font-size: 13px;
+    }
+
+    .badge-discount {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .page-link {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
+
+/* ==========================================================
+   RANGE: 1024px TO 1366px ONLY
+========================================================== */
+@media (min-width: 1024px) and (max-width: 1366px) {
+    /* Filter Bar */
+    .filter-bar {
+        padding: 18px 22px;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .filter-left {
+        flex: 1;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar h1 {
+        font-size: 21px;
+    }
+
+    .search-box {
+        max-width: 340px;
+        min-width: 190px;
+        flex: 1;
+    }
+
+    .search-box input {
+        font-size: 14px;
+        padding: 8px 11px;
+    }
+
+    .search-box .btn-search {
+        padding: 7px 17px;
+        font-size: 13px;
+    }
+
+    .filter-bar .filter-right {
+        gap: 11px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .filter-right .form-select {
+        min-width: 135px;
+        font-size: 13px;
+        padding: 8px 30px 8px 13px;
+    }
+
+    .price-filter {
+        padding: 4px 11px;
+    }
+
+    .price-filter label {
+        font-size: 12px;
+    }
+
+    .price-filter input {
+        width: 52px;
+        font-size: 12px;
+        padding: 5px 4px;
+    }
+
+    .price-filter .btn-price-filter {
+        font-size: 11px;
+        padding: 4px 11px;
+    }
+
+    .filter-bar .btn-clear {
+        font-size: 12px;
+        padding: 6px 11px;
+    }
+
+    /* Product Grid - 3 to 4 Columns */
+    .col-lg-4 {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .col-xl-3 {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+
+    /* Product Images */
+    .product-img-wrap {
+        height: 320px;
+    }
+
+    .product-title {
+        font-size: 14px;
+        min-height: 38px;
+    }
+
+    .price-wrap {
+        font-size: 14px;
+    }
+
+    .price-compare {
+        font-size: 13px;
+    }
+
+    .badge-discount {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .page-link {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+}
 </style>
 
 <!-- ========================================================== -->
@@ -221,22 +1255,43 @@
     <div class="container">
         
         <!-- ==============================================
-        FILTER BAR (Search & Sort)
+        FILTER BAR (New Design with Price Filter)
         ============================================== -->
         <div class="filter-bar">
-            <h1>Products</h1>
-
-            <div class="d-flex gap-3 align-items-center flex-wrap">
-                <!-- Search -->
-                <form method="GET" action="" id="searchForm" class="d-flex">
+            <div class="filter-left">
+                <h1>Products</h1>
+                
+                <!-- Search Box -->
+                <form method="GET" action="" id="searchForm" class="search-box">
+                    <i class="fas fa-search"></i>
                     <input type="text" 
-                           class="form-control" 
                            name="q" 
                            placeholder="Search products..." 
                            value="{{ search_query|default:'' }}">
-                    <button class="btn-search ms-2" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <button class="btn-search" type="submit">Search</button>
+                    {% if sort_by %}
+                        <input type="hidden" name="sort" value="{{ sort_by }}">
+                    {% endif %}
+                    {% if min_price %}
+                        <input type="hidden" name="min_price" value="{{ min_price }}">
+                    {% endif %}
+                    {% if max_price %}
+                        <input type="hidden" name="max_price" value="{{ max_price }}">
+                    {% endif %}
+                </form>
+            </div>
+
+            <div class="filter-right">
+                <!-- Price Filter -->
+                <form method="GET" action="" id="priceFilterForm" class="price-filter">
+                    <label>Price:</label>
+                    <input type="number" name="min_price" placeholder="Min" value="{{ min_price|default:'' }}" min="0">
+                    <span class="price-sep">-</span>
+                    <input type="number" name="max_price" placeholder="Max" value="{{ max_price|default:'' }}" min="0">
+                    <button class="btn-price-filter" type="submit">Go</button>
+                    {% if search_query %}
+                        <input type="hidden" name="q" value="{{ search_query }}">
+                    {% endif %}
                     {% if sort_by %}
                         <input type="hidden" name="sort" value="{{ sort_by }}">
                     {% endif %}
@@ -252,12 +1307,18 @@
                     {% if search_query %}
                         <input type="hidden" name="q" value="{{ search_query }}">
                     {% endif %}
+                    {% if min_price %}
+                        <input type="hidden" name="min_price" value="{{ min_price }}">
+                    {% endif %}
+                    {% if max_price %}
+                        <input type="hidden" name="max_price" value="{{ max_price }}">
+                    {% endif %}
                 </form>
 
                 <!-- Clear -->
-                {% if search_query or sort_by %}
+                {% if search_query or sort_by or min_price or max_price %}
                 <a href="{% url 'products:product-list' %}" class="btn-clear">
-                    <i class="fas fa-times me-1"></i> Clear Filters
+                    <i class="fas fa-times me-1"></i> Clear
                 </a>
                 {% endif %}
             </div>
@@ -290,7 +1351,7 @@
                             {% endif %}
                         {% endwith %}
 
-                        <!-- ✅ EXACT RED SQUARE BADGE -->
+                        <!-- EXACT RED SQUARE BADGE -->
                         {% with product.variants.all|first as variant %}
                             {% if variant and variant.discount_price %}
                                 {% with discount=variant.discount_price|add:"0"|add:variant.price|floatformat:0 %}
@@ -300,7 +1361,7 @@
                         {% endwith %}
                     </div>
                     
-                    <!-- ✅ EXACT TEXT & PRICE -->
+                    <!-- EXACT TEXT & PRICE -->
                     <div class="product-details-wrap">
                         <a href="{% url 'products:product-detail' slug=product.slug %}" class="text-decoration-none text-dark">
                             <div class="product-title">{{ product.name|truncatechars:30 }}</div>
@@ -340,7 +1401,7 @@
                     <ul class="pagination">
                         {% if page_obj.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Previous">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -355,7 +1416,7 @@
                             <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}">
+                                <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}">
                                     {{ num }}
                                 </a>
                             </li>
@@ -364,7 +1425,7 @@
                         
                         {% if page_obj.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}" aria-label="Next">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_by %}&sort={{ sort_by }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

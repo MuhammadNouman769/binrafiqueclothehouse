@@ -4,7 +4,6 @@
 .logo-img {
     height: 75px !important;
     width: auto;
-   
 }
 
 /* ========================================
@@ -153,10 +152,10 @@
    FOOTER STYLES (Exclusive Luxury Black & Gold Theme)
 ======================================== */
 .footer {
-    background: linear-gradient(135deg, #f8f4f0 0%, #ebe7dd 100%); /* Deep Black */
+    background: linear-gradient(135deg, #f8f4f0 0%, #ebe7dd 100%);
     color: rgba(255, 255, 255, 0.8);
     font-family: 'Inter', sans-serif;
-    border-top: 2px solid #b8a776; /* Premium Gold Border Top */
+    border-top: 2px solid #b8a776;
 }
 
 .footer .border-bottom {
@@ -181,7 +180,7 @@
     left: 0;
     width: 30px;
     height: 2px;
-    background: #000000; /* Gold Underline */
+    background: #000000;
 }
 
 .footer .footer-item p {
@@ -191,7 +190,7 @@
 }
 
 .footer .btn-link {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     text-decoration: none;
     padding: 6px 0;
     display: inline-block;
@@ -234,7 +233,7 @@
 .footer .newsletter-input {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgb(2, 2, 2);
-    color: #ffffff;
+    color: #000000;
     border-radius: 50px;
     padding: 12px 20px;
     width: 100%;
@@ -269,24 +268,84 @@
     box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
 }
 
+/* ==========================================================
+   FOOTER CONTACT ITEMS - ICON ON TOP (Mobile) / SIDE (Desktop)
+========================================================== */
 .footer .contact-item {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 12px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    margin-bottom: 15px;
 }
 
 .footer .contact-item i {
     color: #000000;
     font-size: 18px;
-    margin-top: 3px;
     min-width: 20px;
+    margin-bottom: 2px;
 }
 
 .footer .contact-item .text {
     color: rgb(0, 0, 0);
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Tablet and above (768px) - Icon on left, text on right */
+@media (min-width: 768px) {
+    .footer .contact-item {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .footer .contact-item i {
+        font-size: 16px;
+        margin-top: 2px;
+        margin-bottom: 0;
+        min-width: 20px;
+    }
+    
+    .footer .contact-item .text {
+        font-size: 14px;
+    }
+}
+
+/* Desktop (992px and above) */
+@media (min-width: 992px) {
+    .footer .contact-item {
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+    
+    .footer .contact-item i {
+        font-size: 18px;
+    }
+    
+    .footer .contact-item .text {
+        font-size: 14px;
+    }
+}
+
+/* Very small screens (below 375px) */
+@media (max-width: 374px) {
+    .footer .contact-item {
+        gap: 3px;
+        margin-bottom: 12px;
+    }
+    
+    .footer .contact-item i {
+        font-size: 16px;
+    }
+    
+    .footer .contact-item .text {
+        font-size: 12px;
+    }
 }
 
 /* Copyright */
@@ -349,7 +408,7 @@
     box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
 }
 
-/* Responsive */
+/* Responsive Footer */
 @media (max-width: 768px) {
     .footer .newsletter-input {
         border-radius: 50px 50px 50px 50px;
@@ -509,7 +568,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="text">Shakhah Wala Bazar, Nazad HabibBank,Farooqabad, Pakistan</span>
+                            <span class="text">Shekhah Wala Bazar, Nazad HabibBank, Farooqabad, Pakistan</span>
                         </div>
                     </div>
                 </div>
@@ -525,7 +584,7 @@
                 <div class="col-md-6 text-center text-md-start">
                     <span class="text">
                         <i class="fas fa-copyright me-1"></i>
-                        2026 <a href="{% url 'products:home-view' %}">Bin Rafique Clothe House</a>. 
+                        2026 <a href="{% url 'products:home-view' %}">Tahir Rafique Clothe House</a>. 
                         All Rights Reserved.
                     </span>
                 </div>

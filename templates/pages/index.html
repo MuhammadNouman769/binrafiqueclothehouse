@@ -636,6 +636,184 @@ a { text-decoration: none; }
 .br-testimonial-carousel .owl-dots .owl-dot:hover span { background: #999; }
 
 /* ==========================================================
+   SERVICE INFO BAR
+========================================================== */
+.service-info-bar {
+    width: 100%;
+    background: #000;
+    border-bottom: 1px solid #ffffff;
+    overflow: hidden;
+}
+.service-info-container {
+    width: 100%;
+    min-height: 165px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+.service-info-item {
+    height: 100%;
+    min-height: 165px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px 20px;
+}
+.service-info-icon {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+.service-info-icon i {
+    color: #fff;
+    font-size: 48px;
+    line-height: 1;
+}
+.service-info-text {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 991px) {
+    .service-info-container {
+        min-height: 145px;
+    }
+    .service-info-item {
+        min-height: 145px;
+        padding: 20px 12px;
+    }
+    .service-info-icon {
+        height: 55px;
+        margin-bottom: 12px;
+    }
+    .service-info-icon i {
+        font-size: 40px;
+    }
+    .service-info-text {
+        font-size: 10px;
+    }
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+/* ==========================================================
+   TRENDING SECTION - IPHONE XR (414px) - Clean Version
+========================================================== */
+/* ==========================================================
+   SAME DESIGN - 414px TO 430px
+========================================================== */
+@media (min-width: 412px) and (max-width: 912px) {
+    /* Trending */
+    .trending-img-wrap {
+        height: 280px;
+    }
+    
+    .trending-img-default,
+    .trending-img-hover {
+        width: 100% !important;
+        height: 180% !important;
+        object-fit: cover !important;
+    }
+    
+    .trending-badge {
+        font-size: 9px;
+        padding: 4px 10px;
+        top: 10px;
+        left: 10px;
+    }
+    
+    .trending-title {
+        font-size: 12px;
+        min-height: 32px;
+    }
+    
+    .trending-price {
+        font-size: 12px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    /* New Arrivals */
+    .new-arrival-image {
+        height: 280px;
+    }
+    
+    .new-arrival-image img {
+        width: 100% !important;
+        height: 149% !important;
+        object-fit: cover !important;
+    }
+    
+    /* Best Sellers */
+    .best-seller-image {
+        height: 320px;
+    }
+    
+    .best-seller-image .main-img {
+        width: 100% !important;
+        height: 130% !important;
+        object-fit: cover !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .service-info-container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    .service-info-item {
+        min-height: 125px;
+        padding: 20px 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .service-info-item:last-child {
+        border-bottom: none;
+    }
+    .service-info-icon {
+        height: 45px;
+        margin-bottom: 10px;
+    }
+    .service-info-icon i {
+        font-size: 34px;
+    }
+    .service-info-text {
+        font-size: 10px;
+    }
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+    .service-info-item {
+        min-height: 115px;
+    }
+    .service-info-icon i {
+        font-size: 30px;
+    }
+    .service-info-text {
+        font-size: 9px;
+        white-space: normal;
+    }
+}
+
+/* ==========================================================
    RESPONSIVE
 ========================================================== */
 @media (max-width: 1400px) {
@@ -701,8 +879,29 @@ a { text-decoration: none; }
         transform: scale(1.2);
     }
 }
+@media (max-width: 414px) {
+    .trending-img-wrap {
+        height: 300px; /* Fixed container height */
+    }
+    
+    .trending-img-default {
+        width: 100%;
+        height: 100%; /* Changed from 180% to 100% */
+        object-fit: cover;
+    }
+    
+    .new-arrival-image {
+        height: 280px;
+    }
+    
+    .best-seller-image {
+        height: 320px;
+    }
+}
+
+
 @media (max-width: 576px) {
-    .hero-section .carousel-item { height: 480px; min-height: 400px; }
+    .hero-section .carousel-item { height: 200px; min-height: 100px; }
     .trending-img-wrap { height: 270px; }
     .new-arrival-image { height: 330px; }
     .best-seller-image { height: 390px; }
@@ -715,11 +914,60 @@ a { text-decoration: none; }
         height: 40px !important;
         font-size: 13px !important;
     }
+    .trnd {
+    color: #000 !important;
+    font-size: 10px;
+    border: 1px solid #111;
+    border-radius: 50px;
+    padding: 7px 18px;
+    display: contents;
+    background: #fff;
+    }
+    .trending-img-default {
+    width: 100%;
+    height: 162%;
+    object-fit: cover;
+    }
+    .new-arrival-image img {
+    width: 100%;
+    height: 134%;
+    object-fit: cover;
+    transition: transform .5s ease;
+    }
+    .best-seller-image .main-img {
+    width: 100%;
+    height: 122%;
+    object-fit: cover;
+    transition: transform .55s ease;
+    }
+/* ==========================================================
+   FIX - 540px AND BELOW
+========================================================== */
+@media (max-width: 540px) {
+    .trending-img-wrap {
+    width: 100% !important;
+    height: 230% !important;
+    object-fit: cover !important;
+    
+    }
+    .new-arrival-image img {
+        width: 100% !important;
+        height: 201% !important;
+        object-fit: cover !important;
+    }
+    .best-seller-image .main-img {
+        width: 100%;
+        height: 170% !important;
+        object-fit: cover;
+        transition: transform .55s ease;
+    }
+    
+}
+
 }
 </style>
-
 <!-- ==========================================================
-   HERO SECTION
+   HERO SECTION - COMPLETELY FIXED
 ========================================================== -->
 <section class="hero-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -736,10 +984,10 @@ a { text-decoration: none; }
         <div class="carousel-inner">
             {% for banner in hero_banners %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}"
-                style="background-image:url('{% if banner.image %}{{ banner.image.url }}{% else %}{% static "img/banner-clothing.jpg" %}{% endif %}');">
+                style="background-image:url('{% if banner.image %}{{ banner.image.url }}{% else %}{% static 'img/banner-clothing.jpg' %}{% endif %}');">
             </div>
             {% empty %}
-            <div class="carousel-item active" style="background-image:url('{% static "img/banner-clothing.jpg" %}');"></div>
+            <div class="carousel-item active" style="background-image:url('{% static 'img/banner-clothing.jpg' %}');"></div>
             {% endfor %}
         </div>
         {% if hero_banners|length > 1 %}
@@ -752,7 +1000,6 @@ a { text-decoration: none; }
         {% endif %}
     </div>
 </section>
-
 <!-- ==========================================================
    TRENDING
 ========================================================== -->
@@ -907,16 +1154,16 @@ a { text-decoration: none; }
                             {% if variant %}
                                 {% with variant.images.all as images %}
                                     {% if images %}
-                                        <img src="{{ images.0.image.url }}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{{ images.0.image.url }}" class="new-main-image" alt="{{ product.name }}">
                                         {% if images|length > 1 %}
-                                        <img src="{{ images.1.image.url }}" class="new-hover-image" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{{ images.1.image.url }}" class="new-hover-image" alt="{{ product.name }}">
                                         {% endif %}
                                     {% else %}
-                                        <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}">
                                     {% endif %}
                                 {% endwith %}
                             {% else %}
-                                <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
+                                <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}">
                             {% endif %}
                         {% endwith %}
                         <span class="new-arrival-badge">NEW IN</span>
@@ -965,16 +1212,16 @@ a { text-decoration: none; }
                             {% if variant %}
                                 {% with variant.images.all as images %}
                                     {% if images %}
-                                        <img src="{{ images.0.image.url }}" class="main-img" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{{ images.0.image.url }}" class="main-img" alt="{{ product.name }}">
                                         {% if images|length > 1 %}
-                                        <img src="{{ images.1.image.url }}" class="hover-img" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{{ images.1.image.url }}" class="hover-img" alt="{{ product.name }}">
                                         {% endif %}
                                     {% else %}
-                                        <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}" loading="lazy">
+                                        <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}">
                                     {% endif %}
                                 {% endwith %}
                             {% else %}
-                                <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}" loading="lazy">
+                                <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}">
                             {% endif %}
                         {% endwith %}
                         <span class="best-seller-tag">BEST SELLER</span>
@@ -1040,9 +1287,9 @@ a { text-decoration: none; }
                 <div class="br-testimonial-author">
                     <div class="br-testimonial-avatar">
                         {% if testimonial.client_image %}
-                            <img src="{{ testimonial.client_image.url }}" alt="{{ testimonial.client_name }}" loading="lazy">
+                            <img src="{{ testimonial.client_image.url }}" alt="{{ testimonial.client_name }}">
                         {% else %}
-                            <img src="{% static 'img/testimonial-1.jpg' %}" alt="{{ testimonial.client_name }}" loading="lazy">
+                            <img src="{% static 'img/testimonial-1.jpg' %}" alt="{{ testimonial.client_name }}">
                         {% endif %}
                     </div>
                     <div class="br-testimonial-info">
@@ -1063,15 +1310,60 @@ a { text-decoration: none; }
         {% endif %}
     </div>
 </section>
+<!-- ==========================================================
+     SERVICE INFO BAR
+========================================================== -->
+<section class="service-info-bar">
+    <div class="service-info-container">
+
+        <!-- FREE SHIPPING -->
+        <div class="service-info-item">
+            <div class="service-info-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+            <div class="service-info-text">
+                FREE SHIPPING ABOVE RS. 6000
+            </div>
+        </div>
+
+        <!-- RETURN & EXCHANGE -->
+        <div class="service-info-item">
+            <div class="service-info-icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="service-info-text">
+                14 DAYS EASY RETURN &amp; EXCHANGE
+            </div>
+        </div>
+
+        <!-- DELIVERY -->
+        <div class="service-info-item">
+            <div class="service-info-icon">
+                <i class="far fa-clock"></i>
+            </div>
+            <div class="service-info-text">
+                DELIVERY IN 3-5 WORKING DAYS
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ==========================================================
+   JAVASCRIPT
+========================================================== -->
 {% block extra_js %}
 <script>
 $(document).ready(function () {
+    // Check if owlCarousel is available
     if (typeof $.fn.owlCarousel === 'undefined') {
         console.error('Owl Carousel not loaded');
         return;
     }
 
-    // New Arrivals
+    // New Arrivals Carousel
     if ($('.new-arrivals-carousel').length && $('.new-arrivals-carousel .new-arrival-item').length > 0) {
         $('.new-arrivals-carousel').owlCarousel({
             loop: true,
@@ -1092,7 +1384,7 @@ $(document).ready(function () {
         });
     }
 
-    // Testimonials
+    // Testimonials Carousel
     if ($('.br-testimonial-carousel').length && $('.br-testimonial-carousel .br-testimonial-card').length > 0) {
         $('.br-testimonial-carousel').owlCarousel({
             loop: true,
