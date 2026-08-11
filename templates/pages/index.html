@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home | Bin Rafique Clothe House{% endblock %}
+
 {% block content %}
 
 <style>
 /* ==========================================================
    GLOBAL
 ========================================================== */
-* {
-    box-sizing: border-box;
-}
-body {
-    background: #fff;
-    font-family: 'Inter', sans-serif;
-}
-a {
-    text-decoration: none;
-}
+* { box-sizing: border-box; }
+body { background: #fff; font-family: 'Inter', sans-serif; }
+a { text-decoration: none; }
 
 /* ==========================================================
    HERO
@@ -88,9 +82,7 @@ a {
     margin-bottom: 30px;
     transition: transform .25s ease;
 }
-.trending-card:hover {
-    transform: translateY(-4px);
-}
+.trending-card:hover { transform: translateY(-4px); }
 .trending-img-wrap {
     position: relative;
     width: 100%;
@@ -113,12 +105,8 @@ a {
     opacity: 0;
     transition: opacity .35s ease;
 }
-.trending-card:hover .trending-img-default {
-    opacity: 0;
-}
-.trending-card:hover .trending-img-hover {
-    opacity: 1;
-}
+.trending-card:hover .trending-img-default { opacity: 0; }
+.trending-card:hover .trending-img-hover { opacity: 1; }
 .trending-badge {
     position: absolute;
     top: 12px;
@@ -143,10 +131,7 @@ a {
     letter-spacing: 1px;
     z-index: 5;
 }
-.trending-details {
-    padding: 13px 0 0;
-    text-align: left;
-}
+.trending-details { padding: 13px 0 0; text-align: left; }
 .trending-title {
     font-size: 15px;
     font-weight: 600;
@@ -164,15 +149,8 @@ a {
     margin-top: 6px;
     font-size: 14px;
 }
-.trending-price-cur {
-    color: #111;
-    font-weight: 700;
-}
-.trending-price-com {
-    color: #c70505;
-    text-decoration: line-through;
-    font-size: 13px;
-}
+.trending-price-cur { color: #111; font-weight: 700; }
+.trending-price-com { color: #c70505; text-decoration: line-through; font-size: 13px; }
 
 /* ==========================================================
    TRENDING TABS
@@ -186,9 +164,7 @@ a {
     display: inline-block;
     background: #fff;
 }
-.nav-pills .nav-link {
-    background: transparent !important;
-}
+.nav-pills .nav-link { background: transparent !important; }
 .nav-pills .nav-link.active .trnd {
     background: #111 !important;
     color: #fff !important;
@@ -251,12 +227,8 @@ a {
     opacity: 0;
     transition: opacity .4s ease;
 }
-.new-arrival-item:hover .new-hover-image {
-    opacity: 1;
-}
-.new-arrival-item:hover .new-main-image {
-    transform: scale(1.04);
-}
+.new-arrival-item:hover .new-hover-image { opacity: 1; }
+.new-arrival-item:hover .new-main-image { transform: scale(1.04); }
 .new-arrival-info {
     display: flex;
     justify-content: space-between;
@@ -300,9 +272,7 @@ a {
 /* ==========================================================
    NEW ARRIVALS NAVIGATION
 ========================================================== */
-.new-arrivals-carousel {
-    position: relative;
-}
+.new-arrivals-carousel { position: relative; }
 .new-arrivals-carousel .owl-nav {
     position: absolute;
     top: 50%;
@@ -342,28 +312,23 @@ a {
     box-shadow: 0 6px 25px rgba(0,0,0,0.15) !important;
     transform: translateY(-50%) scale(1.05);
 }
-.new-arrivals-carousel .owl-nav .owl-prev {
-    left: -25px;
+.new-arrivals-carousel .owl-nav .owl-prev { left: -25px; }
+.new-arrivals-carousel .owl-nav .owl-next { right: -25px; }
+.new-arrivals-carousel .owl-nav button i { font-size: 16px; line-height: 1; }
+
+/* Fix for carousel items on reload */
+.new-arrivals-carousel .owl-item {
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
-.new-arrivals-carousel .owl-nav .owl-next {
-    right: -25px;
-}
-.new-arrivals-carousel .owl-nav button i {
-    font-size: 16px;
-    line-height: 1;
-}
+.new-arrivals-carousel .owl-item.active { opacity: 1; }
+.new-arrivals-carousel .owl-stage-outer { overflow: visible !important; }
 
 /* ==========================================================
    BEST SELLERS
 ========================================================== */
-.best-sellers-section {
-    padding: 90px 0;
-    background: #fff;
-}
-.best-seller-header {
-    text-align: center;
-    margin-bottom: 45px;
-}
+.best-sellers-section { padding: 90px 0; background: #fff; }
+.best-seller-header { text-align: center; margin-bottom: 45px; }
 .best-seller-eyebrow {
     font-size: 11px;
     font-weight: 700;
@@ -379,11 +344,7 @@ a {
     color: #111;
     margin: 0;
 }
-.best-seller-header p {
-    color: #777;
-    font-size: 14px;
-    margin-top: 12px;
-}
+.best-seller-header p { color: #777; font-size: 14px; margin-top: 12px; }
 
 /* ==========================================================
    BEST SELLER CARD
@@ -394,9 +355,7 @@ a {
     overflow: hidden;
     transition: transform .35s ease;
 }
-.best-seller-card:hover {
-    transform: translateY(-7px);
-}
+.best-seller-card:hover { transform: translateY(-7px); }
 .best-seller-image {
     position: relative;
     height: 440px;
@@ -418,12 +377,8 @@ a {
     opacity: 0;
     transition: opacity .4s ease;
 }
-.best-seller-card:hover .main-img {
-    transform: scale(1.05);
-}
-.best-seller-card:hover .hover-img {
-    opacity: 1;
-}
+.best-seller-card:hover .main-img { transform: scale(1.05); }
+.best-seller-card:hover .hover-img { opacity: 1; }
 
 /* ==========================================================
    BEST SELLER BADGE
@@ -444,9 +399,7 @@ a {
 /* ==========================================================
    BEST SELLER DETAILS
 ========================================================== */
-.best-seller-details {
-    padding: 17px 4px 0;
-}
+.best-seller-details { padding: 17px 4px 0; }
 .best-seller-category {
     font-size: 10px;
     color: #888;
@@ -466,16 +419,8 @@ a {
     gap: 10px;
     margin-top: 8px;
 }
-.best-seller-current {
-    color: #111;
-    font-size: 13px;
-    font-weight: 400;
-}
-.best-seller-old {
-    color: #da1515;
-    font-size: 12px;
-    text-decoration: line-through;
-}
+.best-seller-current { color: #111; font-size: 13px; font-weight: 400; }
+.best-seller-old { color: #da1515; font-size: 12px; text-decoration: line-through; }
 .best-seller-action {
     display: block;
     width: 100%;
@@ -491,45 +436,25 @@ a {
     text-transform: uppercase;
     transition: all .3s ease;
 }
-.best-seller-action:hover {
-    background: #111;
-    color: #fff;
-}
+.best-seller-action:hover { background: #111; color: #fff; }
 
 /* ==========================================================
    OWL CAROUSEL
 ========================================================== */
-.owl-carousel {
-    display: block !important;
-    visibility: visible !important;
-}
-.owl-carousel .owl-stage {
-    display: flex;
-}
-.owl-carousel .owl-item {
-    display: flex;
-}
-.owl-carousel .owl-item > div {
-    width: 100%;
-}
+.owl-carousel { display: block !important; visibility: visible !important; }
+.owl-carousel .owl-stage { display: flex; }
+.owl-carousel .owl-item { display: flex; }
+.owl-carousel .owl-item > div { width: 100%; }
 
 /* ==========================================================
    FACTS
 ========================================================== */
-.counter {
-    text-align: center;
-}
-.counter h4 {
-    text-transform: capitalize;
-    font-size: 15px;
-    margin: 12px 0;
-}
-.counter h1 {
-    font-weight: 700;
-}
+.counter { text-align: center; }
+.counter h4 { text-transform: capitalize; font-size: 15px; margin: 12px 0; }
+.counter h1 { font-weight: 700; }
 
 /* ==========================================================
-   TESTIMONIALS - COMPLETELY REDESIGNED
+   TESTIMONIALS
 ========================================================== */
 .br-testimonial-section {
     background: linear-gradient(135deg, #f8f4f0 0%, #ebe7dd 100%);
@@ -537,7 +462,6 @@ a {
     position: relative;
     overflow: hidden;
 }
-
 .br-testimonial-section::before {
     content: '"';
     position: absolute;
@@ -548,12 +472,7 @@ a {
     font-family: Georgia, serif;
     line-height: 1;
 }
-
-.br-testimonial-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
+.br-testimonial-header { text-align: center; margin-bottom: 50px; }
 .br-testimonial-badge {
     display: inline-block;
     background: #111;
@@ -566,7 +485,6 @@ a {
     margin-bottom: 15px;
     border-radius: 50px;
 }
-
 .br-testimonial-header h2 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 48px;
@@ -575,14 +493,12 @@ a {
     margin: 0 0 10px;
     letter-spacing: -1px;
 }
-
 .br-testimonial-header p {
     color: #666;
     font-size: 15px;
     max-width: 500px;
     margin: 0 auto;
 }
-
 .br-testimonial-card {
     background: #ffffff;
     border-radius: 20px;
@@ -593,13 +509,11 @@ a {
     margin: 10px 5px;
     border: 1px solid rgba(0,0,0,0.04);
 }
-
 .br-testimonial-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.08);
     border-color: rgba(0,0,0,0.08);
 }
-
 .br-quote-icon {
     position: absolute;
     top: 20px;
@@ -608,22 +522,9 @@ a {
     color: rgba(17,17,17,0.06);
     line-height: 1;
 }
-
-.br-testimonial-stars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 16px;
-}
-
-.br-testimonial-stars i {
-    font-size: 14px;
-    color: #f5a623;
-}
-
-.br-testimonial-stars i.empty-star {
-    color: #e0e0e0;
-}
-
+.br-testimonial-stars { display: flex; gap: 4px; margin-bottom: 16px; }
+.br-testimonial-stars i { font-size: 14px; color: #f5a623; }
+.br-testimonial-stars i.empty-star { color: #e0e0e0; }
 .br-testimonial-text {
     font-size: 14px;
     line-height: 1.8;
@@ -632,7 +533,6 @@ a {
     font-style: italic;
     min-height: 70px;
 }
-
 .br-testimonial-text::before {
     content: '"';
     font-size: 24px;
@@ -641,7 +541,6 @@ a {
     margin-right: 4px;
     opacity: 0.3;
 }
-
 .br-testimonial-text::after {
     content: '"';
     font-size: 24px;
@@ -650,7 +549,6 @@ a {
     margin-left: 4px;
     opacity: 0.3;
 }
-
 .br-testimonial-author {
     display: flex;
     align-items: center;
@@ -658,7 +556,6 @@ a {
     padding-top: 18px;
     border-top: 1px solid rgba(0,0,0,0.06);
 }
-
 .br-testimonial-avatar {
     width: 55px;
     height: 55px;
@@ -667,26 +564,22 @@ a {
     flex-shrink: 0;
     border: 2px solid #f0ede8;
 }
-
 .br-testimonial-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .br-testimonial-info h5 {
     font-size: 15px;
     font-weight: 700;
     color: #111;
     margin: 0 0 2px;
 }
-
 .br-testimonial-info span {
     font-size: 12px;
     color: #888;
     display: block;
 }
-
 .br-testimonial-verified {
     display: inline-flex;
     align-items: center;
@@ -698,17 +591,10 @@ a {
     border-radius: 50px;
     margin-top: 4px;
 }
-
-.br-testimonial-verified i {
-    font-size: 10px;
-}
+.br-testimonial-verified i { font-size: 10px; }
 
 /* Testimonial Carousel Navigation */
-.br-testimonial-carousel .owl-nav {
-    text-align: center;
-    margin-top: 35px;
-}
-
+.br-testimonial-carousel .owl-nav { text-align: center; margin-top: 35px; }
 .br-testimonial-carousel .owl-nav button {
     width: 48px !important;
     height: 48px !important;
@@ -726,7 +612,6 @@ a {
     margin: 0 6px !important;
     padding: 0 !important;
 }
-
 .br-testimonial-carousel .owl-nav button:hover {
     background: #111111 !important;
     color: #ffffff !important;
@@ -734,17 +619,8 @@ a {
     transform: scale(1.05);
     box-shadow: 0 6px 25px rgba(0,0,0,0.12) !important;
 }
-
-.br-testimonial-carousel .owl-dots {
-    text-align: center;
-    margin-top: 25px;
-}
-
-.br-testimonial-carousel .owl-dots .owl-dot {
-    display: inline-block;
-    margin: 0 5px;
-}
-
+.br-testimonial-carousel .owl-dots { text-align: center; margin-top: 25px; }
+.br-testimonial-carousel .owl-dots .owl-dot { display: inline-block; margin: 0 5px; }
 .br-testimonial-carousel .owl-dots .owl-dot span {
     display: block;
     width: 8px;
@@ -753,137 +629,65 @@ a {
     border-radius: 50%;
     transition: all 0.3s ease;
 }
-
 .br-testimonial-carousel .owl-dots .owl-dot.active span {
     background: #111;
     transform: scale(1.3);
 }
-
-.br-testimonial-carousel .owl-dots .owl-dot:hover span {
-    background: #999;
-}
+.br-testimonial-carousel .owl-dots .owl-dot:hover span { background: #999; }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 @media (max-width: 1400px) {
-    .new-arrival-image {
-        height: 350px;
-    }
-    .best-seller-image {
-        height: 400px;
-    }
+    .new-arrival-image { height: 350px; }
+    .best-seller-image { height: 400px; }
 }
-
 @media (max-width: 1200px) {
-    .new-arrivals-carousel .owl-nav .owl-prev {
-        left: -15px;
-    }
-    .new-arrivals-carousel .owl-nav .owl-next {
-        right: -15px;
-    }
+    .new-arrivals-carousel .owl-nav .owl-prev { left: -15px; }
+    .new-arrivals-carousel .owl-nav .owl-next { right: -15px; }
 }
-
 @media (max-width: 991px) {
-    .hero-section .carousel-item {
-        height: 600px;
-        min-height: 450px;
-    }
-    .trending-img-wrap {
-        height: 300px;
-    }
-    .new-arrivals-header h2 {
-        font-size: 50px;
-    }
-    .new-arrival-image {
-        height: 320px;
-    }
-    .best-seller-header h2 {
-        font-size: 44px;
-    }
-    .best-seller-image {
-        height: 350px;
-    }
-    .br-testimonial-header h2 {
-        font-size: 40px;
-    }
+    .hero-section .carousel-item { height: 600px; min-height: 450px; }
+    .trending-img-wrap { height: 300px; }
+    .new-arrivals-header h2 { font-size: 50px; }
+    .new-arrival-image { height: 320px; }
+    .best-seller-header h2 { font-size: 44px; }
+    .best-seller-image { height: 350px; }
+    .br-testimonial-header h2 { font-size: 40px; }
 }
-
 @media (max-width: 992px) {
     .new-arrivals-carousel .owl-nav button {
         width: 40px !important;
         height: 40px !important;
         font-size: 14px !important;
     }
-    .new-arrivals-carousel .owl-nav .owl-prev {
-        left: -10px;
-    }
-    .new-arrivals-carousel .owl-nav .owl-next {
-        right: -10px;
-    }
+    .new-arrivals-carousel .owl-nav .owl-prev { left: -10px; }
+    .new-arrivals-carousel .owl-nav .owl-next { right: -10px; }
 }
-
 @media (max-width: 767px) {
-    .section-heading {
-        display: block;
-    }
-    .section-heading h1 {
-        font-size: 30px;
-        margin-bottom: 15px;
-    }
-    .section-heading a {
-        display: inline-block;
-    }
-    .new-arrivals-section {
-        padding: 55px 0;
-    }
-    .new-arrivals-header {
-        display: block;
-    }
-    .new-arrivals-header h2 {
-        font-size: 43px;
-        margin-bottom: 18px;
-    }
-    .new-arrival-image {
-        height: 360px;
-    }
-    .best-sellers-section {
-        padding: 60px 0;
-    }
-    .best-seller-header h2 {
-        font-size: 40px;
-    }
-    .best-seller-image {
-        height: 420px;
-    }
-    .br-testimonial-section {
-        padding: 55px 0 45px;
-    }
-    .br-testimonial-header h2 {
-        font-size: 34px;
-    }
-    .br-testimonial-card {
-        padding: 22px 20px 20px;
-    }
-    .br-testimonial-text {
-        font-size: 13px;
-        min-height: 50px;
-    }
+    .section-heading { display: block; }
+    .section-heading h1 { font-size: 30px; margin-bottom: 15px; }
+    .section-heading a { display: inline-block; }
+    .new-arrivals-section { padding: 55px 0; }
+    .new-arrivals-header { display: block; }
+    .new-arrivals-header h2 { font-size: 43px; margin-bottom: 18px; }
+    .new-arrival-image { height: 360px; }
+    .best-sellers-section { padding: 60px 0; }
+    .best-seller-header h2 { font-size: 40px; }
+    .best-seller-image { height: 420px; }
+    .br-testimonial-section { padding: 55px 0 45px; }
+    .br-testimonial-header h2 { font-size: 34px; }
+    .br-testimonial-card { padding: 22px 20px 20px; }
+    .br-testimonial-text { font-size: 13px; min-height: 50px; }
 }
-
 @media (max-width: 768px) {
-    .new-arrivals-carousel .owl-nav {
-        display: none !important;
-    }
+    .new-arrivals-carousel .owl-nav { display: none !important; }
     .new-arrivals-carousel .owl-dots {
         display: block !important;
         text-align: center;
         margin-top: 15px;
     }
-    .new-arrivals-carousel .owl-dots .owl-dot {
-        display: inline-block;
-        margin: 0 5px;
-    }
+    .new-arrivals-carousel .owl-dots .owl-dot { display: inline-block; margin: 0 5px; }
     .new-arrivals-carousel .owl-dots .owl-dot span {
         display: block;
         width: 10px;
@@ -897,34 +701,15 @@ a {
         transform: scale(1.2);
     }
 }
-
 @media (max-width: 576px) {
-    .hero-section .carousel-item {
-        height: 480px;
-        min-height: 400px;
-    }
-    .trending-img-wrap {
-        height: 270px;
-    }
-    .new-arrival-image {
-        height: 330px;
-    }
-    .best-seller-image {
-        height: 390px;
-    }
-    .best-seller-name {
-        font-size: 14px;
-    }
-    .br-testimonial-header h2 {
-        font-size: 28px;
-    }
-    .br-testimonial-avatar {
-        width: 45px;
-        height: 45px;
-    }
-    .br-testimonial-info h5 {
-        font-size: 13px;
-    }
+    .hero-section .carousel-item { height: 480px; min-height: 400px; }
+    .trending-img-wrap { height: 270px; }
+    .new-arrival-image { height: 330px; }
+    .best-seller-image { height: 390px; }
+    .best-seller-name { font-size: 14px; }
+    .br-testimonial-header h2 { font-size: 28px; }
+    .br-testimonial-avatar { width: 45px; height: 45px; }
+    .br-testimonial-info h5 { font-size: 13px; }
     .br-testimonial-carousel .owl-nav button {
         width: 40px !important;
         height: 40px !important;
@@ -934,26 +719,27 @@ a {
 </style>
 
 <!-- ==========================================================
-     HERO SECTION
+   HERO SECTION
 ========================================================== -->
 <section class="hero-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             {% for banner in hero_banners %}
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Slide {{ forloop.counter }}">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %}class="active"{% endif %}
+                aria-label="Slide {{ forloop.counter }}">
             </button>
             {% empty %}
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active">
-            </button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
             {% endfor %}
         </div>
         <div class="carousel-inner">
             {% for banner in hero_banners %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}" style="background-image:url('{% if banner.image %}{{ banner.image.url }}{% else %}{% static "img/banner-clothing.jpg" %}{% endif %}');">
+            <div class="carousel-item {% if forloop.first %}active{% endif %}"
+                style="background-image:url('{% if banner.image %}{{ banner.image.url }}{% else %}{% static "img/banner-clothing.jpg" %}{% endif %}');">
             </div>
             {% empty %}
-            <div class="carousel-item active" style="background-image:url('{% static "img/banner-clothing.jpg" %}');">
-            </div>
+            <div class="carousel-item active" style="background-image:url('{% static "img/banner-clothing.jpg" %}');"></div>
             {% endfor %}
         </div>
         {% if hero_banners|length > 1 %}
@@ -968,7 +754,7 @@ a {
 </section>
 
 <!-- ==========================================================
-     TRENDING
+   TRENDING
 ========================================================== -->
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -994,6 +780,7 @@ a {
                     </ul>
                 </div>
             </div>
+
             <div class="tab-content">
                 <div id="tab-all" class="tab-pane fade show active">
                     <div class="row g-4">
@@ -1005,16 +792,16 @@ a {
                                         {% if variant %}
                                             {% with variant.images.all as images %}
                                                 {% if images %}
-                                                <img src="{{ images.0.image.url }}" class="trending-img-default" alt="{{ product.name }}">
-                                                {% if images|length > 1 %}
-                                                <img src="{{ images.1.image.url }}" class="trending-img-hover" alt="{{ product.name }}">
-                                                {% endif %}
+                                                    <img src="{{ images.0.image.url }}" class="trending-img-default" alt="{{ product.name }}">
+                                                    {% if images|length > 1 %}
+                                                    <img src="{{ images.1.image.url }}" class="trending-img-hover" alt="{{ product.name }}">
+                                                    {% endif %}
                                                 {% else %}
-                                                <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
+                                                    <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
                                                 {% endif %}
                                             {% endwith %}
                                         {% else %}
-                                        <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
+                                            <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
                                         {% endif %}
                                     {% endwith %}
                                     <div class="trending-badge">TRENDING</div>
@@ -1026,10 +813,10 @@ a {
                                     <div class="trending-price">
                                         {% with product.variants.all|first as variant %}
                                             {% if variant %}
-                                            <span class="trending-price-cur">PKR {{ variant.price }}</span>
-                                            {% if variant.discount_price %}
-                                            <span class="trending-price-com">PKR {{ variant.discount_price }}</span>
-                                            {% endif %}
+                                                <span class="trending-price-cur">PKR {{ variant.price }}</span>
+                                                {% if variant.discount_price %}
+                                                <span class="trending-price-com">PKR {{ variant.discount_price }}</span>
+                                                {% endif %}
                                             {% endif %}
                                         {% endwith %}
                                     </div>
@@ -1043,6 +830,7 @@ a {
                         {% endfor %}
                     </div>
                 </div>
+
                 {% for category_data in category_products_list %}
                 <div id="tab-{{ category_data.category.id }}" class="tab-pane fade">
                     <div class="row g-4">
@@ -1054,16 +842,16 @@ a {
                                         {% if variant %}
                                             {% with variant.images.all as images %}
                                                 {% if images %}
-                                                <img src="{{ images.0.image.url }}" class="trending-img-default" alt="{{ product.name }}">
-                                                {% if images|length > 1 %}
-                                                <img src="{{ images.1.image.url }}" class="trending-img-hover" alt="{{ product.name }}">
-                                                {% endif %}
+                                                    <img src="{{ images.0.image.url }}" class="trending-img-default" alt="{{ product.name }}">
+                                                    {% if images|length > 1 %}
+                                                    <img src="{{ images.1.image.url }}" class="trending-img-hover" alt="{{ product.name }}">
+                                                    {% endif %}
                                                 {% else %}
-                                                <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
+                                                    <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
                                                 {% endif %}
                                             {% endwith %}
                                         {% else %}
-                                        <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
+                                            <img src="{% static 'img/default-product.jpg' %}" class="trending-img-default" alt="{{ product.name }}">
                                         {% endif %}
                                     {% endwith %}
                                     <div class="trending-badge">NEW IN</div>
@@ -1076,10 +864,10 @@ a {
                                     <div class="trending-price">
                                         {% with product.variants.all|first as variant %}
                                             {% if variant %}
-                                            <span class="trending-price-cur">PKR {{ variant.price }}</span>
-                                            {% if variant.discount_price %}
-                                            <span class="trending-price-com">PKR {{ variant.discount_price }}</span>
-                                            {% endif %}
+                                                <span class="trending-price-cur">PKR {{ variant.price }}</span>
+                                                {% if variant.discount_price %}
+                                                <span class="trending-price-com">PKR {{ variant.discount_price }}</span>
+                                                {% endif %}
                                             {% endif %}
                                         {% endwith %}
                                     </div>
@@ -1100,7 +888,7 @@ a {
 </div>
 
 <!-- ==========================================================
-     NEW ARRIVALS
+   NEW ARRIVALS
 ========================================================== -->
 <section class="new-arrivals-section">
     <div class="container">
@@ -1108,6 +896,8 @@ a {
             <h2>New Arrivals</h2>
             <a href="{% url 'products:product-list' %}">Shop All</a>
         </div>
+
+        {% if new_arrivals %}
         <div class="owl-carousel new-arrivals-carousel">
             {% for product in new_arrivals %}
             <div class="new-arrival-item">
@@ -1117,16 +907,16 @@ a {
                             {% if variant %}
                                 {% with variant.images.all as images %}
                                     {% if images %}
-                                    <img src="{{ images.0.image.url }}" class="new-main-image" alt="{{ product.name }}">
-                                    {% if images|length > 1 %}
-                                    <img src="{{ images.1.image.url }}" class="new-hover-image" alt="{{ product.name }}">
-                                    {% endif %}
+                                        <img src="{{ images.0.image.url }}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
+                                        {% if images|length > 1 %}
+                                        <img src="{{ images.1.image.url }}" class="new-hover-image" alt="{{ product.name }}" loading="lazy">
+                                        {% endif %}
                                     {% else %}
-                                    <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}">
+                                        <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
                                     {% endif %}
                                 {% endwith %}
                             {% else %}
-                            <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}">
+                                <img src="{% static 'img/default-product.jpg' %}" class="new-main-image" alt="{{ product.name }}" loading="lazy">
                             {% endif %}
                         {% endwith %}
                         <span class="new-arrival-badge">NEW IN</span>
@@ -1138,25 +928,26 @@ a {
                         {% with product.variants.all|first as variant %}
                             {% if variant %}
                                 PKR {{ variant.price }}
-                            {% endif %}
-                            {% if variant.discount_price %}
-                            <span class="new-arrival-discount-price">PKR {{ variant.discount_price }}</span>
+                                {% if variant.discount_price %}
+                                <span class="new-arrival-discount-price">PKR {{ variant.discount_price }}</span>
+                                {% endif %}
                             {% endif %}
                         {% endwith %}
                     </div>
                 </a>
             </div>
-            {% empty %}
-            <div class="text-center py-5">
-                <p class="text-muted">No new arrivals available.</p>
-            </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">No new arrivals available.</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 
 <!-- ==========================================================
-     BEST SELLERS
+   BEST SELLERS
 ========================================================== -->
 <section class="best-sellers-section">
     <div class="container">
@@ -1174,16 +965,16 @@ a {
                             {% if variant %}
                                 {% with variant.images.all as images %}
                                     {% if images %}
-                                    <img src="{{ images.0.image.url }}" class="main-img" alt="{{ product.name }}">
-                                    {% if images|length > 1 %}
-                                    <img src="{{ images.1.image.url }}" class="hover-img" alt="{{ product.name }}">
-                                    {% endif %}
+                                        <img src="{{ images.0.image.url }}" class="main-img" alt="{{ product.name }}" loading="lazy">
+                                        {% if images|length > 1 %}
+                                        <img src="{{ images.1.image.url }}" class="hover-img" alt="{{ product.name }}" loading="lazy">
+                                        {% endif %}
                                     {% else %}
-                                    <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}">
+                                        <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}" loading="lazy">
                                     {% endif %}
                                 {% endwith %}
                             {% else %}
-                            <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}">
+                                <img src="{% static 'img/default-product.jpg' %}" class="main-img" alt="{{ product.name }}" loading="lazy">
                             {% endif %}
                         {% endwith %}
                         <span class="best-seller-tag">BEST SELLER</span>
@@ -1195,10 +986,10 @@ a {
                         <div class="best-seller-price">
                             {% with product.variants.all|first as variant %}
                                 {% if variant %}
-                                <span class="best-seller-current">PKR {{ variant.price }}</span>
-                                {% if variant.discount_price %}
-                                <span class="best-seller-old">PKR {{ variant.discount_price }}</span>
-                                {% endif %}
+                                    <span class="best-seller-current">PKR {{ variant.price }}</span>
+                                    {% if variant.discount_price %}
+                                    <span class="best-seller-old">PKR {{ variant.discount_price }}</span>
+                                    {% endif %}
                                 {% endif %}
                             {% endwith %}
                         </div>
@@ -1216,7 +1007,7 @@ a {
 </section>
 
 <!-- ==========================================================
-     TESTIMONIALS - COMPLETELY REDESIGNED
+   TESTIMONIALS
 ========================================================== -->
 <section class="br-testimonial-section">
     <div class="container">
@@ -1226,19 +1017,20 @@ a {
             <p>Hear from our valued customers about their experience with Bin Rafique Clothe House</p>
         </div>
 
+        {% if testimonials %}
         <div class="owl-carousel br-testimonial-carousel">
             {% for testimonial in testimonials %}
             <div class="br-testimonial-card">
                 <div class="br-quote-icon">
                     <i class="fas fa-quote-right"></i>
                 </div>
-                
+
                 <div class="br-testimonial-stars">
                     {% for i in "12345"|make_list %}
                         {% if forloop.counter <= testimonial.rating %}
-                        <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         {% else %}
-                        <i class="fas fa-star empty-star"></i>
+                            <i class="fas fa-star empty-star"></i>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -1248,9 +1040,9 @@ a {
                 <div class="br-testimonial-author">
                     <div class="br-testimonial-avatar">
                         {% if testimonial.client_image %}
-                        <img src="{{ testimonial.client_image.url }}" alt="{{ testimonial.client_name }}">
+                            <img src="{{ testimonial.client_image.url }}" alt="{{ testimonial.client_name }}" loading="lazy">
                         {% else %}
-                        <img src="{% static 'img/testimonial-1.jpg' %}" alt="{{ testimonial.client_name }}">
+                            <img src="{% static 'img/testimonial-1.jpg' %}" alt="{{ testimonial.client_name }}" loading="lazy">
                         {% endif %}
                     </div>
                     <div class="br-testimonial-info">
@@ -1262,30 +1054,25 @@ a {
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="br-testimonial-card text-center py-5">
-                <p class="text-muted">No testimonials available yet.</p>
-            </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">No testimonials available yet.</p>
+        </div>
+        {% endif %}
     </div>
 </section>
-
-<!-- ==========================================================
-     JAVASCRIPT
-========================================================== -->
+{% block extra_js %}
 <script>
-$(document).ready(function() {
-    // Check if owlCarousel is available
+$(document).ready(function () {
     if (typeof $.fn.owlCarousel === 'undefined') {
         console.error('Owl Carousel not loaded');
         return;
     }
 
-    setTimeout(function() {
-        /* ======================================================
-           NEW ARRIVALS CAROUSEL
-        ====================================================== */
+    // New Arrivals
+    if ($('.new-arrivals-carousel').length && $('.new-arrivals-carousel .new-arrival-item').length > 0) {
         $('.new-arrivals-carousel').owlCarousel({
             loop: true,
             margin: 8,
@@ -1294,39 +1081,19 @@ $(document).ready(function() {
             autoplay: true,
             autoplayTimeout: 3500,
             autoplayHoverPause: true,
-            navText: [],
+            navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             responsive: {
-                0: {
-                    items: 1,
-                    nav: false,
-                    dots: true
-                },
-                576: {
-                    items: 2,
-                    nav: false,
-                    dots: true
-                },
-                768: {
-                    items: 3,
-                    nav: true,
-                    dots: false
-                },
-                992: {
-                    items: 4,
-                    nav: true,
-                    dots: false
-                },
-                1200: {
-                    items: 5,
-                    nav: true,
-                    dots: false
-                }
+                0:    { items: 1, nav: false, dots: true },
+                576:  { items: 2, nav: false, dots: true },
+                768:  { items: 3, nav: true,  dots: false },
+                992:  { items: 4, nav: true,  dots: false },
+                1200: { items: 5, nav: true,  dots: false }
             }
         });
+    }
 
-        /* ======================================================
-           TESTIMONIAL CAROUSEL - UPDATED
-        ====================================================== */
+    // Testimonials
+    if ($('.br-testimonial-carousel').length && $('.br-testimonial-carousel .br-testimonial-card').length > 0) {
         $('.br-testimonial-carousel').owlCarousel({
             loop: true,
             margin: 25,
@@ -1337,57 +1104,16 @@ $(document).ready(function() {
             autoplayHoverPause: true,
             navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             responsive: {
-                0: {
-                    items: 1,
-                    nav: false,
-                    dots: true
-                },
-                576: {
-                    items: 1,
-                    nav: false,
-                    dots: true
-                },
-                768: {
-                    items: 2,
-                    nav: true,
-                    dots: true
-                },
-                992: {
-                    items: 3,
-                    nav: true,
-                    dots: true
-                },
-                1200: {
-                    items: 3,
-                    nav: true,
-                    dots: true
-                }
+                0:    { items: 1, nav: false, dots: true },
+                576:  { items: 1, nav: false, dots: true },
+                768:  { items: 2, nav: true,  dots: true },
+                992:  { items: 3, nav: true,  dots: true },
+                1200: { items: 3, nav: true,  dots: true }
             }
         });
-
-        // Fix for owl nav positioning
-        $('.owl-carousel').each(function() {
-            var $carousel = $(this);
-            $carousel.on('initialized.owl.carousel', function() {
-                // Ensure nav buttons are properly positioned for new arrivals
-                if ($carousel.hasClass('new-arrivals-carousel')) {
-                    $carousel.find('.owl-nav').css({
-                        'position': 'absolute',
-                        'top': '50%',
-                        'left': '0',
-                        'right': '0',
-                        'transform': 'translateY(-50%)',
-                        'pointer-events': 'none'
-                    });
-                    $carousel.find('.owl-nav button').css({
-                        'pointer-events': 'auto'
-                    });
-                }
-            });
-        });
-
-    }, 500);
+    }
 });
 </script>
+{% endblock %}
 
 {% endblock %}

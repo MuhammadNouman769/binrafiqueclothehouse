@@ -8,18 +8,13 @@
     <title>{% block title %}Tahir Rafique Clothes House{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ========================================================== -->
-    <!-- ✅ CSP META TAG (Prevents JS Blocking / Infinite Reload) -->
-    <!-- ========================================================== -->
+    <!-- CSP -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:;">
 
-    <!-- ========================================================== -->
-    <!-- ✅ FAVICON (Browser Tab Icon) - Fixed for better display -->
-    <!-- ========================================================== -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logos/logo-.png' %}">
     <link rel="shortcut icon" href="{% static 'logos/logo-.png' %}">
     <link rel="apple-touch-icon" href="{% static 'logos/logo-.png' %}">
-    <!-- Fallback for modern browsers -->
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 
     <!-- Google Fonts -->
@@ -42,14 +37,6 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    <!-- ========================================================== -->
-    <!-- ✅ ADDED: jQuery and Libraries JS (Needed for Owl Carousel) -->
-    <!-- ========================================================== -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
-
 </head>
 
 <body>
@@ -62,35 +49,58 @@
     {% include 'includes/footer.html' %}
 
     {% include 'includes/scripts.html' %}
+    
 
-    <!-- ========================================================== -->
-    <!-- ✅ HEADER JAVASCRIPT (Spinner + Mobile Menu Toggle) -->
-    <!-- ========================================================== -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
+{% block extra_js %}{% endblock %}
+
+<!-- Spinner + Mobile Menu Toggle -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
         'use strict';
-        
-        // 1. Spinner remove safely
         const spinner = document.getElementById('spinner');
         if (spinner) {
-            setTimeout(function() {
+            setTimeout(function () {
                 spinner.style.display = 'none';
                 spinner.classList.remove('show');
-            }, 800); // 0.8 seconds load time
+            }, 800);
         }
 
-        // 2. Mobile menu toggle (Industry standard)
         const toggleBtn = document.getElementById('trMobileToggle');
         const mobileMenu = document.getElementById('trMobileMenu');
         if (toggleBtn && mobileMenu) {
-            toggleBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // Stops any accidental page jump
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
                 mobileMenu.classList.toggle('open');
             });
         }
     });
+</script>
+
+    <!-- Spinner + Mobile Menu Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            'use strict';
+
+            // Spinner
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                setTimeout(function () {
+                    spinner.style.display = 'none';
+                    spinner.classList.remove('show');
+                }, 800);
+            }
+
+            // Mobile menu toggle
+            const toggleBtn = document.getElementById('trMobileToggle');
+            const mobileMenu = document.getElementById('trMobileMenu');
+            if (toggleBtn && mobileMenu) {
+                toggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    mobileMenu.classList.toggle('open');
+                });
+            }
+        });
     </script>
 
 </body>
-
 </html>
