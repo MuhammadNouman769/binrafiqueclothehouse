@@ -1,7 +1,8 @@
-from django.views.generic import TemplateView
+from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.conf import settings
+from django.views.generic import TemplateView
+
 from apps.whatspp.models.whatsapp_setting import SiteSetting
 
 
@@ -10,28 +11,28 @@ class ContactView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         # Get site settings
         site_settings = SiteSetting.get_settings()
-        context['site_settings'] = site_settings
-        
+        context["site_settings"] = site_settings
+
         return context
-    
+
     def post(self, request, *args, **kwargs):
         # Get form data
-        name = request.POST.get('name', '').strip()
-        email = request.POST.get('email', '').strip()
-        subject = request.POST.get('subject', '').strip()
-        message = request.POST.get('message', '').strip()
-        
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "").strip()
+        message = request.POST.get("message", "").strip()
+
         # Validate
         if not name or not email or not message:
-            messages.error(request, 'Please fill in all required fields.')
+            messages.error(request, "Please fill in all required fields.")
             return self.get(request, *args, **kwargs)
-        
+
         # Get site settings
         site_settings = SiteSetting.get_settings()
-        
+
         # Send email
         try:
             html_message = f"""
@@ -80,7 +81,7 @@ class ContactView(TemplateView):
             </body>
             </html>
             """
-            
+
             text_message = f"""
             New Contact Form Submission
             
@@ -94,7 +95,7 @@ class ContactView(TemplateView):
             ---
             Sent from {site_settings.site_name} Contact Form
             """
-            
+
             send_mail(
                 subject=f'Contact Form: {subject or "New Message"} from {name}',
                 message=text_message,
@@ -103,20 +104,21 @@ class ContactView(TemplateView):
                 html_message=html_message,
                 fail_silently=False,
             )
-            
+
             messages.success(
-                request, 
-                '✅ Thank you for your message! We will get back to you shortly.'
+                request,
+                "✅ Thank you for your message! We will get back to you shortly.",
             )
-            
+
         except Exception as e:
             import logging
+
             logger = logging.getLogger(__name__)
-            logger.error(f"Email sending error: {str(e)}")
-            
+            logger.error(f"Email sending error: {e!s}")
+
             messages.error(
-                request, 
-                '❌ There was an error sending your message. Please try again later.'
+                request,
+                "❌ There was an error sending your message. Please try again later.",
             )
-        
+
         return self.get(request, *args, **kwargs)

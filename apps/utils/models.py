@@ -4,10 +4,11 @@ from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 
-from .managers import BaseManager, AllObjectsManager
-
+from .managers import AllObjectsManager, BaseManager
 
 """ ==================== Base Models ================= """
+
+
 class BaseModel(models.Model):
     id = models.BigAutoField(primary_key=True)
 
@@ -85,8 +86,7 @@ class SlugModel(BaseModel):
             counter = 1
 
             while (
-                self.__class__.all_objects
-                .filter(slug=slug)
+                self.__class__.all_objects.filter(slug=slug)
                 .exclude(pk=self.pk)
                 .exists()
             ):

@@ -16,13 +16,9 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         "products_count",
     )
 
-    list_filter = (
-        "is_active",
-    )
+    list_filter = ("is_active",)
 
-    search_fields = (
-        "title",
-    )
+    search_fields = ("title",)
 
     list_editable = (
         "display_order",
@@ -33,9 +29,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
         "slug": ("title",),
     }
 
-    list_select_related = (
-        "parent",
-    )
+    list_select_related = ("parent",)
 
     ordering = (
         "display_order",

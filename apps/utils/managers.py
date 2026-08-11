@@ -2,6 +2,7 @@ from django.db import models
 
 """ ==================== Managers ================= """
 
+
 class SoftDeleteQuerySet(models.QuerySet):
     def active(self):
         return self.filter(is_active=True)
@@ -21,15 +22,9 @@ class SoftDeleteQuerySet(models.QuerySet):
 
 class BaseManager(models.Manager):
     def get_queryset(self):
-        return SoftDeleteQuerySet(
-            self.model,
-            using=self._db
-        ).filter(is_active=True)
+        return SoftDeleteQuerySet(self.model, using=self._db).filter(is_active=True)
 
 
 class AllObjectsManager(models.Manager):
     def get_queryset(self):
-        return SoftDeleteQuerySet(
-            self.model,
-            using=self._db
-        )
+        return SoftDeleteQuerySet(self.model, using=self._db)

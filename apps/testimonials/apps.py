@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class TestimonialsConfig(AppConfig):
-    name = 'apps.testimonials'
+    name = "apps.testimonials"

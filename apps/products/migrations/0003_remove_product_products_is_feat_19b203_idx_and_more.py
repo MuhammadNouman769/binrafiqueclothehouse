@@ -6,29 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0002_productvariant_discount_price_alter_product_category'),
+        ("products", "0002_productvariant_discount_price_alter_product_category"),
     ]
 
     operations = [
         migrations.RemoveIndex(
-            model_name='product',
-            name='products_is_feat_19b203_idx',
+            model_name="product",
+            name="products_is_feat_19b203_idx",
         ),
         migrations.RenameField(
-            model_name='product',
-            old_name='is_featured',
-            new_name='trending',
+            model_name="product",
+            old_name="is_featured",
+            new_name="trending",
         ),
         migrations.AddIndex(
-            model_name='product',
-            index=models.Index(fields=['trending'], name='products_trendin_a703e9_idx'),
+            model_name="product",
+            index=models.Index(fields=["trending"], name="products_trendin_a703e9_idx"),
         ),
         migrations.AddIndex(
-            model_name='product',
-            index=models.Index(fields=['is_new_arrival'], name='products_is_new__d3fc15_idx'),
+            model_name="product",
+            index=models.Index(
+                fields=["is_new_arrival"], name="products_is_new__d3fc15_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='product',
-            index=models.Index(fields=['is_bestseller'], name='products_is_best_476666_idx'),
+            model_name="product",
+            index=models.Index(
+                fields=["is_bestseller"], name="products_is_best_476666_idx"
+            ),
         ),
     ]

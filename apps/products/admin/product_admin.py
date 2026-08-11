@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.db.models import Prefetch
 from django.utils.html import format_html
-from django.utils import timezone
-from datetime import timedelta
 
 from apps.products.models import (
     Product,
@@ -15,9 +13,7 @@ from .product_variant import ProductVariantInline
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    inlines = (
-        ProductVariantInline,
-    )
+    inlines = (ProductVariantInline,)
 
     list_display = (
         "id",
@@ -27,8 +23,8 @@ class ProductAdmin(admin.ModelAdmin):
         "brand",
         "default_price",
         "variants_count",
-        "trending",            
-        "is_bestseller",      
+        "trending",
+        "is_bestseller",
         "is_new_arrival",
         "is_active",
         "created_at",
@@ -37,8 +33,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = (
         "category",
         "brand",
-        "trending",            
-        "is_bestseller",      
+        "trending",
+        "is_bestseller",
         "is_new_arrival",
         "is_active",
         "created_at",
@@ -51,17 +47,15 @@ class ProductAdmin(admin.ModelAdmin):
         "description",
     )
 
-    autocomplete_fields = (
-        "category",
-    )
+    autocomplete_fields = ("category",)
 
     prepopulated_fields = {
         "slug": ("name",),
     }
 
     list_editable = (
-        "trending",            
-        "is_bestseller",      
+        "trending",
+        "is_bestseller",
         "is_new_arrival",
         "is_active",
     )
@@ -71,7 +65,7 @@ class ProductAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
         "new_arrival_status",
-        "bestseller_status",  
+        "bestseller_status",
     )
 
     fieldsets = (
@@ -86,7 +80,6 @@ class ProductAdmin(admin.ModelAdmin):
                 )
             },
         ),
-
         (
             "Description",
             {
@@ -96,39 +89,33 @@ class ProductAdmin(admin.ModelAdmin):
                 )
             },
         ),
-
         (
             "Settings",
             {
                 "fields": (
-                    "trending",            
-                    "is_bestseller",      
+                    "trending",
+                    "is_bestseller",
                     "is_new_arrival",
                     "is_active",
                 )
             },
         ),
-
         (
             "Information",
             {
                 "fields": (
                     "variants_count",
                     "new_arrival_status",
-                    "bestseller_status",  
+                    "bestseller_status",
                     "created_at",
                     "updated_at",
                 ),
-                "classes": (
-                    "collapse",
-                ),
+                "classes": ("collapse",),
             },
         ),
     )
 
-    ordering = (
-        "-created_at",
-    )
+    ordering = ("-created_at",)
 
     list_per_page = 30
 
@@ -207,10 +194,10 @@ class ProductAdmin(admin.ModelAdmin):
     actions = (
         "activate_products",
         "deactivate_products",
-        "mark_trending",          
-        "remove_trending",        
-        "mark_bestseller",          
-        "remove_bestseller",        
+        "mark_trending",
+        "remove_trending",
+        "mark_bestseller",
+        "remove_bestseller",
         "mark_new_arrival",
         "remove_new_arrival",
         "make_new_arrival_for_days",
@@ -323,7 +310,7 @@ class ProductAdmin(admin.ModelAdmin):
         updated = queryset.update(
             is_new_arrival=True,
         )
-        
+
         self.message_user(
             request,
             f"{updated} product(s) marked as New Arrival for 15 days.",
@@ -334,7 +321,5 @@ class ProductAdmin(admin.ModelAdmin):
     # ============================================================
 
     class Media:
-        css = {
-            'all': ('admin/css/custom_admin.css',)
-        }
-        js = ('admin/js/custom_admin.js',)
+        css = {"all": ("admin/css/custom_admin.css",)}
+        js = ("admin/js/custom_admin.js",)

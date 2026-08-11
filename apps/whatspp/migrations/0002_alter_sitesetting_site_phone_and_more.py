@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('whatspp', '0001_initial'),
+        ("whatspp", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sitesetting',
-            name='site_phone',
-            field=models.CharField(default='+92 324 869 9647', max_length=20),
+            model_name="sitesetting",
+            name="site_phone",
+            field=models.CharField(default="+92 324 869 9647", max_length=20),
         ),
         migrations.AlterField(
-            model_name='sitesetting',
-            name='whatsapp_number',
-            field=models.CharField(default='923248699647', help_text='WhatsApp number with country code (e.g., 923248699647)', max_length=20),
+            model_name="sitesetting",
+            name="whatsapp_number",
+            field=models.CharField(
+                default="923248699647",
+                help_text="WhatsApp number with country code (e.g., 923248699647)",
+                max_length=20,
+            ),
         ),
     ]

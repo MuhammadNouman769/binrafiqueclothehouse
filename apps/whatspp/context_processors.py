@@ -1,4 +1,3 @@
-
 from apps.whatspp.models.whatsapp_setting import SiteSetting
 
 
@@ -8,5 +7,5 @@ def site_settings(request):
     """
     settings = SiteSetting.get_settings()
     return {
-        'site_settings': settings,
+        "site_settings": settings,
     }

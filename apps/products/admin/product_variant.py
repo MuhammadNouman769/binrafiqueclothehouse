@@ -6,10 +6,10 @@ from apps.products.models import (
     VariantImage,
 )
 
-
 # ============================================================
 # Variant Images Inline
 # ============================================================
+
 
 class VariantImageInline(admin.TabularInline):
 
@@ -24,9 +24,7 @@ class VariantImageInline(admin.TabularInline):
         "preview",
     )
 
-    readonly_fields = (
-        "preview",
-    )
+    readonly_fields = ("preview",)
 
     ordering = (
         "position",
@@ -51,6 +49,7 @@ class VariantImageInline(admin.TabularInline):
 # ============================================================
 # Product Variant Inline
 # ============================================================
+
 
 class ProductVariantInline(admin.TabularInline):
 
@@ -82,6 +81,7 @@ class ProductVariantInline(admin.TabularInline):
 # Product Variant Admin
 # ============================================================
 
+
 @admin.register(ProductVariant)
 class ProductVariantAdmin(admin.ModelAdmin):
 
@@ -102,9 +102,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
         "is_active",
     )
 
-    search_fields = (
-        "product__name",
-    )
+    search_fields = ("product__name",)
 
     autocomplete_fields = (
         "product",
@@ -120,24 +118,17 @@ class ProductVariantAdmin(admin.ModelAdmin):
         "is_active",
     )
 
-    readonly_fields = (
-        "variant_name",
-    )
+    readonly_fields = ("variant_name",)
 
-    inlines = (
-        VariantImageInline,
-    )
+    inlines = (VariantImageInline,)
 
     fieldsets = (
         (
             "Product",
             {
-                "fields": (
-                    "product",
-                ),
+                "fields": ("product",),
             },
         ),
-
         (
             "Variant Options",
             {
@@ -148,7 +139,6 @@ class ProductVariantAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-
         (
             "Pricing",
             {
@@ -158,12 +148,11 @@ class ProductVariantAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-
         (
             "Settings",
             {
                 "fields": (
-                    "variant_name",    # ✅ Added to show cleanly in edit page
+                    "variant_name",  # ✅ Added to show cleanly in edit page
                     "position",
                     "is_default",
                     "is_active",

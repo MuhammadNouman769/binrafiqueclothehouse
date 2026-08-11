@@ -3,6 +3,7 @@ import uuid
 
 """ ================ File Upload Helper =============== """
 
+
 def upload_to(instance, filename):
     ext = filename.split(".")[-1]
 

@@ -1,11 +1,9 @@
-
 from django.db import models
 
 from apps.utils.models import BaseModel
-from apps.products.models.product_variant import ProductVariant
-
 
 """ ===================== Cart ======================== """
+
 
 class Cart(BaseModel):
     session_key = models.CharField(

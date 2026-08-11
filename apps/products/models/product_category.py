@@ -2,7 +2,6 @@ from django.db import models
 
 from apps.utils.models import SlugModel
 
-
 """
 ===============================================================================
                         PRODUCT CATEGORY
@@ -100,11 +99,7 @@ class ProductCategory(SlugModel):
         if self.parent == self:
             from django.core.exceptions import ValidationError
 
-            raise ValidationError(
-                {
-                    "parent": "Category cannot be its own parent."
-                }
-            )
+            raise ValidationError({"parent": "Category cannot be its own parent."})
 
     # ------------------------------------------------------------------
     # Slug

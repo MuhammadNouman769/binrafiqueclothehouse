@@ -1,8 +1,7 @@
 from django.db import models
 
-from apps.utils.models import SlugModel
 from apps.products.models.product_category import ProductCategory
-
+from apps.utils.models import SlugModel
 
 """
 ===============================================================================
@@ -58,17 +57,15 @@ class Product(SlugModel):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
-        ordering = (
-            "name",
-        )
+        ordering = ("name",)
 
         indexes = [
             models.Index(fields=["category"]),
             models.Index(fields=["brand"]),
             models.Index(fields=["name"]),
-            models.Index(fields=["trending"]),            # ✅ Fixed: is_featured → trending
-            models.Index(fields=["is_new_arrival"]),      # ✅ Added for speed
-            models.Index(fields=["is_bestseller"]),       # ✅ Added for speed
+            models.Index(fields=["trending"]),  # ✅ Fixed: is_featured → trending
+            models.Index(fields=["is_new_arrival"]),  # ✅ Added for speed
+            models.Index(fields=["is_bestseller"]),  # ✅ Added for speed
             models.Index(fields=["is_active"]),
             models.Index(fields=["created_at"]),
         ]

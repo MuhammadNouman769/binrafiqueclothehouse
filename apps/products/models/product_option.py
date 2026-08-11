@@ -1,8 +1,7 @@
 from django.db import models
 
-from apps.utils.models import BaseModel
 from apps.products.models.product import Product
-
+from apps.utils.models import BaseModel
 
 """
 ===============================================================================
@@ -83,9 +82,7 @@ class ProductOption(BaseModel):
             ).count()
 
             if count >= 3:
-                raise ValidationError(
-                    "A product can have a maximum of 3 options."
-                )
+                raise ValidationError("A product can have a maximum of 3 options.")
 
     # ------------------------------------------------------------------
     # String

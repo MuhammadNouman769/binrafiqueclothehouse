@@ -7,39 +7,49 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='HeroBanner',
+            name="HeroBanner",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('is_active', models.BooleanField(db_index=True, default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('image', models.ImageField(help_text='Banner image (recommended: 1920x800)', upload_to='hero_banners/')),
-                ('display_order', models.PositiveSmallIntegerField(default=0, help_text='Lower number = higher priority')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("is_active", models.BooleanField(db_index=True, default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True, db_index=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "image",
+                    models.ImageField(
+                        help_text="Banner image (recommended: 1920x800)",
+                        upload_to="hero_banners/",
+                    ),
+                ),
+                (
+                    "display_order",
+                    models.PositiveSmallIntegerField(
+                        default=0, help_text="Lower number = higher priority"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Hero Banner',
-                'verbose_name_plural': 'Hero Banners',
-                'db_table': 'hero_banners',
-                'ordering': ['display_order', '-created_at'],
+                "verbose_name": "Hero Banner",
+                "verbose_name_plural": "Hero Banners",
+                "db_table": "hero_banners",
+                "ordering": ["display_order", "-created_at"],
             },
         ),
         migrations.CreateModel(
-            name='NewsletterSubscriber',
+            name="NewsletterSubscriber",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('subscribed_at', models.DateTimeField(auto_now_add=True)),
-                ('is_active', models.BooleanField(default=True)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True, db_index=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("subscribed_at", models.DateTimeField(auto_now_add=True)),
+                ("is_active", models.BooleanField(default=True)),
             ],
             options={
-                'ordering': ['-subscribed_at'],
+                "ordering": ["-subscribed_at"],
             },
         ),
     ]

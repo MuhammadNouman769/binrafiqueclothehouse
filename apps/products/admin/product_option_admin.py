@@ -7,10 +7,10 @@ from apps.products.models import (
     ProductOptionValue,
 )
 
-
 # ============================================================
 # Product Option
 # ============================================================
+
 
 @admin.register(ProductOption)
 class ProductOptionAdmin(admin.ModelAdmin):
@@ -23,18 +23,14 @@ class ProductOptionAdmin(admin.ModelAdmin):
         "is_active",
     )
 
-    list_filter = (
-        "is_active",
-    )
+    list_filter = ("is_active",)
 
     search_fields = (
         "name",
         "product__name",
     )
 
-    autocomplete_fields = (
-        "product",
-    )
+    autocomplete_fields = ("product",)
 
     list_editable = (
         "position",
@@ -67,6 +63,7 @@ class ProductOptionAdmin(admin.ModelAdmin):
 # Product Option Value
 # ============================================================
 
+
 @admin.register(ProductOptionValue)
 class ProductOptionValueAdmin(admin.ModelAdmin):
 
@@ -90,9 +87,7 @@ class ProductOptionValueAdmin(admin.ModelAdmin):
         "option__product__name",
     )
 
-    autocomplete_fields = (
-        "option",
-    )
+    autocomplete_fields = ("option",)
 
     list_editable = (
         "position",

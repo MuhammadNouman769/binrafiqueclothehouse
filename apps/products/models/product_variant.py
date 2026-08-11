@@ -1,10 +1,9 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from apps.utils.models import BaseModel
 from apps.products.models.product import Product
 from apps.products.models.product_option import ProductOptionValue
-
+from apps.utils.models import BaseModel
 
 """
 ===============================================================================
@@ -119,16 +118,12 @@ class ProductVariant(BaseModel):
 
     def clean(self):
         values = [
-            value
-            for value in [self.option1, self.option2, self.option3]
-            if value
+            value for value in [self.option1, self.option2, self.option3] if value
         ]
 
         # Prevent duplicate option values
         if len(values) != len(set(v.pk for v in values)):
-            raise ValidationError(
-                "Duplicate option values are not allowed."
-            )
+            raise ValidationError("Duplicate option values are not allowed.")
 
         # Ensure option values belong to this product
         for value in values:
@@ -162,20 +157,14 @@ class ProductVariant(BaseModel):
 
     @property
     def option_values(self):
-        return [
-            value
-            for value in [self.option1, self.option2, self.option3]
-            if value
-        ]
+        return [value for value in [self.option1, self.option2, self.option3] if value]
 
     @property
     def variant_name(self):
         if not self.option_values:
             return "Default"
 
-        return " / ".join(
-            value.value for value in self.option_values
-        )
+        return " / ".join(value.value for value in self.option_values)
 
     @property
     def primary_image(self):

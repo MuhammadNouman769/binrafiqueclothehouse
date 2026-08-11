@@ -3,11 +3,9 @@ import os
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from apps.products.models.product_variant import ProductVariant
 from apps.utils.helpers import upload_to
 from apps.utils.models import BaseModel
-
-from apps.products.models.product_variant import ProductVariant
-
 
 """
 ===============================================================================
@@ -77,9 +75,7 @@ class VariantImage(BaseModel):
 
     def clean(self):
         if not self.image:
-            raise ValidationError(
-                {"image": "Image is required."}
-            )
+            raise ValidationError({"image": "Image is required."})
 
     # ------------------------------------------------------------------
     # Save

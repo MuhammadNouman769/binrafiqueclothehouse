@@ -3,10 +3,10 @@ from django.utils.html import format_html
 
 from apps.products.models import VariantImage
 
-
 # ============================================================
 # Variant Image Inline
 # ============================================================
+
 
 class VariantImageInline(admin.TabularInline):
 
@@ -21,9 +21,7 @@ class VariantImageInline(admin.TabularInline):
         "preview",
     )
 
-    readonly_fields = (
-        "preview",
-    )
+    readonly_fields = ("preview",)
 
     ordering = (
         "position",
@@ -49,6 +47,7 @@ class VariantImageInline(admin.TabularInline):
 # Variant Image Admin
 # ============================================================
 
+
 @admin.register(VariantImage)
 class VariantImageAdmin(admin.ModelAdmin):
 
@@ -67,13 +66,9 @@ class VariantImageAdmin(admin.ModelAdmin):
         "variant__product",
     )
 
-    search_fields = (
-        "variant__product__name",
-    )
+    search_fields = ("variant__product__name",)
 
-    autocomplete_fields = (
-        "variant",
-    )
+    autocomplete_fields = ("variant",)
 
     list_editable = (
         "position",

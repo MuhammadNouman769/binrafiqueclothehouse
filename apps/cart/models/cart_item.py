@@ -1,12 +1,11 @@
-
 from django.db import models
 
 from apps.cart.models.cart import Cart
-from apps.utils.models import BaseModel
 from apps.products.models.product_variant import ProductVariant
-
+from apps.utils.models import BaseModel
 
 """ ===================== Cart Item ======================== """
+
 
 class CartItem(BaseModel):
     cart = models.ForeignKey(
