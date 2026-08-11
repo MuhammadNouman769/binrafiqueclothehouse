@@ -1,721 +1,929 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ product.name }} | Hadi Sports{% endblock %}
+{% block title %}{{ product.name }} | Tahir Rafique Clothe House{% endblock %}
 
 {% block content %}
 
 <style>
-    /* ========================================
-       PRODUCT DETAIL STYLES
-    ======================================== */
-    .product-detail-container {
-        padding: 60px 0;
-        background: #f8fafc;
-        margin-top: 120px;
+/* ==========================================================
+   PRODUCT DETAIL - TAHIR RAFIQUE CLOTHE HOUSE
+   Premium & Minimal Design
+========================================================== */
+.tr-product-wrapper {
+    padding: 60px 0 70px;
+    background: #faf8f6;
+    min-height: 70vh;
+}
+
+.tr-product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Product Card */
+.tr-product-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 40px 35px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* ==========================================================
+   IMAGE ZOOM CONTAINER - SIDE ZOOM
+========================================================== */
+.tr-image-wrapper {
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.tr-image-main {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #faf8f6;
+    height: 500px;
+    border: 1px solid #ece9e4;
+    cursor: zoom-in;
+}
+
+.tr-image-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    background: #faf8f6;
+}
+
+.tr-image-main.zoomed img {
+    transform: scale(1.5);
+    cursor: zoom-out;
+}
+
+/* Zoom Lens */
+.tr-zoom-lens {
+    position: absolute;
+    border: 2px solid #111;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.1);
+    pointer-events: none;
+    display: none;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+.tr-image-main.zoomed .tr-zoom-lens {
+    display: block;
+}
+
+/* Zoom Result - Side */
+.tr-zoom-result {
+    width: 100%;
+    max-width: 380px;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    border-radius: 14px;
+    border: 1px solid #ece9e4;
+    display: none;
+    background-color: #ffffff;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+}
+
+.tr-zoom-result.visible {
+    display: block;
+}
+
+.tr-zoom-result .tr-zoom-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #bbb;
+    font-size: 14px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tr-zoom-result .tr-zoom-placeholder i {
+    font-size: 40px;
+    color: #ddd;
+}
+
+/* ==========================================================
+   THUMBNAILS
+========================================================== */
+.tr-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.tr-thumbnails img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.tr-thumbnails img:hover {
+    border-color: #bbb;
+}
+
+.tr-thumbnails img.active {
+    border-color: #111;
+}
+
+/* ==========================================================
+   PRODUCT INFO
+========================================================== */
+.tr-product-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+}
+
+.tr-product-category {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.tr-product-category i {
+    margin-right: 4px;
+}
+
+.tr-product-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111;
+}
+
+.tr-product-price .tr-original-price {
+    font-size: 16px;
+    color: #d01818;
+    text-decoration: line-through;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.tr-product-rating {
+    color: #f5a623;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.tr-product-rating span {
+    color: #999;
+    margin-left: 6px;
+}
+
+.tr-product-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+/* Meta Grid */
+.tr-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    background: #faf8f6;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.tr-meta-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #ece9e4;
+}
+
+.tr-meta-item:last-child {
+    border-bottom: none;
+}
+
+.tr-meta-label {
+    color: #999;
+    font-size: 13px;
+}
+
+.tr-meta-value {
+    color: #111;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Quantity */
+.tr-quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.tr-qty-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #ddd8d2;
+    background: #ffffff;
+    color: #111;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tr-qty-btn:hover {
+    background: #111;
+    color: #ffffff;
+    border-color: #111;
+}
+
+.tr-qty-input {
+    width: 55px;
+    text-align: center;
+    border: 1px solid #ddd8d2;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    background: #faf8f6;
+}
+
+/* WhatsApp Button */
+.tr-btn-whatsapp {
+    background: #25D366;
+    color: #ffffff;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.tr-btn-whatsapp:hover {
+    background: #128C7E;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.tr-btn-whatsapp i {
+    font-size: 20px;
+}
+
+.tr-delivery-note {
+    color: #999;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.tr-delivery-note i {
+    margin-right: 4px;
+}
+
+/* ==========================================================
+   TABS
+========================================================== */
+.tr-tabs {
+    margin-top: 35px;
+    border-top: 1px solid #ece9e4;
+    padding-top: 25px;
+}
+
+.tr-tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #ece9e4;
+    margin-bottom: 20px;
+}
+
+.tr-tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #999;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tr-tab-btn:hover {
+    color: #111;
+}
+
+.tr-tab-btn.active {
+    color: #111;
+    border-bottom-color: #111;
+}
+
+.tr-tab-pane {
+    display: none;
+    padding: 10px 0;
+}
+
+.tr-tab-pane.active {
+    display: block;
+}
+
+.tr-tab-pane p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.tr-tab-pane .tr-meta-grid {
+    margin: 0;
+}
+
+/* ==========================================================
+   RELATED PRODUCTS
+========================================================== */
+.tr-related {
+    margin-top: 40px;
+}
+
+.tr-related h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 20px;
+}
+
+.tr-related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.tr-related-item {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid #ece9e4;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.tr-related-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-color: #ddd8d2;
+}
+
+.tr-related-item .tr-related-image-wrap {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #faf8f6;
+}
+
+.tr-related-item .tr-related-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.tr-related-item:hover .tr-related-image-wrap img {
+    transform: scale(1.03);
+}
+
+.tr-related-item .tr-related-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111;
+    margin: 10px 0 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 38px;
+}
+
+.tr-related-item .tr-related-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    margin-top: 4px;
+}
+
+.tr-related-item .tr-related-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 20px;
+    border: 1px solid #ddd8d2;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.tr-related-item .tr-related-link:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+@media (max-width: 1200px) {
+    .tr-zoom-result {
+        max-width: 280px;
+        min-height: 400px;
     }
     
-    .product-detail-card {
-        background: #ffffff;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-    }
-    
-    /* ========================================
-       IMAGE ZOOM ON HOVER
-    ======================================== */
-    .image-zoom-container {
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-        border: 1px solid #e9ecef;
-        cursor: zoom-in;
-        background: #ffffff;
-        width: 100%;
+    .tr-image-main {
         height: 400px;
     }
-    
-    .image-zoom-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.4s ease;
-        transform-origin: center center;
+}
+
+@media (max-width: 992px) {
+    .tr-image-wrapper {
+        flex-direction: column;
     }
     
-    .image-zoom-container:hover img {
-        transform: scale(1.5);
-        cursor: zoom-out;
+    .tr-zoom-result {
+        max-width: 100%;
+        min-height: 200px;
+        display: none !important;
     }
     
-    /* Zoom Lens Effect */
-    .image-zoom-container .zoom-lens {
-        position: absolute;
-        border: 2px solid #81c408;
-        width: 150px;
-        height: 150px;
-        background: rgba(255, 255, 255, 0.1);
-        pointer-events: none;
-        display: none;
-        border-radius: 50%;
-        box-shadow: 0 0 20px rgba(129, 196, 8, 0.2);
+    .tr-zoom-result.visible {
+        display: none !important;
     }
     
-    .image-zoom-container:hover .zoom-lens {
-        display: block;
+    .tr-image-main {
+        height: 380px;
     }
     
-    /* Zoom Result */
-    .zoom-result {
-        position: absolute;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
-        border-radius: 12px;
-        border: 1px solid #e9ecef;
-        display: none;
-        z-index: 10;
-        background-color: #ffffff;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    .tr-related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tr-product-wrapper {
+        padding: 40px 0 50px;
     }
     
-    .image-zoom-container:hover .zoom-result {
-        display: block;
+    .tr-product-card {
+        padding: 24px 18px 20px;
+        border-radius: 16px;
     }
     
-    @media (min-width: 1200px) {
-        .image-zoom-container:hover .zoom-result {
-            right: -105%;
-            width: 100%;
-        }
+    .tr-image-main {
+        height: 320px;
     }
     
-    @media (max-width: 1199px) {
-        .zoom-result {
-            display: none !important;
-        }
-        .image-zoom-container:hover img {
-            transform: scale(1.3);
-        }
+    .tr-product-name {
+        font-size: 20px;
     }
     
-    /* ========================================
-       THUMBNAILS
-    ======================================== */
-    .product-thumbnails {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        justify-content: flex-start;
-    }
-    
-    .product-thumbnails img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 8px;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-        margin-left: 10px;
-        margin-top: 10PX
-    }
-    
-    .product-thumbnails img:hover,
-    .product-thumbnails img.active {
-        border-color: #81c408;
-        transform: scale(1.05);
-    }
-    
-    /* ========================================
-       PRODUCT INFO
-    ======================================== */
-    .product-price {
-        font-size: 28px;
-        font-weight: 700;
-        color: #81c408;
-    }
-    
-    .product-price .original-price {
-        font-size: 18px;
-        color: #e74c3c;
-        text-decoration: line-through;
-        font-weight: 400;
-        margin-left: 10px;
-    }
-    
-    .product-name {
-        font-size: 28px;
-        font-weight: 700;
-        color: #1a202c;
-    }
-    
-    .product-brand {
-        color: #6c757d;
-        font-size: 14px;
-    }
-    
-    .product-rating {
-        color: #f39c12;
-    }
-    
-    .product-description {
-        color: #4a5568;
-        line-height: 1.8;
-        margin: 20px 0;
-    }
-    
-    .product-meta {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        background: #f8fafc;
-        padding: 20px;
-        border-radius: 12px;
-        margin: 20px 0;
-    }
-    
-    .product-meta .meta-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px 0;
-        border-bottom: 1px solid #e9ecef;
-    }
-    
-    .product-meta .meta-item:last-child {
-        border-bottom: none;
-    }
-    
-    .product-meta .meta-label {
-        color: #6c757d;
-        font-weight: 500;
-    }
-    
-    .product-meta .meta-value {
-        color: #1a202c;
-        font-weight: 600;
-    }
-    
-    /* Quantity Selector */
-    .quantity-selector {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin: 20px 0;
-    }
-    
-    .quantity-selector .qty-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 1px solid #dee2e6;
-        background: #ffffff;
-        color: #1a202c;
-        font-size: 18px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .quantity-selector .qty-btn:hover {
-        background: #81c408;
-        color: #ffffff;
-        border-color: #81c408;
-    }
-    
-    .quantity-selector .qty-input {
-        width: 60px;
-        text-align: center;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 8px;
-        font-size: 18px;
-        font-weight: 600;
-    }
-    
-    /* WhatsApp Button */
-    .btn-whatsapp {
-        background: #25D366;
-        color: #ffffff;
-        padding: 14px 35px;
-        border-radius: 50px;
-        font-weight: 600;
-        border: none;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        font-size: 16px;
-    }
-    
-    .btn-whatsapp:hover {
-        background: #128C7E;
-        color: #ffffff;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-    }
-    
-    .btn-whatsapp i {
+    .tr-product-price {
         font-size: 22px;
     }
     
-    /* Tab Styles */
-    .nav-tabs .nav-link {
-        color: #4a5568;
-        font-weight: 600;
-        border: none;
+    .tr-meta-grid {
+        grid-template-columns: 1fr;
+        padding: 14px 16px;
+    }
+    
+    .tr-tab-nav {
+        overflow-x: auto;
+        gap: 0;
+    }
+    
+    .tr-tab-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    
+    .tr-btn-whatsapp {
         padding: 12px 24px;
+        font-size: 14px;
     }
     
-    .nav-tabs .nav-link.active {
-        color: #81c408;
-        border-bottom: 3px solid #81c408;
-        background: transparent;
+    .tr-thumbnails img {
+        width: 60px;
+        height: 60px;
     }
     
-    .nav-tabs .nav-link:hover {
-        color: #81c408;
+    .tr-related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
     
-    /* Related Products */
-    .related-product-card {
-        border: 1px solid #e9ecef;
-        border-radius: 12px;
-        padding: 15px;
-        transition: all 0.3s ease;
-        text-align: center;
-        height: 100%;
+    .tr-related-item .tr-related-image-wrap {
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tr-product-wrapper {
+        padding: 30px 0 40px;
     }
     
-    .related-product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    .tr-product-card {
+        padding: 16px 12px 16px;
+        border-radius: 14px;
     }
     
-    .related-product-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
+    .tr-image-main {
+        height: 240px;
+        border-radius: 10px;
+    }
+    
+    .tr-product-name {
+        font-size: 17px;
+    }
+    
+    .tr-product-price {
+        font-size: 19px;
+    }
+    
+    .tr-product-description {
+        font-size: 13px;
+    }
+    
+    .tr-thumbnails img {
+        width: 50px;
+        height: 50px;
         border-radius: 8px;
     }
     
-    .related-product-card .product-title {
-        font-weight: 600;
-        color: #1a202c;
-        margin-top: 10px;
+    .tr-related-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
     
-    .related-product-card .product-price {
-        font-size: 18px;
+    .tr-related-item .tr-related-image-wrap {
+        height: 120px;
     }
     
-    .btn-outline-primary {
-        color: #81c408;
-        border-color: #81c408;
+    .tr-related-item .tr-related-name {
+        font-size: 12px;
+        min-height: 32px;
     }
     
-    .btn-outline-primary:hover {
-        background: #81c408;
-        color: #ffffff;
+    .tr-tab-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tr-related-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
     
-    .page-header h1 {
-        font-size: 42px;
-        font-weight: 700;
-        color: #ffffff;
+    .tr-related-item {
+        padding: 10px;
     }
     
-    .page-header .breadcrumb {
-        background: transparent;
-        padding: 0;
-        margin: 0;
-        justify-content: center;
+    .tr-related-item .tr-related-image-wrap {
+        height: 100px;
     }
     
-    .page-header .breadcrumb-item a {
-        color: #ffc107;
-        text-decoration: none;
+    .tr-related-item .tr-related-name {
+        font-size: 11px;
+        min-height: 28px;
     }
     
-    .page-header .breadcrumb-item a:hover {
-        color: #ffc107;
+    .tr-related-item .tr-related-price {
+        font-size: 12px;
     }
     
-    .page-header .breadcrumb-item.active {
-        color: #ffc107;
+    .tr-related-item .tr-related-link {
+        font-size: 10px;
+        padding: 4px 14px;
     }
-    
-    .page-header .breadcrumb-item + .breadcrumb-item::before {
-        color: rgba(255, 255, 255, 0.5);
-    }
-    
-    @media (max-width: 768px) {
-        .product-detail-container {
-            margin-top: 100px;
-            padding: 30px 0;
-        }
-        
-        .page-header {
-            padding: 40px 0;
-            margin-top: 100px;
-        }
-        
-        .page-header h1 {
-            font-size: 28px;
-        }
-        
-        .product-detail-card {
-            padding: 20px;
-        }
-        
-        .image-zoom-container {
-            height: 250px;
-        }
-        
-        .product-name {
-            font-size: 22px;
-        }
-        
-        .product-price {
-            font-size: 24px;
-        }
-        
-        .product-meta {
-            grid-template-columns: 1fr;
-        }
-        
-        .btn-whatsapp {
-            width: 100%;
-            justify-content: center;
-            padding: 12px 20px;
-            font-size: 14px;
-        }
-        
-        .product-thumbnails {
-            justify-content: center;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .page-header {
-            margin-top: 80px;
-            padding: 30px 0;
-        }
-        
-        .page-header h1 {
-            font-size: 24px;
-        }
-        
-        .image-zoom-container {
-            height: 200px;
-        }
-    }
+}
 </style>
 
-<!-- ======================================== -->
-<!-- PAGE HEADER -->
-<!-- ======================================== -->
-<div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Products</h1>
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a style="color: #ffb524;" href="{% url 'products:home-view' %}">Home</a></li>
-                <li class="breadcrumb-item"><a style="color: #ffb524;" href="{% url 'products:product-list' %}">Products</a></li>
-                <li class="breadcrumb-item active"  style="color: #ffb524;">Product Detail</li>
-            </ol>
-        </div>  
-
-<!-- ======================================== -->
-<!-- PRODUCT DETAIL -->
-<!-- ======================================== -->
-<div class="product-detail-container">
+<!-- ==========================================================
+     PRODUCT DETAIL - TAHIR RAFIQUE CLOTHE HOUSE
+========================================================== -->
+<div class="tr-product-wrapper">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="product-detail-card">
-                    <div class="row g-4">
-                        <!-- Product Images -->
-                        <div class="col-lg-6">
-                            <div class="image-zoom-container" id="imageZoomContainer">
+        <div class="tr-product-container">
+            
+            <!-- Product Card -->
+            <div class="tr-product-card">
+                <div class="row g-4">
+                    
+                    <!-- Images Column -->
+                    <div class="col-lg-6">
+                        <!-- Image Wrapper with Side Zoom -->
+                        <div class="tr-image-wrapper">
+                            <!-- Main Image -->
+                            <div class="tr-image-main" id="trImageMain">
                                 {% with product.default_variant as variant %}
                                     {% if variant and variant.images.all %}
                                         <img src="{{ variant.images.first.image.url }}" 
-                                             id="mainProductImage"
+                                             id="trMainImage"
                                              alt="{{ product.name }}">
                                     {% else %}
                                         <img src="{% static 'img/default-product.jpg' %}" 
-                                             id="mainProductImage"
+                                             id="trMainImage"
                                              alt="{{ product.name }}">
                                     {% endif %}
                                 {% endwith %}
                                 
                                 <!-- Zoom Lens -->
-                                <div class="zoom-lens" id="zoomLens"></div>
-                                
-                                <!-- Zoom Result -->
-                                <div class="zoom-result" id="zoomResult"></div>
+                                <div class="tr-zoom-lens" id="trZoomLens"></div>
                             </div>
                             
-                            <!-- Thumbnails -->
-                            <div class="product-thumbnails">
-                                {% with product.default_variant as variant %}
-                                    {% if variant %}
-                                        {% for image in variant.images.all %}
-                                            <img src="{{ image.image.url }}" 
-                                                 alt="{{ product.name }}" 
-                                                 class="{% if forloop.first %}active{% endif %}"
-                                                 onclick="changeMainImage(this.src, this)">
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endwith %}
+                            <!-- Zoom Result -->
+                            <div class="tr-zoom-result" id="trZoomResult">
+                                <div class="tr-zoom-placeholder" id="trZoomPlaceholder">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Hover to zoom</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Product Info -->
-                        <div class="col-lg-6">
-                            <div class="product-info">
-                                <div class="d-flex justify-content-between align-items-start flex-wrap">
-                                    <div>
-                                        <h1 class="product-name">{{ product.name }}</h1>
-                                        <div class="product-brand">
-                                            <i class="fas fa-tag me-1"></i> 
-                                            {{ product.category.title }}
-                                            {% if product.brand %}
-                                                | <i class="fas fa-building me-1"></i> {{ product.brand }}
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Rating -->
-                                <div class="product-rating mt-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <span class="ms-2 text-muted">(4.5/5)</span>
-                                </div>
-                                
-                                <!-- Price -->
-                                <div class="mt-3">
-                                    {% with product.default_variant as variant %}
-                                        {% if variant %}
-                                            <span class="product-price">
-                                                Rs. {{ variant.price }}
-                                                {% if variant.compare_price %}
-                                                    <span class="original-price">Rs. {{ variant.compare_price }}</span>
-                                                {% endif %}
-                                            </span>
-                                        {% endif %}
-                                    {% endwith %}
-                                </div>
-                        
-                                <!-- Description -->
-                                <div class="product-description">
-                                    {{ product.short_description }}
-                                    {% if product.description %}
-                                        <div class="mt-2">
-                                            {{ product.description|truncatewords:30 }}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                
-                                <!-- Product Meta -->
-                                <div class="product-meta">
-                                    <div class="meta-item">
-                                        <span class="meta-label">Category</span>
-                                        <span class="meta-value">{{ product.category.title }}</span>
-                                    </div>
-                                    {% if product.brand %}
-                                    <div class="meta-item">
-                                        <span class="meta-label">Brand</span>
-                                        <span class="meta-value">{{ product.brand }}</span>
-                                    </div>
-                                    {% endif %}
-                                    <div class="meta-item">
-                                        <span class="meta-label">SKU</span>
-                                        <span class="meta-value">#{{ product.id|stringformat:"06d" }}</span>
-                                    </div>
-                                    {% with product.default_variant as variant %}
-                                        {% if variant %}
-                                        <div class="meta-item">
-                                            <span class="meta-label">Stock</span>
-                                            <span class="meta-value">{{ variant.stock }} units</span>
-                                        </div>
-                                        {% endif %}
-                                    {% endwith %}
-                                </div>
-                                
-                                <!-- Quantity Selector -->
-                                <div class="quantity-selector">
-                                    <button class="qty-btn" onclick="updateQuantity(-1)">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <input type="text" class="qty-input" id="quantityInput" value="1" readonly>
-                                    <button class="qty-btn" onclick="updateQuantity(1)">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                
-                                <!-- WhatsApp Button -->
-                                <a href="#" class="btn-whatsapp" id="whatsappBtn" target="_blank">
-                                    <i class="fab fa-whatsapp"></i> 
-                                    Order on WhatsApp
-                                </a>
-                                
-                                <p class="text-muted mt-2 small">
-                                    <i class="fas fa-clock me-1"></i> 
-                                    Order now and get delivery within 2-3 business days
-                                </p>
-                            </div>
+                        <!-- Thumbnails -->
+                        <div class="tr-thumbnails" id="trThumbnails">
+                            {% with product.default_variant as variant %}
+                                {% if variant %}
+                                    {% for image in variant.images.all %}
+                                        <img src="{{ image.image.url }}" 
+                                             alt="{{ product.name }}" 
+                                             class="{% if forloop.first %}active{% endif %}"
+                                             onclick="trChangeImage(this.src, this)">
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
                         </div>
                     </div>
                     
-                    <!-- ======================================== -->
-                    <!-- TABS: Description & Reviews -->
-                    <!-- ======================================== -->
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <nav>
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">
-                                            <i class="fas fa-info-circle me-2"></i> Description
-                                        </button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">
-                                            <i class="fas fa-star me-2"></i> Reviews
-                                        </button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#specifications">
-                                            <i class="fas fa-list me-2"></i> Specifications
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                            
-                            <div class="tab-content mt-3">
-                                <!-- Description Tab -->
-                                <div class="tab-pane fade show active" id="description">
-                                    <div class="p-3">
-                                        <p>{{ product.description|default:"No description available for this product." }}</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- Reviews Tab -->
-                                <div class="tab-pane fade" id="reviews">
-                                    <div class="p-3">
-                                        <p class="text-muted">No reviews yet. Be the first to review this product!</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- Specifications Tab -->
-                                <div class="tab-pane fade" id="specifications">
-                                    <div class="p-3">
-                                        <div class="product-meta" style="grid-template-columns: 1fr;">
-                                            <div class="meta-item">
-                                                <span class="meta-label">Product Name</span>
-                                                <span class="meta-value">{{ product.name }}</span>
-                                            </div>
-                                            <div class="meta-item">
-                                                <span class="meta-label">Category</span>
-                                                <span class="meta-value">{{ product.category.title }}</span>
-                                            </div>
-                                            {% if product.brand %}
-                                            <div class="meta-item">
-                                                <span class="meta-label">Brand</span>
-                                                <span class="meta-value">{{ product.brand }}</span>
-                                            </div>
-                                            {% endif %}
-                                            <div class="meta-item">
-                                                <span class="meta-label">Product ID</span>
-                                                <span class="meta-value">#{{ product.id|stringformat:"06d" }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Info Column -->
+                    <div class="col-lg-6">
+                        <h1 class="tr-product-name">{{ product.name }}</h1>
+                        <div class="tr-product-category">
+                            <i class="fas fa-tag"></i> {{ product.category.title }}
+                            {% if product.brand %}
+                                | <i class="fas fa-building"></i> {{ product.brand }}
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Rating -->
+                        <div class="tr-product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(4.5/5)</span>
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="tr-product-price">
+                            {% with product.default_variant as variant %}
+                                {% if variant %}
+                                    PKR {{ variant.price }}
+                                    {% if variant.compare_price %}
+                                        <span class="tr-original-price">PKR {{ variant.compare_price }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="tr-product-description">
+                            {{ product.short_description|default:product.description|truncatewords:25 }}
+                        </div>
+                        
+                        <!-- Meta -->
+                        <div class="tr-meta-grid">
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Category</span>
+                                <span class="tr-meta-value">{{ product.category.title }}</span>
                             </div>
+                            {% if product.brand %}
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Brand</span>
+                                <span class="tr-meta-value">{{ product.brand }}</span>
+                            </div>
+                            {% endif %}
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Product ID</span>
+                                <span class="tr-meta-value">#{{ product.id|stringformat:"06d" }}</span>
+                            </div>
+                            {% with product.default_variant as variant %}
+                                {% if variant %}
+                                <div class="tr-meta-item">
+                                    <span class="tr-meta-label">Stock</span>
+                                    <span class="tr-meta-value">{{ variant.stock }} units</span>
+                                </div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        
+                        <!-- Quantity -->
+                        <div class="tr-quantity">
+                            <button class="tr-qty-btn" onclick="trUpdateQty(-1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="text" class="tr-qty-input" id="trQtyInput" value="1" readonly>
+                            <button class="tr-qty-btn" onclick="trUpdateQty(1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- WhatsApp Button -->
+                        <a href="#" class="tr-btn-whatsapp" id="trWhatsappBtn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                        
+                        <div class="tr-delivery-note">
+                            <i class="fas fa-clock"></i> Delivery within 2-3 business days
                         </div>
                     </div>
                 </div>
                 
                 <!-- ======================================== -->
-                <!-- RELATED PRODUCTS -->
+                <!-- TABS -->
                 <!-- ======================================== -->
-                {% if related_products %}
-                <div class="mt-5">
-                    <h3 class="mb-4"><i class="fas fa-boxes me-2 text-primary"></i>Related Products</h3>
-                    <div class="row g-4">
-                        {% for product in related_products %}
-                        <div class="col-md-4 col-lg-3">
-                            <div class="related-product-card">
-                                <a href="{% url 'products:product-detail' slug=product.slug %}">
-                                    {% with product.default_variant as variant %}
-                                        {% if variant and variant.images.all %}
-                                            <img src="{{ variant.images.first.image.url }}" alt="{{ product.name }}">
-                                        {% else %}
-                                            <img src="{% static 'img/default-product.jpg' %}" alt="{{ product.name }}">
-                                        {% endif %}
-                                    {% endwith %}
-                                </a>
-                                <div class="product-title">{{ product.name|truncatechars:25 }}</div>
-                                <div class="product-price mt-2">
-                                    {% with product.default_variant as variant %}
-                                        {% if variant %}
-                                            Rs. {{ variant.price }}
-                                        {% endif %}
-                                    {% endwith %}
-                                </div>
-                                <a href="{% url 'products:product-detail' slug=product.slug %}" class="btn btn-outline-primary btn-sm mt-2">
-                                    View Details
-                                </a>
+                <div class="tr-tabs">
+                    <div class="tr-tab-nav">
+                        <button class="tr-tab-btn active" data-tab="tab-description">
+                            <i class="fas fa-info-circle"></i> Description
+                        </button>
+                        <button class="tr-tab-btn" data-tab="tab-specs">
+                            <i class="fas fa-list"></i> Specifications
+                        </button>
+                        <button class="tr-tab-btn" data-tab="tab-reviews">
+                            <i class="fas fa-star"></i> Reviews
+                        </button>
+                    </div>
+                    
+                    <div class="tr-tab-pane active" id="tab-description">
+                        <p>{{ product.description|default:"No description available for this product." }}</p>
+                    </div>
+                    
+                    <div class="tr-tab-pane" id="tab-specs">
+                        <div class="tr-meta-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Product Name</span>
+                                <span class="tr-meta-value">{{ product.name }}</span>
                             </div>
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Category</span>
+                                <span class="tr-meta-value">{{ product.category.title }}</span>
+                            </div>
+                            {% if product.brand %}
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Brand</span>
+                                <span class="tr-meta-value">{{ product.brand }}</span>
+                            </div>
+                            {% endif %}
+                            <div class="tr-meta-item">
+                                <span class="tr-meta-label">Product ID</span>
+                                <span class="tr-meta-value">#{{ product.id|stringformat:"06d" }}</span>
+                            </div>
+                            {% with product.default_variant as variant %}
+                                {% if variant %}
+                                <div class="tr-meta-item">
+                                    <span class="tr-meta-label">Fabric</span>
+                                    <span class="tr-meta-value">{{ variant.fabric|default:"Premium Quality" }}</span>
+                                </div>
+                                <div class="tr-meta-item">
+                                    <span class="tr-meta-label">Season</span>
+                                    <span class="tr-meta-value">{{ variant.season|default:"All Seasons" }}</span>
+                                </div>
+                                {% endif %}
+                            {% endwith %}
                         </div>
-                        {% endfor %}
+                    </div>
+                    
+                    <div class="tr-tab-pane" id="tab-reviews">
+                        <p class="text-muted">No reviews yet. Be the first to review this product!</p>
                     </div>
                 </div>
-                {% endif %}
             </div>
+            
+            <!-- ======================================== -->
+            <!-- RELATED PRODUCTS -->
+            <!-- ======================================== -->
+            {% if related_products %}
+            <div class="tr-related">
+                <h3><i class="fas fa-boxes" style="margin-right:8px; opacity:0.5;"></i> You May Also Like</h3>
+                <div class="tr-related-grid">
+                    {% for related in related_products|slice:":4" %}
+                    <div class="tr-related-item">
+                        <a href="{% url 'products:product-detail' slug=related.slug %}">
+                            <div class="tr-related-image-wrap">
+                                {% with related.default_variant as variant %}
+                                    {% if variant and variant.images.all %}
+                                        <img src="{{ variant.images.first.image.url }}" alt="{{ related.name }}">
+                                    {% else %}
+                                        <img src="{% static 'img/default-product.jpg' %}" alt="{{ related.name }}">
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </a>
+                        <div class="tr-related-name">{{ related.name|truncatechars:25 }}</div>
+                        <div class="tr-related-price">
+                            {% with related.default_variant as variant %}
+                                {% if variant %}
+                                    PKR {{ variant.price }}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <a href="{% url 'products:product-detail' slug=related.slug %}" class="tr-related-link">
+                            View Details
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
         </div>
     </div>
 </div>
 
-<!-- ======================================== -->
+<!-- ========================================================== -->
 <!-- JAVASCRIPT -->
-<!-- ======================================== -->
+<!-- ========================================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ========================================
-    // IMAGE ZOOM ON HOVER
-    // ========================================
-    const container = document.getElementById('imageZoomContainer');
-    const lens = document.getElementById('zoomLens');
-    const result = document.getElementById('zoomResult');
-    const mainImage = document.getElementById('mainProductImage');
+    // ==========================================================
+    // IMAGE ZOOM - SIDE VIEW
+    // ==========================================================
+    const mainImage = document.getElementById('trMainImage');
+    const imageMain = document.getElementById('trImageMain');
+    const lens = document.getElementById('trZoomLens');
+    const result = document.getElementById('trZoomResult');
+    const placeholder = document.getElementById('trZoomPlaceholder');
     
-    if (container && lens && result && mainImage) {
-        // Only enable zoom on desktop
-        if (window.innerWidth >= 1200) {
-            container.addEventListener('mousemove', function(e) {
-                const rect = container.getBoundingClientRect();
+    if (mainImage && imageMain && lens && result) {
+        // Only enable zoom on desktop (width > 992px)
+        const isDesktop = window.innerWidth >= 992;
+        
+        if (isDesktop) {
+            // Show result on hover
+            imageMain.addEventListener('mouseenter', function() {
+                imageMain.classList.add('zoomed');
+                result.classList.add('visible');
+                if (placeholder) placeholder.style.display = 'none';
+            });
+            
+            imageMain.addEventListener('mouseleave', function() {
+                imageMain.classList.remove('zoomed');
+                result.classList.remove('visible');
+                if (placeholder) placeholder.style.display = 'flex';
+            });
+            
+            imageMain.addEventListener('mousemove', function(e) {
+                const rect = imageMain.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 
                 // Calculate lens position
-                const lensWidth = lens.offsetWidth;
-                const lensHeight = lens.offsetHeight;
+                const lensWidth = lens.offsetWidth || 120;
+                const lensHeight = lens.offsetHeight || 120;
                 const lensX = Math.min(Math.max(x - lensWidth / 2, 0), rect.width - lensWidth);
                 const lensY = Math.min(Math.max(y - lensHeight / 2, 0), rect.height - lensHeight);
                 
@@ -723,111 +931,112 @@ document.addEventListener('DOMContentLoaded', function() {
                 lens.style.top = lensY + 'px';
                 
                 // Calculate zoom position
-                const naturalWidth = mainImage.naturalWidth || mainImage.width;
-                const naturalHeight = mainImage.naturalHeight || mainImage.height;
+                const naturalWidth = mainImage.naturalWidth || mainImage.width || 800;
+                const naturalHeight = mainImage.naturalHeight || mainImage.height || 800;
                 const ratioX = naturalWidth / rect.width;
                 const ratioY = naturalHeight / rect.height;
                 
-                result.style.backgroundImage = `url(${mainImage.src})`;
-                result.style.backgroundSize = `${rect.width * ratioX}px ${rect.height * ratioY}px`;
-                result.style.backgroundPosition = `-${lensX * ratioX}px -${lensY * ratioY}px`;
-            });
-            
-            container.addEventListener('mouseenter', function() {
-                lens.style.display = 'block';
-                result.style.display = 'block';
-            });
-            
-            container.addEventListener('mouseleave', function() {
-                lens.style.display = 'none';
-                result.style.display = 'none';
+                // Set background image on result
+                result.style.backgroundImage = 'url(' + mainImage.src + ')';
+                result.style.backgroundSize = (rect.width * ratioX) + 'px ' + (rect.height * ratioY) + 'px';
+                result.style.backgroundPosition = '-' + (lensX * ratioX) + 'px -' + (lensY * ratioY) + 'px';
+                result.style.backgroundRepeat = 'no-repeat';
             });
         }
     }
     
-    // ========================================
+    // ==========================================================
     // CHANGE MAIN IMAGE
-    // ========================================
-    window.changeMainImage = function(src, element) {
-        const mainImg = document.getElementById('mainProductImage');
+    // ==========================================================
+    window.trChangeImage = function(src, element) {
+        const mainImg = document.getElementById('trMainImage');
         mainImg.src = src;
         
         // Update zoom result background
-        const result = document.getElementById('zoomResult');
+        const result = document.getElementById('trZoomResult');
         if (result) {
-            result.style.backgroundImage = `url(${src})`;
+            result.style.backgroundImage = 'url(' + src + ')';
         }
         
-        document.querySelectorAll('.product-thumbnails img').forEach(img => {
+        // Update active state
+        document.querySelectorAll('.tr-thumbnails img').forEach(img => {
             img.classList.remove('active');
         });
         element.classList.add('active');
     };
     
-    // ========================================
-    // QUANTITY SELECTOR
-    // ========================================
-    window.updateQuantity = function(change) {
-        const input = document.getElementById('quantityInput');
+    // ==========================================================
+    // QUANTITY
+    // ==========================================================
+    window.trUpdateQty = function(change) {
+        const input = document.getElementById('trQtyInput');
         let value = parseInt(input.value) + change;
         if (value < 1) value = 1;
         if (value > 99) value = 99;
         input.value = value;
-        updateWhatsAppLink();
+        trUpdateWhatsApp();
     };
     
-    // ========================================
+    // ==========================================================
     // WHATSAPP LINK
-    // ========================================
-    function updateWhatsAppLink() {
-        const quantity = document.getElementById('quantityInput').value;
-        const whatsappBtn = document.getElementById('whatsappBtn');
+    // ==========================================================
+    function trUpdateWhatsApp() {
+        const quantity = document.getElementById('trQtyInput').value;
+        const btn = document.getElementById('trWhatsappBtn');
         
         const productName = "{{ product.name|escapejs }}";
         {% with product.default_variant as variant %}
             const price = "{{ variant.price|default:'0' }}";
         {% endwith %}
         
-        const whatsappNumber = "{{ site_settings.whatsapp_number|default:'923001234567' }}";
+        const whatsappNumber = "{{ site_settings.whatsapp_number|default:'923089272829' }}";
         const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
         
-        const message = `Hello! I'm interested in this product:\n\n📦 *Product:* ${productName}\n💰 *Price:* Rs. ${price}\n🔢 *Quantity:* ${quantity}\n\nCan you provide more details?`;
+        const message = 'Hello! I am interested in this product:\n\n📦 *Product:* ' + productName + '\n💰 *Price:* PKR ' + price + '\n🔢 *Quantity:* ' + quantity + '\n\nPlease provide more details.';
         const encodedMessage = encodeURIComponent(message);
         
-        whatsappBtn.href = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
+        btn.href = 'https://wa.me/' + cleanNumber + '?text=' + encodedMessage;
     }
     
-    // Initial update
-    updateWhatsAppLink();
+    // Initial WhatsApp link
+    trUpdateWhatsApp();
     
-    // ========================================
-    // TABS FUNCTIONALITY
-    // ========================================
-    const tabButtons = document.querySelectorAll('.nav-tabs .nav-link');
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
+    // ==========================================================
+    // TABS
+    // ==========================================================
+    const tabBtns = document.querySelectorAll('.tr-tab-btn');
+    tabBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            // Remove active from all
+            tabBtns.forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tr-tab-pane').forEach(function(p) { p.classList.remove('active'); });
             
-            const target = this.getAttribute('data-bs-target');
-            document.querySelectorAll('.tab-pane').forEach(pane => {
-                pane.classList.remove('show', 'active');
-            });
-            document.querySelector(target).classList.add('show', 'active');
+            // Add active to clicked
+            this.classList.add('active');
+            const target = document.getElementById(this.getAttribute('data-tab'));
+            if (target) target.classList.add('active');
         });
     });
     
-    // ========================================
-    // WHATSAPP BUTTON CLICK HANDLER
-    // ========================================
-    document.getElementById('whatsappBtn').addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (!href || href === '#') {
-            e.preventDefault();
-            alert('WhatsApp number not configured. Please contact admin.');
-            return false;
+    // ==========================================================
+    // RESPONSIVE ZOOM HANDLER
+    // ==========================================================
+    window.addEventListener('resize', function() {
+        const isDesktop = window.innerWidth >= 992;
+        const imageMain = document.getElementById('trImageMain');
+        const result = document.getElementById('trZoomResult');
+        const placeholder = document.getElementById('trZoomPlaceholder');
+        
+        if (!isDesktop) {
+            if (imageMain) imageMain.classList.remove('zoomed');
+            if (result) {
+                result.classList.remove('visible');
+                result.style.display = 'none';
+            }
+            if (placeholder) placeholder.style.display = 'flex';
+        } else {
+            if (result) result.style.display = 'block';
         }
-        return true;
     });
 });
 </script>

@@ -58,115 +58,6 @@ class Error500View(TemplateView):
 
 
 
-class ServicesView(TemplateView):
-    template_name = "pages/services.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        # Service sections data
-        context['service_sections'] = [
-            {
-                'id': 'cricket',
-                'title': 'Cricket Services',
-                'icon': 'fa-cricket-ball',
-                'image': static('img/services/bat-service.png'),  
-                'description': 'Professional cricket equipment repair and maintenance services.',
-                'services': [
-                    'Bat Knocking & Preparation',
-                    'Bat Repairs (Cracks, Splits, Handles)',
-                    'Bat Regripping',
-                    'Bat Toe Guard Installation',
-                    'Bat Oil Treatment',
-                    'Ball Re-stitching',
-                    'Pad & Glove Repair',
-                    'Bat Customization (Weight/Size)'
-                ]
-            },
-            {
-                'id': 'racket',
-                'title': 'Racket Sports Services',
-                'icon': 'fa-table-tennis',
-                'image': static('img/services/racket-service.png'),  
-                'description': 'Expert racket stringing and repair for all racket sports.',
-                'services': [
-                    'Professional Stringing (All Tensions)',
-                    'Grip Replacement (Overgrip/Replacement)',
-                    'Racket Frame Repair',
-                    'Grommet Replacement',
-                    'Racket Balancing',
-                    'String Tension Consultation',
-                    'Vibration Dampener Installation'
-                ]
-            },
-            {
-                'id': 'football',
-                'title': 'Football Services',
-                'icon': 'fa-futbol',
-                'image': static('img/services/football-service.png'),  
-                'description': 'Complete football equipment repair and maintenance.',
-                'services': [
-                    'Ball Puncture Repair',
-                    'Bladder Replacement',
-                    'Stitching Repair',
-                    'Ball Cleaning',
-                    'Goal Net Repair',
-                    'Custom Team Kit Printing'
-                ]
-            },
-            {
-                'id': 'hockey',
-                'title': 'Hockey Services',
-                'icon': 'fa-hockey-stick',
-                'image': static('img/services/hockey-stick-service.png'),
-                'description': 'Professional hockey stick repair and maintenance.',
-                'services': [
-                    'Stick Repair (Broken Sticks)',
-                    'Grip Replacement',
-                    'Blade Repair',
-                    'Stick Taping',
-                    'Stick Customization',
-                    'Goalkeeper Equipment Repair'
-                ]
-            },
-            {
-                'id': 'boxing',
-                'title': 'Boxing & MMA Services',
-                'icon': 'fa-fist-raised',
-                'image': static('img/services/boxing-mma.service.png'),
-                'description': 'Professional boxing and MMA equipment services.',
-                'services': [
-                    'Glove Repair',
-                    'Bag Repair',
-                    'Hand Wrap Service',
-                    'Glove Customization',
-                    'Equipment Cleaning',
-                    'Ring Installation Service'
-                ]
-            },
-            {
-                'id': 'custom',
-                'title': 'Custom Services',
-                'icon': 'fa-paint-brush',
-                'image': static('img/services/custom-service.png'),
-                'description': 'Custom sports equipment and team services.',
-                'services': [
-                    'Name Engraving',
-                    'Custom Team Kits',
-                    'Number Printing',
-                    'Team Bulk Orders',
-                    'Trade-in Program',
-                    'Equipment Consultation'
-                ]
-            }
-        ]
-        
-        return context    
-
-
-
-
-
 
 class SitemapView(TemplateView):
     template_name = "pages/sitemap.html"
@@ -174,7 +65,7 @@ class SitemapView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Define sitemap structure
+        # Define sitemap structure - Updated for Tahir Rafique Clothe House
         context['sitemap_sections'] = [
             {
                 'title': 'Main Pages',
@@ -183,69 +74,49 @@ class SitemapView(TemplateView):
                     {'name': 'Home', 'url': 'products:home-view'},
                     {'name': 'Products', 'url': 'products:product-list'},
                     {'name': 'Contact Us', 'url': 'contact:contact'},
-                    {'name': 'Services', 'url': 'main:services'},
                     {'name': 'FAQ', 'url': 'main:faqs'},
                 ]
             },
             {
-                'title': 'Products Categories',
-                'icon': 'fa-boxes',
+                'title': 'Product Categories',
+                'icon': 'fa-tshirt',
                 'links': [
-                    {'name': 'Cricket Equipment', 'url': 'products:product-list', 'params': '?category=cricket'},
-                    {'name': 'Badminton Equipment', 'url': 'products:product-list', 'params': '?category=badminton'},
-                    {'name': 'Tennis Equipment', 'url': 'products:product-list', 'params': '?category=tennis'},
-                    {'name': 'Football Equipment', 'url': 'products:product-list', 'params': '?category=football'},
-                    {'name': 'Hockey Equipment', 'url': 'products:product-list', 'params': '?category=hockey'},
-                    {'name': 'Boxing & MMA', 'url': 'products:product-list', 'params': '?category=boxing-mma'},
-                    {'name': 'Basketball', 'url': 'products:product-list', 'params': '?category=basketball'},
-                    {'name': 'Golf', 'url': 'products:product-list', 'params': '?category=golf'},
-                    {'name': 'Swimming', 'url': 'products:product-list', 'params': '?category=swimming'},
-                    {'name': 'Yoga', 'url': 'products:product-list', 'params': '?category=yoga'},
-                    {'name': 'Running', 'url': 'products:product-list', 'params': '?category=running'},
-                    {'name': 'Cycling', 'url': 'products:product-list', 'params': '?category=cycling'},
+                    {'name': 'Shalwar Kameez', 'url': 'products:product-list', 'params': '?category=shalwar-kameez'},
+                    {'name': 'Formal Wear', 'url': 'products:product-list', 'params': '?category=formal-wear'},
+                    {'name': 'Casual Wear', 'url': 'products:product-list', 'params': '?category=casual-wear'},
+                    {'name': 'Semi-Formal', 'url': 'products:product-list', 'params': '?category=semi-formal'},
+                    {'name': 'Kurta', 'url': 'products:product-list', 'params': '?category=kurta'},
+                    {'name': 'Waistcoats', 'url': 'products:product-list', 'params': '?category=waistcoats'},
+                    {'name': 'Sherwani', 'url': 'products:product-list', 'params': '?category=sherwani'},
+                    {'name': 'Premium Collection', 'url': 'products:product-list', 'params': '?category=premium'},
+                    {'name': 'Eid Collection', 'url': 'products:product-list', 'params': '?category=eid-collection'},
+                    {'name': 'Wedding Collection', 'url': 'products:product-list', 'params': '?category=wedding'},
                 ]
             },
             {
-                'title': 'Services',
-                'icon': 'fa-tools',
+                'title': 'Fabrics',
+                'icon': 'fa-layer-group',
                 'links': [
-                    {'name': 'Cricket Services', 'url': 'main:services', 'anchor': 'cricket'},
-                    {'name': 'Racket Sports Services', 'url': 'main:services', 'anchor': 'racket'},
-                    {'name': 'Football Services', 'url': 'main:services', 'anchor': 'football'},
-                    {'name': 'Hockey Services', 'url': 'main:services', 'anchor': 'hockey'},
-                    {'name': 'Boxing & MMA Services', 'url': 'main:services', 'anchor': 'boxing'},
-                    {'name': 'Custom Services', 'url': 'main:services', 'anchor': 'custom'},
+                    {'name': 'Cotton', 'url': 'products:product-list', 'params': '?fabric=cotton'},
+                    {'name': 'Lawn', 'url': 'products:product-list', 'params': '?fabric=lawn'},
+                    {'name': 'Khadar', 'url': 'products:product-list', 'params': '?fabric=khadar'},
+                    {'name': 'Linen', 'url': 'products:product-list', 'params': '?fabric=linen'},
+                    {'name': 'Silk', 'url': 'products:product-list', 'params': '?fabric=silk'},
+                    {'name': 'Wool', 'url': 'products:product-list', 'params': '?fabric=wool'},
+                    {'name': 'Velvet', 'url': 'products:product-list', 'params': '?fabric=velvet'},
                 ]
             },
             {
-                'title': 'Footwear',
-                'icon': 'fa-shoe-prints',
+                'title': 'Collections',
+                'icon': 'fa-star',
                 'links': [
-                    {'name': 'Badminton Footwear', 'url': 'products:product-list', 'params': '?category=badminton-footwear'},
-                    {'name': 'Cricket Footwear', 'url': 'products:product-list', 'params': '?category=cricket-footwear'},
-                    {'name': 'Tennis Footwear', 'url': 'products:product-list', 'params': '?category=tennis-footwear'},
-                    {'name': 'Football Footwear', 'url': 'products:product-list', 'params': '?category=football-footwear'},
-                    {'name': 'Running Footwear', 'url': 'products:product-list', 'params': '?category=running-footwear'},
-                    {'name': 'Golf Footwear', 'url': 'products:product-list', 'params': '?category=golf-footwear'},
-                    {'name': 'Squash Footwear', 'url': 'products:product-list', 'params': '?category=squash-footwear'},
-                    {'name': 'Basketball Footwear', 'url': 'products:product-list', 'params': '?category=basketball-footwear'},
-                ]
-            },
-            {
-                'title': 'Accessories',
-                'icon': 'fa-cog',
-                'links': [
-                    {'name': 'Bags & Backpacks', 'url': 'products:product-list', 'params': '?category=bags-backpacks'},
-                    {'name': 'Sports Eyewear', 'url': 'products:product-list', 'params': '?category=sports-eyewear'},
-                    {'name': 'Sports Watches', 'url': 'products:product-list', 'params': '?category=sports-watches'},
-                    {'name': 'Caps', 'url': 'products:product-list', 'params': '?category=caps'},
-                    {'name': 'Shakers', 'url': 'products:product-list', 'params': '?category=shakers'},
-                    {'name': 'Water Bottles', 'url': 'products:product-list', 'params': '?category=water-bottles'},
-                    {'name': 'Headbands', 'url': 'products:product-list', 'params': '?category=headbands'},
-                    {'name': 'Socks', 'url': 'products:product-list', 'params': '?category=socks'},
-                    {'name': 'Towels', 'url': 'products:product-list', 'params': '?category=towels'},
-                    {'name': 'Pocket Tools', 'url': 'products:product-list', 'params': '?category=pocket-tools'},
-                    {'name': 'Storage', 'url': 'products:product-list', 'params': '?category=storage'},
+                    {'name': 'Summer Collection', 'url': 'products:product-list', 'params': '?collection=summer'},
+                    {'name': 'Winter Collection', 'url': 'products:product-list', 'params': '?collection=winter'},
+                    {'name': 'Eid Collection', 'url': 'products:product-list', 'params': '?collection=eid'},
+                    {'name': 'Wedding Collection', 'url': 'products:product-list', 'params': '?collection=wedding'},
+                    {'name': 'Festive Collection', 'url': 'products:product-list', 'params': '?collection=festive'},
+                    {'name': 'New Arrivals', 'url': 'products:product-list', 'params': '?sort=newest'},
+                    {'name': 'Best Sellers', 'url': 'products:product-list', 'params': '?sort=popular'},
                 ]
             },
             {
@@ -259,4 +130,4 @@ class SitemapView(TemplateView):
             },
         ]
         
-        return context        
+        return context
