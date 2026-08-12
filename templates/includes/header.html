@@ -19,7 +19,24 @@
     .tr-nav-right a, .tr-nav-right button { color: #1a1a1a; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px; background: none; border: none; cursor: pointer; }
     .tr-nav-right a:hover, .tr-nav-right button:hover { color: #000000; }
     .tr-nav-right button i { font-size: 16px; }
-    .tr-bag-count { background: #c9a84c; color: #ffffff; border-radius: 50%; padding: 0 6px; font-size: 10px; height: 18px; min-width: 18px; display: inline-flex; align-items: center; justify-content: center; margin-left: -8px; margin-top: -12px; font-weight: 700; }
+    
+    /* ✅ Live Bag Counter */
+    .tr-bag-count {
+        color: #ffffff;
+        border-radius: 50%;
+        padding: 0 6px;
+        font-size: 10px;
+        height: 18px;
+        min-width: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -8px;
+        margin-top: -12px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
     .tr-header-bottom { padding: 12px 0; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f0f0f0; }
     .tr-flag { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #1a1a1a; text-transform: uppercase; }
     .tr-flag img { height: 16px; width: auto; display: block; }
@@ -27,18 +44,86 @@
     .tr-nav-sub a { color: #1a1a1a; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
     .tr-nav-sub a:hover { color: #000000; }
     
-    .tr-mobile-toggle { display: none; background: none; border: none; font-size: 24px; color: #1a1a1a; padding: 5px; }
-    .tr-mobile-menu { display: none; flex-direction: column; padding: 10px 0; background: #ffffff; border-top: 1px solid #f0f0f0; }
-    .tr-mobile-menu.open { display: flex; }
-    .tr-mobile-menu a { padding: 12px 15px; color: #1a1a1a; font-weight: 500; text-transform: uppercase; font-size: 14px; border-bottom: 1px solid #f5f5f5; }
+    /* ✅ MOBILE MENU - COMPLETELY FIXED */
+    .tr-mobile-toggle {
+        display: none;
+        background: transparent !important;
+        border: none !important;
+        font-size: 26px !important;
+        color: #1a1a1a !important;
+        padding: 8px !important;
+        cursor: pointer !important;
+        position: absolute;
+        right: 15px;
+        top: 22px;
+        z-index: 10000 !important;
+        line-height: 1 !important;
+    }
+    
+    .tr-mobile-menu {
+        display: none;
+        flex-direction: column;
+        padding: 15px 0;
+        background: #ffffff;
+        border-top: 1px solid #f0f0f0;
+        position: fixed;
+        top: 120px;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        height: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    .tr-mobile-menu.open { display: flex !important; }
+    .tr-mobile-menu a { 
+        padding: 15px 20px; 
+        color: #1a1a1a; 
+        font-weight: 500; 
+        text-transform: uppercase; 
+        font-size: 14px; 
+        border-bottom: 1px solid #f5f5f5; 
+        display: block;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .tr-mobile-menu a:hover { background: #f9f9f9; }
+    .tr-mobile-menu a:last-child { border-bottom: none; }
 
+    /* Mobile View */
     @media (max-width: 991px) {
-        .tr-nav-left, .tr-nav-right, .tr-nav-sub, .tr-flag { display: none; }
-        .tr-mobile-toggle { display: block; position: absolute; right: 15px; top: 22px; }
-        .tr-logo-center { position: relative; left: 0; transform: none; top: 0; margin: 0 auto; }
+        .tr-nav-left, .tr-nav-right, .tr-nav-sub, .tr-flag { display: none !important; }
+        .tr-mobile-toggle { display: block !important; }
+        .tr-logo-center { 
+            position: relative; 
+            left: auto; 
+            transform: none; 
+            top: auto; 
+            margin: 0 auto; 
+            padding-right: 50px; /* Space for hamburger */
+        }
         .tr-logo-center img { height: 45px; }
-        .tr-header-top { flex-direction: column; padding: 15px 0; gap: 10px; }
-        .tr-header-bottom { display: none; }
+        .tr-header-top { 
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 15px 0 !important;
+            gap: 10px !important;
+            position: relative !important;
+        }
+        .tr-header-bottom { display: none !important; }
+        /* Ensure parent doesn't clip the menu */
+        .container.position-relative {
+            overflow: visible !important;
+        }
+    }
+    
+    /* Fix for very small screens to ensure hamburger doesn't overlap logo */
+    @media (max-width: 480px) {
+        .tr-logo-center img { height: 38px; }
+        .tr-logo-center { padding-right: 45px; }
     }
 
     .tr-modal-content { border-radius: 12px; border: none; box-shadow: 0 15px 50px rgba(0,0,0,0.1); }
@@ -64,10 +149,17 @@
     <div class="container-fluid bg-white">
         <div class="container position-relative">
             <div class="tr-header-top">
-                <!-- Mobile Toggle -->
-                <button class="tr-mobile-toggle" id="trMobileToggle"><i class="fas fa-bars"></i></button>
+                <!-- Center Logo (Moved top for proper mobile alignment) -->
+                <div class="tr-logo-center">
+                    <a href="{% url 'products:home-view' %}"><img src="{% static 'logos/logo-.png' %}" alt="Tahir Rafique"></a>
+                </div>
                 
-                <!-- Left Nav -->
+                <!-- Mobile Toggle (Moved here so it gets proper z-index) -->
+                <button class="tr-mobile-toggle" id="trMobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Left Nav (Desktop Only) -->
                 <nav class="tr-nav-left">
                     <a href="{% url 'products:product-list' %}?category=women">Women</a>
                     <a href="{% url 'products:product-list' %}?category=men">Men</a>
@@ -75,24 +167,28 @@
                     <a href="{% url 'products:product-list' %}?category=teens">Teens</a>
                 </nav>
 
-                <!-- Center Logo -->
-                <div class="tr-logo-center">
-                    <a href="{% url 'products:home-view' %}"><img src="{% static 'logos/logo-.png' %}" alt="Tahir Rafique"></a>
-                </div>
-
-                <!-- Right Icons -->
+                <!-- Right Icons (Desktop Only) -->
                 <div class="tr-nav-right">
-                    <button data-bs-toggle="modal" data-bs-target="#trSearchModal">SEARCH <i class="fas fa-search"></i></button>
+                    <button data-bs-toggle="modal" data-bs-target="#trSearchModal">
+                        SEARCH <i class="fas fa-search"></i>
+                    </button>
+                    <a href="{% url 'cart:view' %}" id="trBagLink">
+                        BAG 
+                        <i class="fas fa-shopping-bag" style="position:relative;">
+                            <span class="tr-bag-count" id="trBagCount">0</span>
+                        </i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Mobile Menu (Hidden on desktop) -->
+            <!-- Mobile Menu (Hidden by default) -->
             <div class="tr-mobile-menu" id="trMobileMenu">
                 <a href="{% url 'products:product-list' %}?category=women">Women</a>
                 <a href="{% url 'products:product-list' %}?category=men">Men</a>
                 <a href="{% url 'products:product-list' %}?category=GEN Z">GEN Z</a>
                 <a href="{% url 'products:product-list' %}?category=teens">Teens</a>
                 <a href="{% url 'products:product-list' %}" style="border-top:2px solid #000000; margin-top:5px;">All Products</a>
+                <a href="{% url 'cart:view' %}" style="border-top:2px solid #000000; margin-top:5px;">Bag (0)</a>
             </div>
         </div>
     </div>
@@ -101,16 +197,6 @@
     <div class="container-fluid bg-white">
         <div class="container">
             <div class="tr-header-bottom">
-                
-                <!-- ✅ Direct SVG Flag -->
-                <div class="tr-flag" style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" 
-                         alt="PK" 
-                         style="height: 20px; width: 30px; display: block; border: 1px solid #eee;">
-                    <span style="font-size: 14px;">PK</span>
-                </div>
-
-                <!-- Sub Navigation -->
                 <nav class="tr-nav-sub">
                     <a href="{% url 'products:home-view' %}">New In</a>
                     <a href="{% url 'products:product-list' %}">All Collection</a>
@@ -119,8 +205,6 @@
                     <a href="{% url 'products:product-list' %}?category=special-kurta">SPECIAL KURTA</a>
                     <a href="{% url 'products:product-list' %}?category=sherwani">SHERWANI</a>
                 </nav>
-
-                <!-- Balancing spacer (Industry standard) -->
                 <div style="width: 50px;"></div>
             </div>
         </div>
@@ -128,7 +212,7 @@
 </header>
 
 <!-- ========================================================== -->
-<!-- ✅ SEARCH MODAL (Fixed: Preserves Category & Submits properly) -->
+<!-- SEARCH MODAL -->
 <!-- ========================================================== -->
 <div class="modal fade" id="trSearchModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -143,8 +227,6 @@
                         <input type="search" class="form-control tr-search-input" name="q" id="trSearchInput" placeholder="Search products..." autocomplete="off">
                         <button class="tr-search-btn" type="submit"><i class="fas fa-search me-2"></i> Search</button>
                     </div>
-                    
-                    <!-- ✅ FIX: Preserve the current category when searching -->
                     {% if request.GET.category %}
                         <input type="hidden" name="category" value="{{ request.GET.category }}">
                     {% endif %}
@@ -153,3 +235,91 @@
         </div>
     </div>
 </div>
+
+<!-- ========================================================== -->
+<!-- ✅ JAVASCRIPT: LIVE BAG COUNT & MENU TOGGLE -->
+<!-- ========================================================== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Spinner remove
+    const spinner = document.getElementById('spinner');
+    if (spinner) {
+        setTimeout(() => {
+            spinner.style.display = 'none';
+            spinner.classList.remove('show');
+        }, 800);
+    }
+
+    // ✅ Mobile menu toggle (Fixed for both click and touch)
+    const toggleBtn = document.getElementById('trMobileToggle');
+    const mobileMenu = document.getElementById('trMobileMenu');
+    
+    if (toggleBtn && mobileMenu) {
+        // Use both click and touchstart for maximum compatibility
+        function toggleMenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            mobileMenu.classList.toggle('open');
+            // Toggle icon between bars and times
+            const icon = toggleBtn.querySelector('i');
+            if (mobileMenu.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        }
+        
+        toggleBtn.addEventListener('click', toggleMenu);
+        toggleBtn.addEventListener('touchstart', toggleMenu);
+
+        // Close menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+                const icon = toggleBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            });
+        });
+    }
+
+    // ✅ INITIAL LOAD: Fetch bag count from server
+    updateBagCount();
+
+    // ✅ LISTEN TO CART UPDATES (AJAX events from cart page)
+    document.addEventListener('cartUpdated', function(e) {
+        if (e.detail && e.detail.total_items !== undefined) {
+            updateBagCountUI(e.detail.total_items);
+        }
+    });
+});
+
+// ==========================================================
+// FETCH BAG COUNT FROM SERVER
+// ==========================================================
+function updateBagCount() {
+    fetch('/cart/get-count/')
+    .then(response => response.json())
+    .then(data => {
+        if (data.total_items !== undefined) {
+            updateBagCountUI(data.total_items);
+        }
+    })
+    .catch(error => console.error('Error fetching bag count:', error));
+}
+
+// ==========================================================
+// UPDATE UI BAG COUNT
+// ==========================================================
+function updateBagCountUI(count) {
+    const bagCountEl = document.getElementById('trBagCount');
+    const mobileBagEl = document.querySelector('.tr-mobile-menu a[href*="cart"]');
+    
+    if (bagCountEl) {
+        bagCountEl.textContent = count;
+    }
+    
+    if (mobileBagEl) {
+        mobileBagEl.textContent = `Bag (${count})`;
+    }
+}
+</script>

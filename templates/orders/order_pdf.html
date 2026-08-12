@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Order Receipt</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #c9a84c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0 0 0;
+        }
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        .order-details div {
+            font-size: 14px;
+            color: #555;
+        }
+        .order-details strong {
+            color: #1a1a1a;
+        }
+        .customer-info {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        .customer-info h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        .customer-info p {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th {
+            background: #f2f2f2;
+            color: #1a1a1a;
+            font-weight: 600;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 13px;
+            border-bottom: 2px solid #ddd;
+        }
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        .total-row {
+            text-align: right;
+            font-weight: 700;
+            font-size: 16px;
+            padding-top: 15px;
+            border-top: 2px solid #c9a84c;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================== -->
+    <!-- HEADER WITH BRANDING -->
+    <!-- ========================================================== -->
+    <div class="header">
+        <h1>Tahir Rafique Clothe House</h1>
+        <p>Premium Fashion • Unstitched • Ready to Wear</p>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ORDER DETAILS -->
+    <!-- ========================================================== -->
+    <div class="order-details">
+        <div>
+            <strong>Order #:</strong> {{ order.order_id }}<br>
+            <strong>Date:</strong> {{ order.created_at|date:"d M Y, h:i A" }}
+        </div>
+        <div style="text-align: right;">
+            <strong>Payment:</strong> Cash on Delivery<br>
+            <strong>Status:</strong> Pending
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- CUSTOMER INFO -->
+    <!-- ========================================================== -->
+    <div class="customer-info">
+        <h3>Customer Details</h3>
+        <p><strong>Name:</strong> {{ order.full_name }}</p>
+        <p><strong>Phone:</strong> {{ order.phone }}</p>
+        <p><strong>Email:</strong> {{ order.email|default:"Not provided" }}</p>
+        <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}</p>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ORDER ITEMS TABLE -->
+    <!-- ========================================================== -->
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Variant</th>
+                <th style="text-align: center;">Qty</th>
+                <th style="text-align: right;">Price</th>
+                <th style="text-align: right;">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.variant.product.name }}</td>
+                <td>{{ item.variant.variant_name|default:"Standard" }}</td>
+                <td style="text-align: center;">{{ item.quantity }}</td>
+                <td style="text-align: right;">PKR {{ item.price }}</td>
+                <td style="text-align: right;">PKR {{ item.total_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- ========================================================== -->
+    <!-- TOTAL -->
+    <!-- ========================================================== -->
+    <div style="margin-top: 20px; text-align: right;">
+        <div style="display: flex; justify-content: flex-end; gap: 40px; font-size: 14px; color: #666;">
+            <span>Subtotal</span>
+            <span>PKR {{ order.subtotal }}</span>
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 40px; font-size: 14px; color: #666; padding-top: 5px;">
+            <span>Shipping</span>
+            <span>Calculated at delivery</span>
+        </div>
+        <div class="total-row">
+            <span style="margin-right: 40px;">Total</span>
+            <span>PKR {{ order.total_amount }}</span>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================================== -->
+    <div class="footer">
+        Thank you for shopping with Tahir Rafique Clothe House!<br>
+        For any queries, contact us at +92 328 5774948
+    </div>
+
+</body>
+</html>

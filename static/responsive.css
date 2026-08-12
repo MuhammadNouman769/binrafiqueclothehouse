@@ -1,0 +1,9 @@
+/* ==========================================================
+   RESPONSIVE - TRENDING SECTION
+========================================================== */
+@media (max-width: 768px) {
+    .trnd-space-remove {  
+        padding-top: 9px !important;
+        padding-bottom: 0px !important; /* Extra spacing remove */
+    }
+}

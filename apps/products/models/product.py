@@ -63,9 +63,9 @@ class Product(SlugModel):
             models.Index(fields=["category"]),
             models.Index(fields=["brand"]),
             models.Index(fields=["name"]),
-            models.Index(fields=["trending"]),  # ✅ Fixed: is_featured → trending
-            models.Index(fields=["is_new_arrival"]),  # ✅ Added for speed
-            models.Index(fields=["is_bestseller"]),  # ✅ Added for speed
+            models.Index(fields=["trending"]),  
+            models.Index(fields=["is_new_arrival"]),
+            models.Index(fields=["is_bestseller"]),
             models.Index(fields=["is_active"]),
             models.Index(fields=["created_at"]),
         ]

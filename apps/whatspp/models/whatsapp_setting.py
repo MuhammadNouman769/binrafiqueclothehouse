@@ -21,10 +21,10 @@ class SiteSetting(BaseModel):
     )
 
     # Site Information
-    site_name = models.CharField(max_length=100, default="Hadi Sports")
+    site_name = models.CharField(max_length=100, default="Tahir Rafique Clothe House", help_text="Name of the site")
 
     site_email = models.EmailField(
-        default="info@hadisports.com",
+        default="info@tahirrafiqueclothehouse.com",
         help_text="Email address for contact form submissions",
     )
 
@@ -33,7 +33,7 @@ class SiteSetting(BaseModel):
     )
 
     site_address = models.TextField(
-        default="297-C, P.I.A. Main Boulevard Road, Lahore, Pakistan"
+        default="Shekhah Wala Bazar, Nazad HabibBank, Farooqabad, Pakistan"
     )
 
     class Meta:
@@ -50,10 +50,10 @@ class SiteSetting(BaseModel):
             id=1,
             defaults={
                 "whatsapp_number": "923285774948",
-                "site_name": "Hadi Sports",
-                "site_email": "info@hadisports.com",
+                "site_name": "Tahir Rafique Clothe House",
+                "site_email": "info@tahirrafiqueclothehouse.com",
                 "site_phone": "+92 328 5774948",
-                "site_address": "297-C, P.I.A. Main Boulevard Road, Lahore, Pakistan",
+                "site_address": "Shekhah Wala Bazar, Nazad HabibBank, Farooqabad, Pakistan",
             },
         )
         return settings

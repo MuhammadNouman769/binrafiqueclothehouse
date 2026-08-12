@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout | Bin Rafique Clothe House{% endblock %}
+
+{% block content %}
+<style>
+/* ==========================================================
+   CHECKOUT PAGE - PREMIUM J. STYLE
+========================================================== */
+.checkout-wrapper {
+    padding: 40px 0 60px;
+    background: #faf8f6;
+    font-family: 'Inter', sans-serif;
+}
+
+.checkout-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* ==========================================================
+   LEFT COLUMN: CART SUMMARY
+========================================================== */
+.checkout-summary {
+    background: #ffffff;
+    border: 1px solid #ece9e4;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.checkout-summary-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ece9e4;
+}
+
+.checkout-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.checkout-item:last-child {
+    border-bottom: none;
+}
+
+.checkout-item-img {
+    width: 70px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.checkout-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.checkout-item-info {
+    flex: 1;
+}
+
+.checkout-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.checkout-item-size {
+    font-size: 13px;
+    color: #999;
+}
+
+.checkout-item-qty {
+    font-size: 13px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.checkout-item-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    text-align: right;
+}
+
+.checkout-total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 15px;
+    color: #666;
+    border-top: 1px solid #ece9e4;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.checkout-total-row.grand-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    border-top: 2px solid #111;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+/* ==========================================================
+   RIGHT COLUMN: CHECKOUT FORM
+========================================================== */
+.checkout-form {
+    background: #ffffff;
+    border: 1px solid #ece9e4;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.checkout-form-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ece9e4;
+}
+
+.checkout-form .form-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.checkout-form .form-control {
+    border: 1px solid #ece9e4;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    background: #faf8f6;
+    transition: 0.3s;
+}
+
+.checkout-form .form-control:focus {
+    border-color: #111;
+    box-shadow: none;
+    background: #ffffff;
+}
+
+.checkout-form .form-control::placeholder {
+    color: #bbb;
+}
+
+/* ==========================================================
+   WHATSAPP BUTTON AT THE END
+========================================================== */
+.checkout-whatsapp-btn {
+    display: block;
+    width: 100%;
+    background: #25D366;
+    color: #ffffff;
+    padding: 16px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.checkout-whatsapp-btn:hover {
+    background: #128C7E;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.checkout-whatsapp-btn i {
+    font-size: 22px;
+}
+
+.checkout-note {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+@media (max-width: 992px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-wrapper {
+        padding: 30px 0 40px;
+    }
+    
+    .checkout-title {
+        font-size: 20px;
+    }
+    
+    .checkout-summary,
+    .checkout-form {
+        padding: 20px;
+    }
+    
+    .checkout-item-img {
+        width: 60px;
+        height: 80px;
+    }
+    
+    .checkout-whatsapp-btn {
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+}
+</style>
+
+<div class="checkout-wrapper">
+    <div class="container">
+        
+        <!-- Breadcrumb -->
+        <div class="tr-breadcrumb" style="font-size:12px; color:#999; margin-bottom:25px;">
+            <a href="{% url 'products:home-view' %}" style="color:#999; text-decoration:none;">HOME</a> &nbsp;/&nbsp; 
+            <a href="{% url 'cart:view' %}" style="color:#999; text-decoration:none;">CART</a> &nbsp;/&nbsp; 
+            <span>CHECKOUT</span>
+        </div>
+        
+        <h1 class="checkout-title">CHECKOUT</h1>
+        
+        <div class="checkout-grid">
+            
+            <!-- ==========================================================
+                 LEFT: CART SUMMARY
+            ========================================================== -->
+            <div class="checkout-summary">
+                <div class="checkout-summary-title">ORDER SUMMARY</div>
+                
+                {% for item in cart_items %}
+                <div class="checkout-item">
+                    <div class="checkout-item-img">
+                        {% with item.variant.primary_image as img %}
+                            <img src="{{ img.image.url|default:'/static/img/default-product.jpg' }}" alt="{{ item.variant.product.name }}">
+                        {% endwith %}
+                    </div>
+                    <div class="checkout-item-info">
+                        <div class="checkout-item-name">{{ item.variant.product.name|truncatechars:25 }}</div>
+                        <div class="checkout-item-size">Size: {{ item.variant.variant_name|default:"Standard" }}</div>
+                        <div class="checkout-item-qty">Qty: {{ item.quantity }}</div>
+                    </div>
+                    <div class="checkout-item-price">PKR {{ item.total_price }}</div>
+                </div>
+                {% endfor %}
+                
+                <div class="checkout-total-row">
+                    <span>SUBTOTAL</span>
+                    <span>PKR {{ subtotal }}</span>
+                </div>
+                
+                <div class="checkout-total-row">
+                    <span>SHIPPING</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                
+                <div class="checkout-total-row grand-total">
+                    <span>TOTAL</span>
+                    <span>PKR {{ total_amount }}</span>
+                </div>
+            </div>
+            
+            <!-- ==========================================================
+                 RIGHT: CHECKOUT FORM
+            ========================================================== -->
+            <div class="checkout-form">
+                <div class="checkout-form-title">CUSTOMER DETAILS</div>
+                
+                <form method="POST" action="{% url 'orders:checkout' %}" id="checkoutForm">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" name="full_name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email (Optional)</label>
+                        <input type="email" name="email" class="form-control" placeholder="john@example.com">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="text" name="phone" class="form-control" placeholder="0300 1234567" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Address *</label>
+                        <textarea name="address" class="form-control" rows="2" placeholder="House #, Street, Area" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">City *</label>
+                        <input type="text" name="city" class="form-control" placeholder="Lahore" required>
+                    </div>
+                    
+                    <!-- ==========================================================
+                         WHATSAPP BUTTON AT THE END
+                    ========================================================== -->
+                    <button type="submit" class="checkout-whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Confirm Order via WhatsApp
+                    </button>
+                    
+                    <div class="checkout-note">
+                        <i class="fas fa-lock me-1"></i> Your details are safe and will only be used for order processing.
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

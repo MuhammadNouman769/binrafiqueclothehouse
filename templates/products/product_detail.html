@@ -31,89 +31,30 @@
 }
 
 /* ==========================================================
-   IMAGE ZOOM CONTAINER - SIDE ZOOM
+   IMAGE ZOOM CONTAINER - SMOOTH CLEAN ZOOM
 ========================================================== */
 .tr-image-wrapper {
-    display: flex;
-    gap: 20px;
-    position: relative;
-}
-
-.tr-image-main {
-    flex: 1;
     position: relative;
     overflow: hidden;
     border-radius: 14px;
     background: #faf8f6;
     height: 500px;
     border: 1px solid #ece9e4;
+}
+
+.tr-image-main {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     cursor: zoom-in;
 }
 
 .tr-image-main img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    background: #faf8f6;
-}
-
-.tr-image-main.zoomed img {
-    transform: scale(1.5);
-    cursor: zoom-out;
-}
-
-/* Zoom Lens */
-.tr-zoom-lens {
-    position: absolute;
-    border: 2px solid #111;
-    width: 120px;
-    height: 120px;
-    background: rgba(255,255,255,0.1);
-    pointer-events: none;
-    display: none;
-    border-radius: 50%;
-    box-shadow: 0 0 30px rgba(0,0,0,0.1);
-}
-
-.tr-image-main.zoomed .tr-zoom-lens {
-    display: block;
-}
-
-/* Zoom Result - Side */
-.tr-zoom-result {
-    width: 100%;
-    max-width: 380px;
-    min-height: 500px;
-    background-repeat: no-repeat;
-    border-radius: 14px;
-    border: 1px solid #ece9e4;
-    display: none;
-    background-color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-    flex-shrink: 0;
-    position: sticky;
-    top: 20px;
-}
-
-.tr-zoom-result.visible {
-    display: block;
-}
-
-.tr-zoom-result .tr-zoom-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #bbb;
-    font-size: 14px;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.tr-zoom-result .tr-zoom-placeholder i {
-    font-size: 40px;
-    color: #ddd;
+    object-fit: fill;
+    transition: transform 0.4s ease;
+   
 }
 
 /* ==========================================================
@@ -128,10 +69,10 @@
 }
 
 .tr-thumbnails img {
-    width: 72px;
-    height: 72px;
+    width: 88px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: all 0.3s ease;
@@ -179,6 +120,23 @@
     text-decoration: line-through;
     font-weight: 400;
     margin-left: 10px;
+}
+
+/* Total Price (Quantity * Price) */
+.tr-total-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tr-total-price .tr-total-label {
+    color: #999;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .tr-product-rating {
@@ -232,12 +190,90 @@
     font-weight: 500;
 }
 
+/* Buttons Row */
+.tr-actions {
+    display: flex;
+    gap: 12px;
+    margin: 18px 0;
+    flex-wrap: wrap;
+}
+
+/* Add to Bag Button (Cart) */
+.tr-btn-addbag {
+    flex: 1;
+    background: #111111;
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    min-width: 160px;
+    cursor: pointer;
+}
+
+.tr-btn-addbag:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.tr-btn-addbag i {
+    font-size: 18px;
+}
+
+/* WhatsApp Button */
+.tr-btn-whatsapp {
+    flex: 1;
+    background: #25D366;
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    min-width: 160px;
+}
+
+.tr-btn-whatsapp:hover {
+    background: #128C7E;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.tr-btn-whatsapp i {
+    font-size: 20px;
+}
+
+.tr-delivery-note {
+    color: #999;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.tr-delivery-note i {
+    margin-right: 4px;
+}
+
 /* Quantity */
 .tr-quantity {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 18px 0;
+    margin: 18px 0 10px;
 }
 
 .tr-qty-btn {
@@ -270,45 +306,6 @@
     font-size: 16px;
     font-weight: 600;
     background: #faf8f6;
-}
-
-/* WhatsApp Button */
-.tr-btn-whatsapp {
-    background: #25D366;
-    color: #ffffff;
-    padding: 14px 35px;
-    border-radius: 50px;
-    font-weight: 600;
-    border: none;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    font-size: 15px;
-    width: 100%;
-    justify-content: center;
-}
-
-.tr-btn-whatsapp:hover {
-    background: #128C7E;
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-}
-
-.tr-btn-whatsapp i {
-    font-size: 20px;
-}
-
-.tr-delivery-note {
-    color: #999;
-    font-size: 12px;
-    margin-top: 8px;
-}
-
-.tr-delivery-note i {
-    margin-right: 4px;
 }
 
 /* ==========================================================
@@ -369,13 +366,13 @@
 }
 
 /* ==========================================================
-   RELATED PRODUCTS
+   RELATED PRODUCTS - CART STYLE (Screenshot #2)
 ========================================================== */
 .tr-related {
     margin-top: 40px;
 }
 
-.tr-related h3 {
+.tr-related-title {
     font-size: 20px;
     font-weight: 600;
     color: #111;
@@ -385,277 +382,170 @@
 .tr-related-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 20px;
 }
 
 .tr-related-item {
     background: #ffffff;
-    border-radius: 14px;
-    padding: 14px;
-    border: 1px solid #ece9e4;
+    border: none;
     transition: all 0.3s ease;
-    text-align: center;
 }
 
 .tr-related-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    border-color: #ddd8d2;
+    transform: translateY(-3px);
 }
 
-.tr-related-item .tr-related-image-wrap {
+.tr-related-img-wrap {
+    position: relative;
     width: 100%;
-    height: 180px;
+    height: 320px;
+    background: #f2f2f2;
     overflow: hidden;
-    border-radius: 10px;
-    background: #faf8f6;
 }
 
-.tr-related-item .tr-related-image-wrap img {
+.tr-related-img-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: fill;
     transition: transform 0.3s ease;
 }
 
-.tr-related-item:hover .tr-related-image-wrap img {
+.tr-related-item:hover .tr-related-img-wrap img {
     transform: scale(1.03);
 }
 
-.tr-related-item .tr-related-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: #111;
-    margin: 10px 0 4px;
+/* ✅ Exact Red "BEST SELLER" Badge */
+.tr-related-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #cc0000;
+    color: #ffffff;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 2;
+    border-radius: 2px;
+}
+
+.tr-related-details {
+    padding: 12px 0 0 0;
+    text-align: left;
+}
+
+.tr-related-name {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 38px;
+    margin-bottom: 5px;
 }
 
-.tr-related-item .tr-related-price {
+.tr-related-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.tr-related-curr {
+    color: #cc0000 !important; /* Exact Red */
+}
+
+.tr-related-old {
+    color: #1a1a1a;
+    text-decoration: line-through;
+    font-weight: 400;
     font-size: 14px;
-    font-weight: 600;
-    color: #111;
-    margin-top: 4px;
 }
 
-.tr-related-item .tr-related-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 6px 20px;
-    border: 1px solid #ddd8d2;
-    border-radius: 50px;
-    font-size: 11px;
+/* ✅ Exact "VIEW PRODUCT" Button */
+.tr-related-btn {
+    display: block;
+    width: 100%;
+    border: 1px solid #111;
+    background: transparent;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 13px;
     font-weight: 600;
     color: #111;
     text-decoration: none;
+    margin-top: 15px;
     transition: all 0.3s ease;
 }
 
-.tr-related-item .tr-related-link:hover {
+.tr-related-btn:hover {
     background: #111;
     color: #fff;
-    border-color: #111;
 }
+    .col-lg-6 {
+        flex: 0 0 auto;
+        width: 40%!important;
+    }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 @media (max-width: 1200px) {
-    .tr-zoom-result {
-        max-width: 280px;
-        min-height: 400px;
-    }
-    
-    .tr-image-main {
-        height: 400px;
-    }
+    .tr-image-wrapper { height: 400px; }
+    .tr-related-img-wrap { height: 280px; }
 }
 
 @media (max-width: 992px) {
-    .tr-image-wrapper {
-        flex-direction: column;
-    }
-    
-    .tr-zoom-result {
-        max-width: 100%;
-        min-height: 200px;
-        display: none !important;
-    }
-    
-    .tr-zoom-result.visible {
-        display: none !important;
-    }
-    
-    .tr-image-main {
-        height: 380px;
-    }
-    
-    .tr-related-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .tr-image-wrapper { height: 380px; }
+    .tr-related-grid { grid-template-columns: repeat(2, 1fr); }
+    .tr-actions { flex-direction: column; }
+    .tr-btn-addbag, .tr-btn-whatsapp { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 768px) {
-    .tr-product-wrapper {
-        padding: 40px 0 50px;
-    }
-    
-    .tr-product-card {
-        padding: 24px 18px 20px;
-        border-radius: 16px;
-    }
-    
-    .tr-image-main {
-        height: 320px;
-    }
-    
-    .tr-product-name {
-        font-size: 20px;
-    }
-    
-    .tr-product-price {
-        font-size: 22px;
-    }
-    
-    .tr-meta-grid {
-        grid-template-columns: 1fr;
-        padding: 14px 16px;
-    }
-    
-    .tr-tab-nav {
-        overflow-x: auto;
-        gap: 0;
-    }
-    
-    .tr-tab-btn {
-        padding: 10px 16px;
-        font-size: 13px;
-        white-space: nowrap;
-    }
-    
-    .tr-btn-whatsapp {
-        padding: 12px 24px;
-        font-size: 14px;
-    }
-    
-    .tr-thumbnails img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .tr-related-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    
-    .tr-related-item .tr-related-image-wrap {
-        height: 140px;
-    }
+    .tr-product-wrapper { padding: 40px 0 50px; }
+    .tr-product-card { padding: 24px 18px 20px; border-radius: 16px; }
+    .tr-image-wrapper { height: 320px; }
+    .tr-product-name { font-size: 20px; }
+    .tr-product-price { font-size: 22px; }
+    .tr-meta-grid { grid-template-columns: 1fr; padding: 14px 16px; }
+    .tr-tab-nav { overflow-x: auto; gap: 0; }
+    .tr-tab-btn { padding: 10px 16px; font-size: 13px; white-space: nowrap; }
+    .tr-thumbnails img { width: 60px; height: 60px; }
+    .tr-related-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .tr-related-img-wrap { height: 240px; }
 }
 
 @media (max-width: 480px) {
-    .tr-product-wrapper {
-        padding: 30px 0 40px;
-    }
-    
-    .tr-product-card {
-        padding: 16px 12px 16px;
-        border-radius: 14px;
-    }
-    
-    .tr-image-main {
-        height: 240px;
-        border-radius: 10px;
-    }
-    
-    .tr-product-name {
-        font-size: 17px;
-    }
-    
-    .tr-product-price {
-        font-size: 19px;
-    }
-    
-    .tr-product-description {
-        font-size: 13px;
-    }
-    
-    .tr-thumbnails img {
-        width: 50px;
-        height: 50px;
-        border-radius: 8px;
-    }
-    
-    .tr-related-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-    
-    .tr-related-item .tr-related-image-wrap {
-        height: 120px;
-    }
-    
-    .tr-related-item .tr-related-name {
-        font-size: 12px;
-        min-height: 32px;
-    }
-    
-    .tr-tab-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 400px) {
-    .tr-related-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-    
-    .tr-related-item {
-        padding: 10px;
-    }
-    
-    .tr-related-item .tr-related-image-wrap {
-        height: 100px;
-    }
-    
-    .tr-related-item .tr-related-name {
-        font-size: 11px;
-        min-height: 28px;
-    }
-    
-    .tr-related-item .tr-related-price {
-        font-size: 12px;
-    }
-    
-    .tr-related-item .tr-related-link {
-        font-size: 10px;
-        padding: 4px 14px;
-    }
+    .tr-product-wrapper { padding: 30px 0 40px; }
+    .tr-product-card { padding: 16px 12px 16px; border-radius: 14px; }
+    .tr-image-wrapper { height: 240px; border-radius: 10px; }
+    .tr-product-name { font-size: 17px; }
+    .tr-product-price { font-size: 19px; }
+    .tr-related-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tr-related-img-wrap { height: 180px; }
+    .tr-related-name { font-size: 13px; min-height: 36px; }
+    .tr-tab-btn { padding: 8px 12px; font-size: 12px; }
 }
 </style>
 
-<!-- ==========================================================
-     PRODUCT DETAIL - TAHIR RAFIQUE CLOTHE HOUSE
-========================================================== -->
 <div class="tr-product-wrapper">
     <div class="container">
         <div class="tr-product-container">
             
             <!-- Product Card -->
-            <div class="tr-product-card">
+            <div class="">
                 <div class="row g-4">
                     
                     <!-- Images Column -->
                     <div class="col-lg-6">
-                        <!-- Image Wrapper with Side Zoom -->
-                        <div class="tr-image-wrapper">
-                            <!-- Main Image -->
-                            <div class="tr-image-main" id="trImageMain">
+                        <!-- ✅ Clean Smooth Zoom Image -->
+                        <div class="tr-image-wrapper" id="trImageWrapper">
+                            <div class="tr-image-main">
                                 {% with product.default_variant as variant %}
                                     {% if variant and variant.images.all %}
                                         <img src="{{ variant.images.first.image.url }}" 
@@ -667,17 +557,6 @@
                                              alt="{{ product.name }}">
                                     {% endif %}
                                 {% endwith %}
-                                
-                                <!-- Zoom Lens -->
-                                <div class="tr-zoom-lens" id="trZoomLens"></div>
-                            </div>
-                            
-                            <!-- Zoom Result -->
-                            <div class="tr-zoom-result" id="trZoomResult">
-                                <div class="tr-zoom-placeholder" id="trZoomPlaceholder">
-                                    <i class="fas fa-search-plus"></i>
-                                    <span>Hover to zoom</span>
-                                </div>
                             </div>
                         </div>
                         
@@ -706,7 +585,6 @@
                             {% endif %}
                         </div>
                         
-                        <!-- Rating -->
                         <div class="tr-product-rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -716,7 +594,6 @@
                             <span>(4.5/5)</span>
                         </div>
                         
-                        <!-- Price -->
                         <div class="tr-product-price">
                             {% with product.default_variant as variant %}
                                 {% if variant %}
@@ -728,12 +605,15 @@
                             {% endwith %}
                         </div>
                         
-                        <!-- Description -->
+                        <div class="tr-total-price">
+                            <span class="tr-total-label">Total:</span>
+                            <span id="trTotalPriceDisplay">PKR {{ product.default_variant.price }}</span>
+                        </div>
+                        
                         <div class="tr-product-description">
                             {{ product.short_description|default:product.description|truncatewords:25 }}
                         </div>
                         
-                        <!-- Meta -->
                         <div class="tr-meta-grid">
                             <div class="tr-meta-item">
                                 <span class="tr-meta-label">Category</span>
@@ -759,7 +639,6 @@
                             {% endwith %}
                         </div>
                         
-                        <!-- Quantity -->
                         <div class="tr-quantity">
                             <button class="tr-qty-btn" onclick="trUpdateQty(-1)">
                                 <i class="fas fa-minus"></i>
@@ -770,10 +649,19 @@
                             </button>
                         </div>
                         
-                        <!-- WhatsApp Button -->
-                        <a href="#" class="tr-btn-whatsapp" id="trWhatsappBtn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
-                        </a>
+                        <div class="tr-actions">
+                            <form method="POST" action="{% url 'cart:add' product.default_variant.id %}" id="trAddToCartForm">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" id="trCartQuantity" value="1">
+                                <button type="submit" class="tr-btn-addbag">
+                                    <i class="fas fa-shopping-bag"></i> Add to Bag
+                                </button>
+                            </form>
+                            
+                            <a href="#" class="tr-btn-whatsapp" id="trWhatsappBtn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                            </a>
+                        </div>
                         
                         <div class="tr-delivery-note">
                             <i class="fas fa-clock"></i> Delivery within 2-3 business days
@@ -781,9 +669,6 @@
                     </div>
                 </div>
                 
-                <!-- ======================================== -->
-                <!-- TABS -->
-                <!-- ======================================== -->
                 <div class="tr-tabs">
                     <div class="tr-tab-nav">
                         <button class="tr-tab-btn active" data-tab="tab-description">
@@ -842,17 +727,26 @@
                 </div>
             </div>
             
-            <!-- ======================================== -->
-            <!-- RELATED PRODUCTS -->
-            <!-- ======================================== -->
+            <!-- ==========================================================
+                 RELATED PRODUCTS - CART STYLE
+            ========================================================== -->
             {% if related_products %}
             <div class="tr-related">
-                <h3><i class="fas fa-boxes" style="margin-right:8px; opacity:0.5;"></i> You May Also Like</h3>
+                <h3 class="tr-related-title">YOU MAY ALSO LIKE</h3>
                 <div class="tr-related-grid">
                     {% for related in related_products|slice:":4" %}
                     <div class="tr-related-item">
-                        <a href="{% url 'products:product-detail' slug=related.slug %}">
-                            <div class="tr-related-image-wrap">
+                        <a href="{% url 'products:product-detail' slug=related.slug %}" class="text-decoration-none">
+                            <div class="tr-related-img-wrap">
+                                <!-- Red Badge -->
+                                {% with related.default_variant as variant %}
+                                    {% if variant and variant.compare_price %}
+                                        {% with discount=variant.compare_price|add:"0"|add:variant.price|floatformat:0 %}
+                                            <div class="tr-related-badge">BEST SELLER</div>
+                                        {% endwith %}
+                                    {% endif %}
+                                {% endwith %}
+                                
                                 {% with related.default_variant as variant %}
                                     {% if variant and variant.images.all %}
                                         <img src="{{ variant.images.first.image.url }}" alt="{{ related.name }}">
@@ -861,17 +755,21 @@
                                     {% endif %}
                                 {% endwith %}
                             </div>
-                        </a>
-                        <div class="tr-related-name">{{ related.name|truncatechars:25 }}</div>
-                        <div class="tr-related-price">
-                            {% with related.default_variant as variant %}
-                                {% if variant %}
-                                    PKR {{ variant.price }}
-                                {% endif %}
-                            {% endwith %}
-                        </div>
-                        <a href="{% url 'products:product-detail' slug=related.slug %}" class="tr-related-link">
-                            View Details
+                            
+                            <div class="tr-related-details">
+                                <div class="tr-related-name">{{ related.name|truncatechars:25 }}</div>
+                                <div class="tr-related-price">
+                                    {% with related.default_variant as variant %}
+                                        {% if variant %}
+                                            <span class="tr-related-curr">PKR {{ variant.price }}</span>
+                                            {% if variant.compare_price %}
+                                                <span class="tr-related-old">PKR {{ variant.compare_price }}</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="tr-related-btn">VIEW PRODUCT</div>
+                            </div>
                         </a>
                     </div>
                     {% endfor %}
@@ -890,75 +788,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ==========================================================
-    // IMAGE ZOOM - SIDE VIEW
-    // ==========================================================
-    const mainImage = document.getElementById('trMainImage');
-    const imageMain = document.getElementById('trImageMain');
-    const lens = document.getElementById('trZoomLens');
-    const result = document.getElementById('trZoomResult');
-    const placeholder = document.getElementById('trZoomPlaceholder');
-    
-    if (mainImage && imageMain && lens && result) {
-        // Only enable zoom on desktop (width > 992px)
-        const isDesktop = window.innerWidth >= 992;
-        
-        if (isDesktop) {
-            // Show result on hover
-            imageMain.addEventListener('mouseenter', function() {
-                imageMain.classList.add('zoomed');
-                result.classList.add('visible');
-                if (placeholder) placeholder.style.display = 'none';
-            });
-            
-            imageMain.addEventListener('mouseleave', function() {
-                imageMain.classList.remove('zoomed');
-                result.classList.remove('visible');
-                if (placeholder) placeholder.style.display = 'flex';
-            });
-            
-            imageMain.addEventListener('mousemove', function(e) {
-                const rect = imageMain.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Calculate lens position
-                const lensWidth = lens.offsetWidth || 120;
-                const lensHeight = lens.offsetHeight || 120;
-                const lensX = Math.min(Math.max(x - lensWidth / 2, 0), rect.width - lensWidth);
-                const lensY = Math.min(Math.max(y - lensHeight / 2, 0), rect.height - lensHeight);
-                
-                lens.style.left = lensX + 'px';
-                lens.style.top = lensY + 'px';
-                
-                // Calculate zoom position
-                const naturalWidth = mainImage.naturalWidth || mainImage.width || 800;
-                const naturalHeight = mainImage.naturalHeight || mainImage.height || 800;
-                const ratioX = naturalWidth / rect.width;
-                const ratioY = naturalHeight / rect.height;
-                
-                // Set background image on result
-                result.style.backgroundImage = 'url(' + mainImage.src + ')';
-                result.style.backgroundSize = (rect.width * ratioX) + 'px ' + (rect.height * ratioY) + 'px';
-                result.style.backgroundPosition = '-' + (lensX * ratioX) + 'px -' + (lensY * ratioY) + 'px';
-                result.style.backgroundRepeat = 'no-repeat';
-            });
-        }
-    }
-    
-    // ==========================================================
     // CHANGE MAIN IMAGE
     // ==========================================================
     window.trChangeImage = function(src, element) {
         const mainImg = document.getElementById('trMainImage');
         mainImg.src = src;
         
-        // Update zoom result background
-        const result = document.getElementById('trZoomResult');
-        if (result) {
-            result.style.backgroundImage = 'url(' + src + ')';
-        }
-        
-        // Update active state
         document.querySelectorAll('.tr-thumbnails img').forEach(img => {
             img.classList.remove('active');
         });
@@ -966,7 +801,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // ==========================================================
-    // QUANTITY
+    // QUANTITY & PRICE UPDATE
     // ==========================================================
     window.trUpdateQty = function(change) {
         const input = document.getElementById('trQtyInput');
@@ -974,8 +809,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (value < 1) value = 1;
         if (value > 99) value = 99;
         input.value = value;
+        
+        document.getElementById('trCartQuantity').value = value;
+        
+        trUpdateTotalPrice(value);
         trUpdateWhatsApp();
     };
+    
+    // ==========================================================
+    // UPDATE TOTAL PRICE
+    // ==========================================================
+    function trUpdateTotalPrice(quantity) {
+        const totalDisplay = document.getElementById('trTotalPriceDisplay');
+        {% with product.default_variant as variant %}
+            const unitPrice = {{ variant.price|default:0 }};
+        {% endwith %}
+        const total = unitPrice * quantity;
+        totalDisplay.textContent = 'PKR ' + total.toLocaleString();
+    }
     
     // ==========================================================
     // WHATSAPP LINK
@@ -998,7 +849,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.href = 'https://wa.me/' + cleanNumber + '?text=' + encodedMessage;
     }
     
-    // Initial WhatsApp link
     trUpdateWhatsApp();
     
     // ==========================================================
@@ -1007,36 +857,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabBtns = document.querySelectorAll('.tr-tab-btn');
     tabBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
-            // Remove active from all
             tabBtns.forEach(function(b) { b.classList.remove('active'); });
             document.querySelectorAll('.tr-tab-pane').forEach(function(p) { p.classList.remove('active'); });
             
-            // Add active to clicked
             this.classList.add('active');
             const target = document.getElementById(this.getAttribute('data-tab'));
             if (target) target.classList.add('active');
         });
-    });
-    
-    // ==========================================================
-    // RESPONSIVE ZOOM HANDLER
-    // ==========================================================
-    window.addEventListener('resize', function() {
-        const isDesktop = window.innerWidth >= 992;
-        const imageMain = document.getElementById('trImageMain');
-        const result = document.getElementById('trZoomResult');
-        const placeholder = document.getElementById('trZoomPlaceholder');
-        
-        if (!isDesktop) {
-            if (imageMain) imageMain.classList.remove('zoomed');
-            if (result) {
-                result.classList.remove('visible');
-                result.style.display = 'none';
-            }
-            if (placeholder) placeholder.style.display = 'flex';
-        } else {
-            if (result) result.style.display = 'block';
-        }
     });
 });
 </script>
