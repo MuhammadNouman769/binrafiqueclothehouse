@@ -1,2031 +1,506 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}{{ product.name }} | Tahir Rafique Clothe House{% endblock %}
-
 {% block content %}
-
 <style>
 /* ==========================================================
    PRODUCT DETAIL - TAHIR RAFIQUE CLOTHE HOUSE
    Premium Responsive Design + Desktop Hover Zoom
 ========================================================== */
-
-.tr-product-wrapper {
-    padding: 50px 0 70px;
-    background: #faf8f6;
-    min-height: 70vh;
-}
-
-.tr-product-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
+.tr-product-wrapper { padding: 50px 0 70px; background: #faf8f6; min-height: 70vh; }
+.tr-product-container { max-width: 1200px; margin: 0 auto; }
 /* ==========================================================
    PRODUCT MAIN LAYOUT
 ========================================================== */
-
-.tr-product-card {
-    background: #faf8f6;
-    border-radius: 20px;
-    padding: 35px;
-    
-}
-
+.tr-product-card { background: #faf8f6; border-radius: 20px; padding: 35px; }
 /* ==========================================================
    IMAGE ZOOM AREA
 ========================================================== */
-
-.tr-image-zoom-area {
-    position: relative;
-    width: 100%;
-}
-
+.tr-image-zoom-area { position: relative; width: 100%; }
 /* Main Image Wrapper */
-
-.tr-image-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 14px;
-    background: #faf8f6;
-    height: 520px;
-
-}
-
+.tr-image-wrapper { position: relative; overflow: hidden; border-radius: 14px; background: #faf8f6; height: 520px; }
 /* Main Image */
-
-.tr-image-main {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    cursor: crosshair;
-}
-
-.tr-image-main img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    transition: opacity 0.2s ease;
-}
-
+.tr-image-main { width: 100%; height: 100%; overflow: hidden; cursor: crosshair; }
+.tr-image-main img { width: 100%; height: 100%; object-fit: contain; display: block; transition: opacity 0.2s ease; }
 /* ==========================================================
    ZOOM LENS
 ========================================================== */
-
-.tr-zoom-lens {
-    position: absolute;
-    display: none;
-    width: 140px;
-    height: 140px;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 0.25);
-    pointer-events: none;
-    z-index: 10;
-}
-
+.tr-zoom-lens { position: absolute; display: none; width: 140px; height: 140px; border: 1px solid rgba(0, 0, 0, 0.25); background: rgba(255, 255, 255, 0.25); pointer-events: none; z-index: 10; }
 /* ==========================================================
    SEPARATE ZOOM PREVIEW
 ========================================================== */
-
-.tr-zoom-preview {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 20px);
-
-    width: 450px;
-    height: 520px;
-
-    background-color: #ffffff;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 200%;
-
-    border: 1px solid #e5e1dc;
-    border-radius: 12px;
-
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
-
-    display: none;
-    z-index: 999;
-
-    overflow: hidden;
-}
-
+.tr-zoom-preview { position: absolute; top: 0; left: calc(100% + 20px); width: 450px; height: 520px; background-color: #ffffff; background-repeat: no-repeat; background-position: center; background-size: 200%; border: 1px solid #e5e1dc; border-radius: 12px; box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12); display: none; z-index: 999; overflow: hidden; }
 /* Show zoom preview */
-
-.tr-image-zoom-area.zoom-active .tr-zoom-preview {
-    display: block;
-}
-
-.tr-image-zoom-area.zoom-active .tr-zoom-lens {
-    display: block;
-}
-
+.tr-image-zoom-area.zoom-active .tr-zoom-preview { display: block; }
+.tr-image-zoom-area.zoom-active .tr-zoom-lens { display: block; }
 /* ==========================================================
    THUMBNAILS
 ========================================================== */
-
-.tr-thumbnails {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    overflow-x: auto;
-    padding-bottom: 5px;
-    scrollbar-width: thin;
-}
-
-.tr-thumbnails img {
-    width: 88px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 6px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.tr-thumbnails img:hover {
-    border-color: #aaa;
-}
-
-.tr-thumbnails img.active {
-    border-color: #111;
-}
-
+.tr-thumbnails { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: thin; }
+.tr-thumbnails img { width: 88px; height: 120px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; flex-shrink: 0; }
+.tr-thumbnails img:hover { border-color: #aaa; }
+.tr-thumbnails img.active { border-color: #111; }
 /* ==========================================================
    PRODUCT INFO
 ========================================================== */
-
-.tr-product-name {
-    font-size: 25px;
-    font-weight: 600;
-    color: #111;
-    margin: 0 0 6px;
-    letter-spacing: -0.5px;
-}
-
-.tr-product-category {
-    font-size: 13px;
-    color: #999;
-    margin-bottom: 12px;
-}
-
-.tr-product-category i {
-    margin-right: 4px;
-}
-
-.tr-product-price {
-    font-size: 27px;
-    font-weight: 700;
-    color: #111;
-}
-
-.tr-product-price .tr-original-price {
-    font-size: 16px;
-    color: #d01818;
-    text-decoration: line-through;
-    font-weight: 400;
-    margin-left: 10px;
-}
-
+.tr-product-name { font-size: 25px; font-weight: 600; color: #111; margin: 0 0 6px; letter-spacing: -0.5px; }
+.tr-product-category { font-size: 13px; color: #999; margin-bottom: 12px; }
+.tr-product-category i { margin-right: 4px; }
+.tr-product-price { font-size: 27px; font-weight: 700; color: #111; }
+.tr-product-price .tr-original-price { font-size: 16px; color: #d01818; text-decoration: line-through; font-weight: 400; margin-left: 10px; }
 /* ==========================================================
    TOTAL PRICE
 ========================================================== */
-
-.tr-total-price {
-    font-size: 20px;
-    font-weight: 700;
-    color: #111;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.tr-total-price .tr-total-label {
-    color: #999;
-    font-weight: 400;
-    font-size: 16px;
-}
-
+.tr-total-price { font-size: 20px; font-weight: 700; color: #111; margin-top: 10px; display: flex; align-items: center; gap: 8px; }
+.tr-total-price .tr-total-label { color: #999; font-weight: 400; font-size: 16px; }
 /* ==========================================================
    RATING
 ========================================================== */
-
-.tr-product-rating {
-    color: #f5a623;
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-.tr-product-rating span {
-    color: #999;
-    margin-left: 6px;
-}
-
+.tr-product-rating { color: #f5a623; font-size: 14px; margin-bottom: 12px; }
+.tr-product-rating span { color: #999; margin-left: 6px; }
 /* ==========================================================
    DESCRIPTION
 ========================================================== */
-
-.tr-product-description {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.8;
-    margin: 15px 0;
-}
-
+.tr-product-description { color: #666; font-size: 14px; line-height: 1.8; margin: 15px 0; }
 /* ==========================================================
    META GRID
 ========================================================== */
-
-.tr-meta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 20px;
-    background: #faf8f6;
-    padding: 16px 20px;
-    border-radius: 12px;
-    margin: 15px 0;
-}
-
-.tr-meta-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    border-bottom: 1px solid #ece9e4;
-}
-
-.tr-meta-item:last-child {
-    border-bottom: none;
-}
-
-.tr-meta-label {
-    color: #999;
-    font-size: 13px;
-}
-
-.tr-meta-value {
-    color: #111;
-    font-size: 13px;
-    font-weight: 500;
-}
-
+.tr-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; background: #faf8f6; padding: 16px 20px; border-radius: 12px; margin: 15px 0; }
+.tr-meta-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #ece9e4; }
+.tr-meta-item:last-child { border-bottom: none; }
+.tr-meta-label { color: #999; font-size: 13px; }
+.tr-meta-value { color: #111; font-size: 13px; font-weight: 500; }
 /* ==========================================================
    QUANTITY
 ========================================================== */
-
-.tr-quantity {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 18px 0 10px;
-}
-
-.tr-qty-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid #ddd8d2;
-    background: #ffffff;
-    color: #111;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tr-qty-btn:hover {
-    background: #111;
-    color: #ffffff;
-    border-color: #111;
-}
-
-.tr-qty-input {
-    width: 55px;
-    text-align: center;
-    border: 1px solid #ddd8d2;
-    border-radius: 8px;
-    padding: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    background: #faf8f6;
-}
-
+.tr-quantity { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; }
+.tr-qty-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #ddd8d2; background: #ffffff; color: #111; font-size: 16px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+.tr-qty-btn:hover { background: #111; color: #ffffff; border-color: #111; }
+.tr-qty-input { width: 55px; text-align: center; border: 1px solid #ddd8d2; border-radius: 8px; padding: 8px; font-size: 16px; font-weight: 600; background: #faf8f6; }
 /* ==========================================================
    BUTTONS
 ========================================================== */
-
-.tr-actions {
-    display: flex;
-    gap: 12px;
-    margin: 18px 0;
-    flex-wrap: wrap;
-}
-
-.tr-btn-addbag,
-.tr-btn-whatsapp {
-    flex: 1;
-    padding: 14px 25px;
-    border-radius: 50px;
-    font-weight: 600;
-    border: none;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-    font-size: 15px;
-    min-width: 160px;
-    cursor: pointer;
-}
-
-.tr-btn-addbag {
-    background: #111111;
-    color: #ffffff;
-}
-
-.tr-btn-addbag:hover {
-    background: #333333;
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.tr-btn-whatsapp {
-    background: #25D366;
-    color: #ffffff;
-}
-
-.tr-btn-whatsapp:hover {
-    background: #128C7E;
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-}
-
-.tr-btn-addbag i {
-    font-size: 18px;
-}
-
-.tr-btn-whatsapp i {
-    font-size: 20px;
-}
-
-.tr-delivery-note {
-    color: #999;
-    font-size: 12px;
-    margin-top: 8px;
-}
-
-.tr-delivery-note i {
-    margin-right: 4px;
-}
-
+.tr-actions { display: flex; gap: 12px; margin: 18px 0; flex-wrap: wrap; }
+.tr-btn-addbag, .tr-btn-whatsapp { flex: 1; padding: 14px 25px; border-radius: 50px; font-weight: 600; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 15px; min-width: 160px; cursor: pointer; }
+.tr-btn-addbag { background: #111111; color: #ffffff; }
+.tr-btn-addbag:hover { background: #333333; color: #ffffff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+.tr-btn-whatsapp { background: #25D366; color: #ffffff; }
+.tr-btn-whatsapp:hover { background: #128C7E; color: #ffffff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3); }
+.tr-btn-addbag i { font-size: 18px; }
+.tr-btn-whatsapp i { font-size: 20px; }
+.tr-delivery-note { color: #999; font-size: 12px; margin-top: 8px; }
+.tr-delivery-note i { margin-right: 4px; }
 /* ==========================================================
    TABS
 ========================================================== */
-
-.tr-tabs {
-    margin-top: 35px;
-    border-top: 1px solid #ece9e4;
-    padding-top: 25px;
-}
-
-.tr-tab-nav {
-    display: flex;
-    border-bottom: 1px solid #ece9e4;
-    margin-bottom: 20px;
-}
-
-.tr-tab-btn {
-    padding: 12px 24px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: #999;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tr-tab-btn:hover {
-    color: #111;
-}
-
-.tr-tab-btn.active {
-    color: #111;
-    border-bottom-color: #111;
-}
-
-.tr-tab-pane {
-    display: none;
-    padding: 10px 0;
-}
-
-.tr-tab-pane.active {
-    display: block;
-}
-
-.tr-tab-pane p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.8;
-    margin: 0;
-}
-
+.tr-tabs { margin-top: 35px; border-top: 1px solid #ece9e4; padding-top: 25px; }
+.tr-tab-nav { display: flex; border-bottom: 1px solid #ece9e4; margin-bottom: 20px; }
+.tr-tab-btn { padding: 12px 24px; background: transparent; border: none; border-bottom: 2px solid transparent; color: #999; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; }
+.tr-tab-btn:hover { color: #111; }
+.tr-tab-btn.active { color: #111; border-bottom-color: #111; }
+.tr-tab-pane { display: none; padding: 10px 0; }
+.tr-tab-pane.active { display: block; }
+.tr-tab-pane p { color: #666; font-size: 14px; line-height: 1.8; margin: 0; }
 /* ==========================================================
    RELATED PRODUCTS
 ========================================================== */
-
-.tr-related {
-    margin-top: 45px;
-}
-
-.tr-related-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 20px;
-}
-
-.tr-related-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.tr-related-item {
-    background: #ffffff;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.tr-related-item:hover {
-    transform: translateY(-3px);
-}
-
-.tr-related-img-wrap {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    background: #f2f2f2;
-    overflow: hidden;
-}
-
-.tr-related-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.tr-related-item:hover .tr-related-img-wrap img {
-    transform: scale(1.03);
-}
-
-.tr-related-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #cc0000;
-    color: #ffffff;
-    padding: 4px 12px;
-    font-size: 12px;
-    font-weight: 700;
-    z-index: 2;
-    border-radius: 2px;
-}
-
-.tr-related-details {
-    padding: 12px 0 0;
-}
-
-.tr-related-name {
-    font-size: 16px;
-    font-weight: 400;
-    color: #1a1a1a;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 5px;
-}
-
-.tr-related-price {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.tr-related-curr {
-    color: #cc0000 !important;
-}
-
-.tr-related-old {
-    color: #1a1a1a;
-    text-decoration: line-through;
-    font-weight: 400;
-    font-size: 14px;
-}
-
-.tr-related-btn {
-    display: block;
-    width: 100%;
-    border: 1px solid #111;
-    background: transparent;
-    padding: 10px 0;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
-    color: #111;
-    text-decoration: none;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-}
-
-.tr-related-btn:hover {
-    background: #111;
-    color: #fff;
-}
-
+.tr-related { margin-top: 45px; }
+.tr-related-title { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 20px; }
+.tr-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.tr-related-item { background: #ffffff; border: none; transition: all 0.3s ease; }
+.tr-related-item:hover { transform: translateY(-3px); }
+.tr-related-img-wrap { position: relative; width: 100%; height: 340px; background: #f2f2f2; overflow: hidden; }
+.tr-related-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.tr-related-item:hover .tr-related-img-wrap img { transform: scale(1.03); }
+.tr-related-badge { position: absolute; top: 12px; left: 12px; background: #cc0000; color: #ffffff; padding: 4px 12px; font-size: 12px; font-weight: 700; z-index: 2; border-radius: 2px; }
+.tr-related-details { padding: 12px 0 0; }
+.tr-related-name { font-size: 16px; font-weight: 400; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px; }
+.tr-related-price { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; }
+.tr-related-curr { color: #cc0000 !important; }
+.tr-related-old { color: #1a1a1a; text-decoration: line-through; font-weight: 400; font-size: 14px; }
+.tr-related-btn { display: block; width: 100%; border: 1px solid #111; background: transparent; padding: 10px 0; text-align: center; text-transform: uppercase; font-size: 13px; font-weight: 600; color: #111; text-decoration: none; margin-top: 15px; transition: all 0.3s ease; }
+.tr-related-btn:hover { background: #111; color: #fff; }
 /* ==========================================================
    RESPONSIVE - 1200px
 ========================================================== */
-
-@media (max-width: 1200px) {
-
-    .tr-product-wrapper {
-        padding: 40px 20px 60px;
-    }
-
-    .tr-product-card {
-        padding: 30px;
-    }
-
-    .tr-image-wrapper {
-        height: 450px;
-    }
-
-    .tr-zoom-preview {
-        width: 380px;
-        height: 450px;
-    }
-
-    .tr-related-img-wrap {
-        height: 280px;
-    }
-}
-
+@media (max-width: 1200px) { .tr-product-wrapper { padding: 40px 20px 60px; } .tr-product-card { padding: 30px; } .tr-image-wrapper { height: 450px; } .tr-zoom-preview { width: 380px; height: 450px; } .tr-related-img-wrap { height: 280px; } }
 /* ==========================================================
    RESPONSIVE - 1100px
 ========================================================== */
-
-@media (max-width: 1100px) {
-
-    .tr-zoom-preview {
-        width: 340px;
-        height: 450px;
-        left: calc(100% + 12px);
-    }
-
-    .tr-image-wrapper {
-        height: 430px;
-    }
-}
-
+@media (max-width: 1100px) { .tr-zoom-preview { width: 340px; height: 450px; left: calc(100% + 12px); } .tr-image-wrapper { height: 430px; } }
 /* ==========================================================
    RESPONSIVE - 992px
 ========================================================== */
-
-@media (max-width: 992px) {
-
-    .tr-product-wrapper {
-        padding: 35px 20px 50px;
-    }
-
-    .tr-product-card {
-        padding: 25px;
-    }
-
-    .tr-image-wrapper {
-        height: 420px;
-    }
-
-    /*
-       Hide separate zoom on tablet.
-       Bootstrap columns become stacked.
-    */
-
-    .tr-zoom-preview,
-    .tr-zoom-lens {
-        display: none !important;
-    }
-
-    .tr-image-main {
-        cursor: default;
-    }
-
-    .tr-actions {
-        flex-direction: column;
-    }
-
-    .tr-btn-addbag,
-    .tr-btn-whatsapp {
-        width: 100%;
-    }
-
-    .tr-related-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tr-related-img-wrap {
-        height: 300px;
-    }
-}
-
+@media (max-width: 992px) { .tr-product-wrapper { padding: 35px 20px 50px; } .tr-product-card { padding: 25px; } .tr-image-wrapper { height: 420px; } .tr-zoom-preview, .tr-zoom-lens { display: none !important; } .tr-image-main { cursor: default; } .tr-actions { flex-direction: column; } .tr-btn-addbag, .tr-btn-whatsapp { width: 100%; } .tr-related-grid { grid-template-columns: repeat(2, 1fr); } .tr-related-img-wrap { height: 300px; } }
 /* ==========================================================
    RESPONSIVE - 768px
 ========================================================== */
-
-@media (max-width: 768px) {
-
-    .tr-product-wrapper {
-        padding: 30px 15px 45px;
-    }
-
-    .tr-product-card {
-        padding: 20px 16px;
-        border-radius: 16px;
-    }
-
-    .tr-image-wrapper {
-        height: 400px;
-        border-radius: 12px;
-    }
-
-    .tr-image-main img {
-        object-fit: contain;
-    }
-
-    .tr-product-name {
-        font-size: 21px;
-    }
-
-    .tr-product-price {
-        font-size: 23px;
-    }
-
-    .tr-meta-grid {
-        grid-template-columns: 1fr;
-        padding: 14px 16px;
-    }
-
-    .tr-tab-nav {
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .tr-tab-btn {
-        padding: 10px 16px;
-        font-size: 13px;
-    }
-
-    .tr-thumbnails img {
-        width: 70px;
-        height: 80px;
-    }
-
-    .tr-related-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    .tr-related-img-wrap {
-        height: 250px;
-    }
-}
-
+@media (max-width: 768px) { .tr-product-wrapper { padding: 30px 15px 45px; } .tr-product-card { padding: 20px 16px; border-radius: 16px; } .tr-image-wrapper { height: 400px; border-radius: 12px; } .tr-image-main img { object-fit: contain; } .tr-product-name { font-size: 21px; } .tr-product-price { font-size: 23px; } .tr-meta-grid { grid-template-columns: 1fr; padding: 14px 16px; } .tr-tab-nav { overflow-x: auto; white-space: nowrap; } .tr-tab-btn { padding: 10px 16px; font-size: 13px; } .tr-thumbnails img { width: 70px; height: 80px; } .tr-related-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } .tr-related-img-wrap { height: 250px; } }
 /* ==========================================================
    RESPONSIVE - 576px
 ========================================================== */
-
-@media (max-width: 576px) {
-
-    .tr-product-wrapper {
-        padding: 20px 10px 40px;
-    }
-
-    .tr-product-card {
-        padding: 15px 10px;
-        border-radius: 12px;
-    }
-
-    .tr-image-wrapper {
-        height: 360px;
-        border-radius: 10px;
-    }
-
-    .tr-product-name {
-        font-size: 19px;
-    }
-
-    .tr-product-category {
-        font-size: 12px;
-    }
-
-    .tr-product-price {
-        font-size: 21px;
-    }
-
-    .tr-original-price {
-        font-size: 14px !important;
-    }
-
-    .tr-total-price {
-        font-size: 18px;
-    }
-
-    .tr-product-description {
-        font-size: 13px;
-    }
-
-    .tr-quantity {
-        justify-content: center;
-    }
-
-    .tr-actions {
-        gap: 8px;
-    }
-
-    .tr-btn-addbag,
-    .tr-btn-whatsapp {
-        min-width: 100%;
-        padding: 13px 20px;
-    }
-
-    .tr-thumbnails {
-        gap: 8px;
-    }
-
-    .tr-thumbnails img {
-        width: 65px;
-        height: 75px;
-    }
-
-    .tr-related {
-        margin-top: 30px;
-    }
-
-    .tr-related-title {
-        font-size: 18px;
-    }
-
-    .tr-related-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    .tr-related-img-wrap {
-        height: 210px;
-    }
-
-    .tr-related-name {
-        font-size: 12px;
-        min-height: 34px;
-    }
-
-    .tr-related-price {
-        font-size: 13px;
-        gap: 6px;
-    }
-
-    .tr-related-old {
-        font-size: 12px;
-    }
-
-    .tr-related-btn {
-        font-size: 11px;
-        padding: 8px 0;
-    }
-}
-
+@media (max-width: 576px) { .tr-product-wrapper { padding: 20px 10px 40px; } .tr-product-card { padding: 15px 10px; border-radius: 12px; } .tr-image-wrapper { height: 360px; border-radius: 10px; } .tr-product-name { font-size: 19px; } .tr-product-category { font-size: 12px; } .tr-product-price { font-size: 21px; } .tr-original-price { font-size: 14px !important; } .tr-total-price { font-size: 18px; } .tr-product-description { font-size: 13px; } .tr-quantity { justify-content: center; } .tr-actions { gap: 8px; } .tr-btn-addbag, .tr-btn-whatsapp { min-width: 100%; padding: 13px 20px; } .tr-thumbnails { gap: 8px; } .tr-thumbnails img { width: 65px; height: 75px; } .tr-related { margin-top: 30px; } .tr-related-title { font-size: 18px; } .tr-related-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .tr-related-img-wrap { height: 210px; } .tr-related-name { font-size: 12px; min-height: 34px; } .tr-related-price { font-size: 13px; gap: 6px; } .tr-related-old { font-size: 12px; } .tr-related-btn { font-size: 11px; padding: 8px 0; } }
 /* ==========================================================
    RESPONSIVE - 480px
 ========================================================== */
-
-@media (max-width: 480px) {
-
-    .tr-product-wrapper {
-        padding: 15px 8px 35px;
-    }
-
-    .tr-product-card {
-        padding: 12px 8px;
-    }
-
-    .tr-image-wrapper {
-        height: 300px;
-    }
-
-    .tr-product-name {
-        font-size: 17px;
-    }
-
-    .tr-product-price {
-        font-size: 19px;
-    }
-
-    .tr-total-price {
-        font-size: 17px;
-    }
-
-    .tr-total-price .tr-total-label {
-        font-size: 14px;
-    }
-
-    .tr-meta-grid {
-        padding: 12px;
-    }
-
-    .tr-meta-label,
-    .tr-meta-value {
-        font-size: 12px;
-    }
-
-    .tr-tab-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-
-    .tr-tab-pane p {
-        font-size: 13px;
-    }
-
-    .tr-related-img-wrap {
-        height: 185px;
-    }
-
-    .tr-related-badge {
-        top: 8px;
-        left: 8px;
-        padding: 3px 7px;
-        font-size: 10px;
-    }
-}
-
+@media (max-width: 480px) { .tr-product-wrapper { padding: 15px 8px 35px; } .tr-product-card { padding: 12px 8px; } .tr-image-wrapper { height: 300px; } .tr-product-name { font-size: 17px; } .tr-product-price { font-size: 19px; } .tr-total-price { font-size: 17px; } .tr-total-price .tr-total-label { font-size: 14px; } .tr-meta-grid { padding: 12px; } .tr-meta-label, .tr-meta-value { font-size: 12px; } .tr-tab-btn { padding: 8px 12px; font-size: 12px; } .tr-tab-pane p { font-size: 13px; } .tr-related-img-wrap { height: 185px; } .tr-related-badge { top: 8px; left: 8px; padding: 3px 7px; font-size: 10px; } }
 /* ==========================================================
    RESPONSIVE - 375px
 ========================================================== */
-
-@media (max-width: 375px) {
-
-    .tr-product-wrapper {
-        padding: 12px 6px 30px;
-    }
-
-    .tr-product-card {
-        padding: 10px 6px;
-        border-radius: 10px;
-    }
-
-    .tr-image-wrapper {
-        height: 270px;
-        border-radius: 8px;
-    }
-
-    .tr-product-name {
-        font-size: 16px;
-    }
-
-    .tr-product-category {
-        font-size: 11px;
-    }
-
-    .tr-product-price {
-        font-size: 18px;
-    }
-
-    .tr-product-price .tr-original-price {
-        font-size: 12px !important;
-        margin-left: 5px;
-    }
-
-    .tr-total-price {
-        font-size: 16px;
-    }
-
-    .tr-total-price .tr-total-label {
-        font-size: 13px;
-    }
-
-    .tr-product-description {
-        font-size: 12px;
-        line-height: 1.7;
-    }
-
-    .tr-meta-grid {
-        padding: 10px;
-        margin: 10px 0;
-    }
-
-    .tr-meta-item {
-        padding: 4px 0;
-    }
-
-    .tr-meta-label,
-    .tr-meta-value {
-        font-size: 11px;
-    }
-
-    .tr-qty-btn {
-        width: 34px;
-        height: 34px;
-    }
-
-    .tr-qty-input {
-        width: 48px;
-        padding: 6px;
-        font-size: 14px;
-    }
-
-    .tr-btn-addbag,
-    .tr-btn-whatsapp {
-        font-size: 13px;
-        padding: 12px 15px;
-    }
-
-    .tr-thumbnails img {
-        width: 58px;
-        height: 65px;
-    }
-
-    .tr-tabs {
-        margin-top: 25px;
-        padding-top: 18px;
-    }
-
-    .tr-tab-btn {
-        padding: 8px 9px;
-        font-size: 11px;
-    }
-
-    .tr-related-title {
-        font-size: 16px;
-    }
-
-    .tr-related-img-wrap {
-        height: 165px;
-    }
-
-    .tr-related-name {
-        font-size: 11px;
-    }
-
-    .tr-related-price {
-        font-size: 11px;
-    }
-
-    .tr-related-old {
-        font-size: 10px;
-    }
-
-    .tr-related-btn {
-        font-size: 10px;
-        margin-top: 8px;
-        padding: 7px 0;
-    }
-}
-
+@media (max-width: 375px) { .tr-product-wrapper { padding: 12px 6px 30px; } .tr-product-card { padding: 10px 6px; border-radius: 10px; } .tr-image-wrapper { height: 270px; border-radius: 8px; } .tr-product-name { font-size: 16px; } .tr-product-category { font-size: 11px; } .tr-product-price { font-size: 18px; } .tr-product-price .tr-original-price { font-size: 12px !important; margin-left: 5px; } .tr-total-price { font-size: 16px; } .tr-total-price .tr-total-label { font-size: 13px; } .tr-product-description { font-size: 12px; line-height: 1.7; } .tr-meta-grid { padding: 10px; margin: 10px 0; } .tr-meta-item { padding: 4px 0; } .tr-meta-label, .tr-meta-value { font-size: 11px; } .tr-qty-btn { width: 34px; height: 34px; } .tr-qty-input { width: 48px; padding: 6px; font-size: 14px; } .tr-btn-addbag, .tr-btn-whatsapp { font-size: 13px; padding: 12px 15px; } .tr-thumbnails img { width: 58px; height: 65px; } .tr-tabs { margin-top: 25px; padding-top: 18px; } .tr-tab-btn { padding: 8px 9px; font-size: 11px; } .tr-related-title { font-size: 16px; } .tr-related-img-wrap { height: 165px; } .tr-related-name { font-size: 11px; } .tr-related-price { font-size: 11px; } .tr-related-old { font-size: 10px; } .tr-related-btn { font-size: 10px; margin-top: 8px; padding: 7px 0; } }
 /* ==========================================================
    TOUCH DEVICES
 ========================================================== */
-
-@media (hover: none) and (pointer: coarse) {
-
-    .tr-zoom-preview,
-    .tr-zoom-lens {
-        display: none !important;
-    }
-
-    .tr-image-main {
-        cursor: default;
-    }
-}
+@media (hover: none) and (pointer: coarse) { .tr-zoom-preview, .tr-zoom-lens { display: none !important; } .tr-image-main { cursor: default; } }
 </style>
-
-
 <div class="tr-product-wrapper">
-
     <div class="container">
-
         <div class="tr-product-container">
-
-            <!-- ==================================================
-                 PRODUCT MAIN
-            ================================================== -->
-
+            <!-- ================================================== PRODUCT MAIN ================================================== -->
             <div class="tr-product-card">
-
                 <div class="row g-4">
-
-                    <!-- ==================================================
-                         PRODUCT IMAGES
-                    ================================================== -->
-
+                    <!-- ================================================== PRODUCT IMAGES ================================================== -->
                     <div class="col-lg-6">
-
                         <div class="tr-image-zoom-area" id="trImageZoomArea">
-
                             <!-- Main Image -->
-
                             <div class="tr-image-wrapper" id="trImageWrapper">
-
                                 <div class="tr-image-main" id="trImageMain">
-
                                     {% with product.default_variant as variant %}
-
                                         {% if variant and variant.images.all %}
-
-                                            <img
-                                                src="{{ variant.images.first.image.url }}"
-                                                id="trMainImage"
-                                                alt="{{ product.name }}"
-                                            >
-
+                                            <img src="{{ variant.images.first.image.url }}" id="trMainImage" alt="{{ product.name }}">
                                         {% else %}
-
-                                            <img
-                                                src="{% static 'img/default-product.jpg' %}"
-                                                id="trMainImage"
-                                                alt="{{ product.name }}"
-                                            >
-
+                                            <img src="{% static 'img/default-product.jpg' %}" id="trMainImage" alt="{{ product.name }}">
                                         {% endif %}
-
                                     {% endwith %}
-
                                 </div>
-
                                 <!-- Zoom Lens -->
-
                                 <div class="tr-zoom-lens" id="trZoomLens"></div>
-
                             </div>
-
-
-                            <!-- ==================================================
-                                 SEPARATE ZOOM PREVIEW
-                            ================================================== -->
-
-                            <div
-                                class="tr-zoom-preview"
-                                id="trZoomPreview"
-                            ></div>
-
+                            <!-- ================================================== SEPARATE ZOOM PREVIEW ================================================== -->
+                            <div class="tr-zoom-preview" id="trZoomPreview"></div>
                         </div>
-
-
-                        <!-- ==================================================
-                             THUMBNAILS
-                        ================================================== -->
-
+                        <!-- ================================================== THUMBNAILS ================================================== -->
                         <div class="tr-thumbnails" id="trThumbnails">
-
                             {% with product.default_variant as variant %}
-
                                 {% if variant %}
-
                                     {% for image in variant.images.all %}
-
-                                        <img
-                                            src="{{ image.image.url }}"
-                                            alt="{{ product.name }}"
-                                            class="{% if forloop.first %}active{% endif %}"
-                                            onclick="trChangeImage(this.src, this)"
-                                        >
-
+                                        <img src="{{ image.image.url }}" alt="{{ product.name }}" class="{% if forloop.first %}active{% endif %}" onclick="trChangeImage(this.src, this)">
                                     {% endfor %}
-
                                 {% endif %}
-
                             {% endwith %}
-
                         </div>
-
                     </div>
-
-
-                    <!-- ==================================================
-                         PRODUCT INFORMATION
-                    ================================================== -->
-
+                    <!-- ================================================== PRODUCT INFORMATION ================================================== -->
                     <div class="col-lg-6">
-
-                        <h1 class="tr-product-name">
-                            {{ product.name }}
-                        </h1>
-
-
+                        <h1 class="tr-product-name">{{ product.name }}</h1>
                         <div class="tr-product-category">
-
                             <i class="fas fa-tag"></i>
-
                             {{ product.category.title }}
-
                             {% if product.brand %}
-
                                 | <i class="fas fa-building"></i>
                                 {{ product.brand }}
-
                             {% endif %}
-
                         </div>
-
-
                         <!-- Rating -->
-
                         <div class="tr-product-rating">
-
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
-
                             <span>(4.5/5)</span>
-
                         </div>
-
-
                         <!-- Price -->
-
                         <div class="tr-product-price">
-
                             {% with product.default_variant as variant %}
-
                                 {% if variant %}
-
                                     PKR {{ variant.price }}
-
                                     {% if variant.compare_price %}
-
-                                        <span class="tr-original-price">
-                                            PKR {{ variant.compare_price }}
-                                        </span>
-
+                                        <span class="tr-original-price">PKR {{ variant.compare_price }}</span>
                                     {% endif %}
-
                                 {% endif %}
-
                             {% endwith %}
-
                         </div>
-
-
                         <!-- Total -->
-
                         <div class="tr-total-price">
-
-                            <span class="tr-total-label">
-                                Total:
-                            </span>
-
-                            <span id="trTotalPriceDisplay">
-                                PKR {{ product.default_variant.price }}
-                            </span>
-
+                            <span class="tr-total-label">Total:</span>
+                            <span id="trTotalPriceDisplay">PKR {{ product.default_variant.price }}</span>
                         </div>
-
-
                         <!-- Description -->
-
                         <div class="tr-product-description">
-
                             {{ product.short_description|default:product.description|truncatewords:25 }}
-
                         </div>
-
-
                         <!-- Meta -->
-
                         <div class="tr-meta-grid">
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Category
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    {{ product.category.title }}
-                                </span>
-
+                                <span class="tr-meta-label">Category</span>
+                                <span class="tr-meta-value">{{ product.category.title }}</span>
                             </div>
-
-
                             {% if product.brand %}
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Brand
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    {{ product.brand }}
-                                </span>
-
+                                <span class="tr-meta-label">Brand</span>
+                                <span class="tr-meta-value">{{ product.brand }}</span>
                             </div>
-
                             {% endif %}
-
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Product ID
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    #{{ product.id|stringformat:"06d" }}
-                                </span>
-
+                                <span class="tr-meta-label">Product ID</span>
+                                <span class="tr-meta-value">#{{ product.id|stringformat:"06d" }}</span>
                             </div>
-
-
                             {% with product.default_variant as variant %}
-
                                 {% if variant %}
-
                                 <div class="tr-meta-item">
-
-                                    <span class="tr-meta-label">
-                                        Stock
-                                    </span>
-
-                                    <span class="tr-meta-value">
-                                        {{ variant.stock }} units
-                                    </span>
-
+                                    <span class="tr-meta-label">Stock</span>
+                                    <span class="tr-meta-value">{{ variant.stock }} units</span>
                                 </div>
-
                                 {% endif %}
-
                             {% endwith %}
-
                         </div>
-
-
                         <!-- Quantity -->
-
                         <div class="tr-quantity">
-
-                            <button
-                                type="button"
-                                class="tr-qty-btn"
-                                onclick="trUpdateQty(-1)"
-                            >
+                            <button type="button" class="tr-qty-btn" onclick="trUpdateQty(-1)">
                                 <i class="fas fa-minus"></i>
                             </button>
-
-                            <input
-                                type="text"
-                                class="tr-qty-input"
-                                id="trQtyInput"
-                                value="1"
-                                readonly
-                            >
-
-                            <button
-                                type="button"
-                                class="tr-qty-btn"
-                                onclick="trUpdateQty(1)"
-                            >
+                            <input type="text" class="tr-qty-input" id="trQtyInput" value="1" readonly>
+                            <button type="button" class="tr-qty-btn" onclick="trUpdateQty(1)">
                                 <i class="fas fa-plus"></i>
                             </button>
-
                         </div>
-
-
                         <!-- Actions -->
-
                         <div class="tr-actions">
-
-                            <form
-                                method="POST"
-                                action="{% url 'cart:add' product.default_variant.id %}"
-                                id="trAddToCartForm"
-                            >
-
+                            <form method="POST" action="{% url 'cart:add' product.default_variant.id %}" id="trAddToCartForm">
                                 {% csrf_token %}
-
-                                <input
-                                    type="hidden"
-                                    name="quantity"
-                                    id="trCartQuantity"
-                                    value="1"
-                                >
-
-                                <button
-                                    type="submit"
-                                    class="tr-btn-addbag"
-                                >
-
+                                <input type="hidden" name="quantity" id="trCartQuantity" value="1">
+                                <button type="submit" class="tr-btn-addbag">
                                     <i class="fas fa-shopping-bag"></i>
-
                                     Add to Bag
-
                                 </button>
-
                             </form>
-
-
-                            <a
-                                href="#"
-                                class="tr-btn-whatsapp"
-                                id="trWhatsappBtn"
-                                target="_blank"
-                            >
-
+                            <a href="#" class="tr-btn-whatsapp" id="trWhatsappBtn" target="_blank">
                                 <i class="fab fa-whatsapp"></i>
-
                                 Order on WhatsApp
-
                             </a>
-
                         </div>
-
-
                         <div class="tr-delivery-note">
-
                             <i class="fas fa-clock"></i>
-
                             Delivery within 2-3 business days
-
                         </div>
-
                     </div>
-
                 </div>
-
-
-                <!-- ==================================================
-                     TABS
-                ================================================== -->
-
+                <!-- ================================================== TABS ================================================== -->
                 <div class="tr-tabs">
-
                     <div class="tr-tab-nav">
-
-                        <button
-                            class="tr-tab-btn active"
-                            data-tab="tab-description"
-                        >
-
+                        <button class="tr-tab-btn active" data-tab="tab-description">
                             <i class="fas fa-info-circle"></i>
-
                             Description
-
                         </button>
-
-
-                        <button
-                            class="tr-tab-btn"
-                            data-tab="tab-specs"
-                        >
-
+                        <button class="tr-tab-btn" data-tab="tab-specs">
                             <i class="fas fa-list"></i>
-
                             Specifications
-
                         </button>
-
-
-                        <button
-                            class="tr-tab-btn"
-                            data-tab="tab-reviews"
-                        >
-
+                        <button class="tr-tab-btn" data-tab="tab-reviews">
                             <i class="fas fa-star"></i>
-
                             Reviews
-
                         </button>
-
                     </div>
-
-
-                    <div
-                        class="tr-tab-pane active"
-                        id="tab-description"
-                    >
-
-                        <p>
-                            {{ product.description|default:"No description available for this product." }}
-                        </p>
-
+                    <div class="tr-tab-pane active" id="tab-description">
+                        <p>{{ product.description|default:"No description available for this product." }}</p>
                     </div>
-
-
-                    <div
-                        class="tr-tab-pane"
-                        id="tab-specs"
-                    >
-
-                        <div
-                            class="tr-meta-grid"
-                            style="grid-template-columns: 1fr 1fr;"
-                        >
-
+                    <div class="tr-tab-pane" id="tab-specs">
+                        <div class="tr-meta-grid" style="grid-template-columns: 1fr 1fr;">
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Product Name
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    {{ product.name }}
-                                </span>
-
+                                <span class="tr-meta-label">Product Name</span>
+                                <span class="tr-meta-value">{{ product.name }}</span>
                             </div>
-
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Category
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    {{ product.category.title }}
-                                </span>
-
+                                <span class="tr-meta-label">Category</span>
+                                <span class="tr-meta-value">{{ product.category.title }}</span>
                             </div>
-
-
                             {% if product.brand %}
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Brand
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    {{ product.brand }}
-                                </span>
-
+                                <span class="tr-meta-label">Brand</span>
+                                <span class="tr-meta-value">{{ product.brand }}</span>
                             </div>
-
                             {% endif %}
-
-
                             <div class="tr-meta-item">
-
-                                <span class="tr-meta-label">
-                                    Product ID
-                                </span>
-
-                                <span class="tr-meta-value">
-                                    #{{ product.id|stringformat:"06d" }}
-                                </span>
-
+                                <span class="tr-meta-label">Product ID</span>
+                                <span class="tr-meta-value">#{{ product.id|stringformat:"06d" }}</span>
                             </div>
-
-
                             {% with product.default_variant as variant %}
-
                                 {% if variant %}
-
                                     <div class="tr-meta-item">
-
-                                        <span class="tr-meta-label">
-                                            Fabric
-                                        </span>
-
-                                        <span class="tr-meta-value">
-                                            {{ variant.fabric|default:"Premium Quality" }}
-                                        </span>
-
+                                        <span class="tr-meta-label">Fabric</span>
+                                        <span class="tr-meta-value">{{ variant.fabric|default:"Premium Quality" }}</span>
                                     </div>
-
-
                                     <div class="tr-meta-item">
-
-                                        <span class="tr-meta-label">
-                                            Season
-                                        </span>
-
-                                        <span class="tr-meta-value">
-                                            {{ variant.season|default:"All Seasons" }}
-                                        </span>
-
+                                        <span class="tr-meta-label">Season</span>
+                                        <span class="tr-meta-value">{{ variant.season|default:"All Seasons" }}</span>
                                     </div>
-
                                 {% endif %}
-
                             {% endwith %}
-
                         </div>
-
                     </div>
-
-
-                    <div
-                        class="tr-tab-pane"
-                        id="tab-reviews"
-                    >
-
-                        <p class="text-muted">
-                            No reviews yet. Be the first to review this product!
-                        </p>
-
+                    <div class="tr-tab-pane" id="tab-reviews">
+                        <p class="text-muted">No reviews yet. Be the first to review this product!</p>
                     </div>
-
                 </div>
-
-
-                <!-- ==================================================
-                     RELATED PRODUCTS
-                ================================================== -->
-
+                <!-- ================================================== RELATED PRODUCTS ================================================== -->
                 {% if related_products %}
-
                 <div class="tr-related">
-
-                    <h3 class="tr-related-title">
-                        YOU MAY ALSO LIKE
-                    </h3>
-
-
+                    <h3 class="tr-related-title">YOU MAY ALSO LIKE</h3>
                     <div class="tr-related-grid">
-
                         {% for related in related_products|slice:":4" %}
-
                         <div class="tr-related-item">
-
-                            <a
-                                href="{% url 'products:product-detail' slug=related.slug %}"
-                                class="text-decoration-none"
-                            >
-
+                            <a href="{% url 'products:product-detail' slug=related.slug %}" class="text-decoration-none">
                                 <div class="tr-related-img-wrap">
-
                                     {% with related.default_variant as variant %}
-
                                         {% if variant and variant.compare_price %}
-
-                                            <div class="tr-related-badge">
-                                                BEST SELLER
-                                            </div>
-
+                                            <div class="tr-related-badge">BEST SELLER</div>
                                         {% endif %}
-
                                     {% endwith %}
-
-
                                     {% with related.default_variant as variant %}
-
                                         {% if variant and variant.images.all %}
-
-                                            <img
-                                                src="{{ variant.images.first.image.url }}"
-                                                alt="{{ related.name }}"
-                                            >
-
+                                            <img src="{{ variant.images.first.image.url }}" alt="{{ related.name }}">
                                         {% else %}
-
-                                            <img
-                                                src="{% static 'img/default-product.jpg' %}"
-                                                alt="{{ related.name }}"
-                                            >
-
+                                            <img src="{% static 'img/default-product.jpg' %}" alt="{{ related.name }}">
                                         {% endif %}
-
                                     {% endwith %}
-
                                 </div>
-
-
                                 <div class="tr-related-details">
-
-                                    <div class="tr-related-name">
-                                        {{ related.name|truncatechars:25 }}
-                                    </div>
-
-
+                                    <div class="tr-related-name">{{ related.name|truncatechars:25 }}</div>
                                     <div class="tr-related-price">
-
                                         {% with related.default_variant as variant %}
-
                                             {% if variant %}
-
-                                                <span class="tr-related-curr">
-                                                    PKR {{ variant.price }}
-                                                </span>
-
+                                                <span class="tr-related-curr">PKR {{ variant.price }}</span>
                                                 {% if variant.compare_price %}
-
-                                                    <span class="tr-related-old">
-                                                        PKR {{ variant.compare_price }}
-                                                    </span>
-
+                                                    <span class="tr-related-old">PKR {{ variant.compare_price }}</span>
                                                 {% endif %}
-
                                             {% endif %}
-
                                         {% endwith %}
-
                                     </div>
-
-
-                                    <div class="tr-related-btn">
-                                        VIEW PRODUCT
-                                    </div>
-
+                                    <div class="tr-related-btn">VIEW PRODUCT</div>
                                 </div>
-
                             </a>
-
                         </div>
-
                         {% endfor %}
-
                     </div>
-
                 </div>
-
                 {% endif %}
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-
-
 <script>
-
 document.addEventListener('DOMContentLoaded', function () {
-
-    /* ==========================================================
-       IMAGE ZOOM
-    ========================================================== */
-
+    /* ========================================================== IMAGE ZOOM ========================================================== */
     const zoomArea = document.getElementById('trImageZoomArea');
     const imageWrapper = document.getElementById('trImageWrapper');
     const imageMain = document.getElementById('trImageMain');
     const mainImage = document.getElementById('trMainImage');
     const zoomPreview = document.getElementById('trZoomPreview');
     const zoomLens = document.getElementById('trZoomLens');
-
-
     function updateZoomImage() {
-
-        if (!mainImage || !zoomPreview) {
-            return;
-        }
-
-        zoomPreview.style.backgroundImage =
-            "url('" + mainImage.src + "')";
-
+        if (!mainImage || !zoomPreview) { return; }
+        zoomPreview.style.backgroundImage = "url('" + mainImage.src + "')";
     }
-
-
     updateZoomImage();
-
-
-    /* ==========================================================
-       DESKTOP MOUSE MOVE ZOOM
-    ========================================================== */
-
+    /* ========================================================== DESKTOP MOUSE MOVE ZOOM ========================================================== */
     if (imageMain) {
-
         imageMain.addEventListener('mouseenter', function () {
-
             if (window.innerWidth > 992) {
-
                 updateZoomImage();
-
                 zoomArea.classList.add('zoom-active');
-
             }
-
         });
-
-
         imageMain.addEventListener('mouseleave', function () {
-
             zoomArea.classList.remove('zoom-active');
-
         });
-
-
         imageMain.addEventListener('mousemove', function (event) {
-
-            if (window.innerWidth <= 992) {
-                return;
-            }
-
-
+            if (window.innerWidth <= 992) { return; }
             const rect = imageWrapper.getBoundingClientRect();
-
-
             let x = event.clientX - rect.left;
             let y = event.clientY - rect.top;
-
-
-            /* Keep mouse inside image */
-
             x = Math.max(0, Math.min(x, rect.width));
             y = Math.max(0, Math.min(y, rect.height));
-
-
-            /* ==================================================
-               LENS POSITION
-            ================================================== */
-
+            /* ================================================== LENS POSITION ================================================== */
             const lensWidth = zoomLens.offsetWidth;
             const lensHeight = zoomLens.offsetHeight;
-
-
             let lensX = x - lensWidth / 2;
             let lensY = y - lensHeight / 2;
-
-
-            lensX = Math.max(
-                0,
-                Math.min(lensX, rect.width - lensWidth)
-            );
-
-            lensY = Math.max(
-                0,
-                Math.min(lensY, rect.height - lensHeight)
-            );
-
-
+            lensX = Math.max(0, Math.min(lensX, rect.width - lensWidth));
+            lensY = Math.max(0, Math.min(lensY, rect.height - lensHeight));
             zoomLens.style.left = lensX + 'px';
             zoomLens.style.top = lensY + 'px';
-
-
-            /* ==================================================
-               ZOOM PREVIEW POSITION
-            ================================================== */
-
+            /* ================================================== ZOOM PREVIEW POSITION ================================================== */
             const percentX = (x / rect.width) * 100;
             const percentY = (y / rect.height) * 100;
-
-
-            zoomPreview.style.backgroundPosition =
-                percentX + '% ' + percentY + '%';
-
+            zoomPreview.style.backgroundPosition = percentX + '% ' + percentY + '%';
         });
-
     }
-
-
-    /* ==========================================================
-       CHANGE MAIN IMAGE
-    ========================================================== */
-
+    /* ========================================================== CHANGE MAIN IMAGE ========================================================== */
     window.trChangeImage = function (src, element) {
-
         const mainImg = document.getElementById('trMainImage');
-
-        if (!mainImg) {
-            return;
-        }
-
-
+        if (!mainImg) { return; }
         mainImg.style.opacity = '0.4';
-
-
         setTimeout(function () {
-
             mainImg.src = src;
-
             updateZoomImage();
-
             mainImg.style.opacity = '1';
-
         }, 100);
-
-
-        document
-            .querySelectorAll('.tr-thumbnails img')
-            .forEach(function (img) {
-
-                img.classList.remove('active');
-
-            });
-
-
-        if (element) {
-            element.classList.add('active');
-        }
-
+        document.querySelectorAll('.tr-thumbnails img').forEach(function (img) {
+            img.classList.remove('active');
+        });
+        if (element) { element.classList.add('active'); }
     };
-
-
-    /* ==========================================================
-       QUANTITY
-    ========================================================== */
-
+    /* ========================================================== QUANTITY ========================================================== */
     window.trUpdateQty = function (change) {
-
         const input = document.getElementById('trQtyInput');
-
-        if (!input) {
-            return;
-        }
-
-
+        if (!input) { return; }
         let value = parseInt(input.value) + change;
-
-
-        if (value < 1) {
-            value = 1;
-        }
-
-
-        if (value > 99) {
-            value = 99;
-        }
-
-
+        if (value < 1) { value = 1; }
+        if (value > 99) { value = 99; }
         input.value = value;
-
-
-        const cartQuantity =
-            document.getElementById('trCartQuantity');
-
-
-        if (cartQuantity) {
-            cartQuantity.value = value;
-        }
-
-
+        const cartQuantity = document.getElementById('trCartQuantity');
+        if (cartQuantity) { cartQuantity.value = value; }
         trUpdateTotalPrice(value);
         trUpdateWhatsApp();
-
     };
-
-
-    /* ==========================================================
-       TOTAL PRICE
-    ========================================================== */
-
+    /* ========================================================== TOTAL PRICE ========================================================== */
     function trUpdateTotalPrice(quantity) {
-
-        const totalDisplay =
-            document.getElementById('trTotalPriceDisplay');
-
-
-        if (!totalDisplay) {
-            return;
-        }
-
-
+        const totalDisplay = document.getElementById('trTotalPriceDisplay');
+        if (!totalDisplay) { return; }
         {% with product.default_variant as variant %}
-
         const unitPrice = {{ variant.price|default:0 }};
-
         {% endwith %}
-
-
         const total = unitPrice * quantity;
-
-
-        totalDisplay.textContent =
-            'PKR ' + total.toLocaleString();
-
+        totalDisplay.textContent = 'PKR ' + total.toLocaleString();
     }
-
-
-    /* ==========================================================
-       WHATSAPP
-    ========================================================== */
-
+    /* ========================================================== WHATSAPP ========================================================== */
     function trUpdateWhatsApp() {
-
-        const quantity =
-            document.getElementById('trQtyInput').value;
-
-
-        const btn =
-            document.getElementById('trWhatsappBtn');
-
-
-        if (!btn) {
-            return;
-        }
-
-
-        const productName =
-            "{{ product.name|escapejs }}";
-
-
+        const quantity = document.getElementById('trQtyInput').value;
+        const btn = document.getElementById('trWhatsappBtn');
+        if (!btn) { return; }
+        const productName = "{{ product.name|escapejs }}";
         {% with product.default_variant as variant %}
-
-        const price =
-            "{{ variant.price|default:'0' }}";
-
+        const price = "{{ variant.price|default:'0' }}";
         {% endwith %}
-
-
-        const whatsappNumber =
-            "{{ site_settings.whatsapp_number|default:'923089272829' }}";
-
-
-        const cleanNumber =
-            whatsappNumber.replace(/[^0-9]/g, '');
-
-
-        const message =
-            'Hello! I am interested in this product:\n\n' +
-            '📦 *Product:* ' + productName + '\n' +
-            '💰 *Price:* PKR ' + price + '\n' +
-            '🔢 *Quantity:* ' + quantity +
-            '\n\nPlease provide more details.';
-
-
-        const encodedMessage =
-            encodeURIComponent(message);
-
-
-        btn.href =
-            'https://wa.me/' +
-            cleanNumber +
-            '?text=' +
-            encodedMessage;
-
+        const whatsappNumber = "{{ site_settings.whatsapp_number|default:'923089272829' }}";
+        const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
+        const message = 'Hello! I am interested in this product:\n\n' + '📦 *Product:* ' + productName + '\n' + '💰 *Price:* PKR ' + price + '\n' + '🔢 *Quantity:* ' + quantity + '\n\nPlease provide more details.';
+        const encodedMessage = encodeURIComponent(message);
+        btn.href = 'https://wa.me/' + cleanNumber + '?text=' + encodedMessage;
     }
-
-
     trUpdateWhatsApp();
-
-
-    /* ==========================================================
-       TABS
-    ========================================================== */
-
-    const tabBtns =
-        document.querySelectorAll('.tr-tab-btn');
-
-
+    /* ========================================================== TABS ========================================================== */
+    const tabBtns = document.querySelectorAll('.tr-tab-btn');
     tabBtns.forEach(function (btn) {
-
         btn.addEventListener('click', function () {
-
-            tabBtns.forEach(function (b) {
-
-                b.classList.remove('active');
-
-            });
-
-
-            document
-                .querySelectorAll('.tr-tab-pane')
-                .forEach(function (pane) {
-
-                    pane.classList.remove('active');
-
-                });
-
-
+            tabBtns.forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tr-tab-pane').forEach(function (pane) { pane.classList.remove('active'); });
             this.classList.add('active');
-
-
-            const target =
-                document.getElementById(
-                    this.getAttribute('data-tab')
-                );
-
-
-            if (target) {
-                target.classList.add('active');
-            }
-
+            const target = document.getElementById(this.getAttribute('data-tab'));
+            if (target) { target.classList.add('active'); }
         });
-
     });
-
 });
-
 </script>
-
 {% endblock %}
