@@ -76,7 +76,14 @@
         max-height: 80vh;
         overflow-y: auto;
     }
-    .tr-mobile-menu.open { display: flex !important; }
+    .tr-mobile-menu.open {
+        display: flex;
+        position: revert-rule;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+    } 
     .tr-mobile-menu a { 
         padding: 15px 20px; 
         color: #1a1a1a; 
@@ -183,11 +190,11 @@
 
             <!-- Mobile Menu (Hidden by default) -->
             <div class="tr-mobile-menu" id="trMobileMenu">
+                <a href="{% url 'products:product-list' %}" style="border-top:2px solid #000000; margin-top:5px;">All Collection</a>
                 <a href="{% url 'products:product-list' %}?category=women">Women</a>
                 <a href="{% url 'products:product-list' %}?category=men">Men</a>
                 <a href="{% url 'products:product-list' %}?category=GEN Z">GEN Z</a>
                 <a href="{% url 'products:product-list' %}?category=teens">Teens</a>
-                <a href="{% url 'products:product-list' %}" style="border-top:2px solid #000000; margin-top:5px;">All Products</a>
                 <a href="{% url 'cart:view' %}" style="border-top:2px solid #000000; margin-top:5px;">Bag (0)</a>
             </div>
         </div>
