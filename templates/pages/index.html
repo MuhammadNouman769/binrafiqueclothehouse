@@ -767,6 +767,15 @@ a { text-decoration: none; }
 }
 
 @media (max-width: 414px) {
+    .tag-sets {
+        color: #000 !important;
+        font-size: 10px !important;
+        border: 1px solid #111 !important;
+        border-radius: 50px 50px 50px !important;
+        padding: 7px 10px !important;
+        display: inline-block;
+        background: #fff;
+    }
     .trending-img-wrap {
         height: 300px;
     }
@@ -781,6 +790,41 @@ a { text-decoration: none; }
     .best-seller-image {
         height: 320px;
     }
+
+/* ==========================================================
+   RESPONSIVE - TRENDING SECTION
+========================================================== */
+@media (max-width: 768px) {
+    .trnd-space-remove {  
+        padding-top: 9px !important;
+        padding-bottom: 0px !important; /* Extra spacing remove */
+    }
+    .tag-set {
+        color: #000 !important;
+        font-size: 10px!important;
+        border: 1px solid #111!important;
+        border-radius: 50px 50px 50px!important;
+        padding: 7px 7px!important;
+        display: inline-block;
+        background: #fff;
+    }
+    .trending-img-wraped {
+        height: 425px!important;
+    }
+   .new-arrivaled-image {
+        height: 451px;
+    }
+    .best-selled-image {
+        height: 450px;
+    }
+    .serviced-info-container {
+        width: 100%;
+        min-height: 165px;
+        display: flow;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+   }
+}
 }
 </style>
 
@@ -825,7 +869,7 @@ a { text-decoration: none; }
 <div class="container-fluid py-5">
     <div class="container trnd-space-remove py-5">
         <div class="tab-class">
-            <div class="row g-4 mb-4 align-items-center">
+            <div class="row  g-4 mb-4 align-items-center">
                 <div class="col-lg-4">
                     <h1 style="color:#000;">TRENDING</h1>
                 </div>
@@ -833,13 +877,13 @@ a { text-decoration: none; }
                     <ul class="nav nav-pills d-inline-flex">
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="pill" href="#tab-all">
-                                <span class="trnd">All</span>
+                                <span class="tag-set tag-sets trnd">All</span>
                             </a>
                         </li>
                         {% for category_data in category_products_list %}
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="pill" href="#tab-{{ category_data.category.id }}">
-                                <span class="trnd">{{ category_data.category.title }}</span>
+                                <span class="tag-set trnd">{{ category_data.category.title }}</span>
                             </a>
                         </li>
                         {% endfor %}
@@ -853,7 +897,7 @@ a { text-decoration: none; }
                         {% for product in trending_products %}
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="trending-card">
-                                <div class="trending-img-wrap">
+                                <div class="trending-img-wrap trending-img-wraped">
                                     <!-- ✅ Clickable Image Overlay -->
                                     <a href="{% url 'products:product-detail' slug=product.slug %}" 
                                        style="position: absolute; inset: 0; z-index: 4; display: block;" 
@@ -978,7 +1022,7 @@ a { text-decoration: none; }
             {% for product in new_arrivals %}
             <div class="new-arrival-item">
                 <a href="{% url 'products:product-detail' slug=product.slug %}" style="display:block;">
-                    <div class="new-arrival-image">
+                    <div class="new-arrival-image new-arrivaled-image">
                         {% with product.default_variant as variant %}
                             {% if variant %}
                                 {% with variant.images.all as images %}
@@ -1036,7 +1080,7 @@ a { text-decoration: none; }
             {% for product in best_sellers|default:trending_products|slice:":8" %}
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                 <div class="best-seller-card">
-                    <div class="best-seller-image">
+                    <div class="best-seller-image best-selled-image">
                         <!-- ✅ Clickable Image Overlay -->
                         <a href="{% url 'products:product-detail' slug=product.slug %}" 
                            style="position: absolute; inset: 0; z-index: 4; display: block;" 
@@ -1149,7 +1193,7 @@ a { text-decoration: none; }
      SERVICE INFO BAR
 ========================================================== -->
 <section class="service-info-bar">
-    <div class="service-info-container">
+    <div class="service-info-container serviced-info-container">
 
         <!-- FREE SHIPPING -->
         <div class="service-info-item">
