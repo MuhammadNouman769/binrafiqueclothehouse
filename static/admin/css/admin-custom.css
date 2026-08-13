@@ -1,0 +1,13 @@
+/* ✅ Force text to show beside logo */
+.unfold-header .unfold-logo-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.unfold-header .unfold-logo-container .unfold-logo-text {
+    display: block !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
