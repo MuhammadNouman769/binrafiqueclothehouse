@@ -2,7 +2,7 @@ from django.db import models
 from apps.utils.models import BaseModel
 from apps.products.models.product_variant import ProductVariant
 
-
+""" ==================== Cart Model ==================== """
 class Cart(BaseModel):
     """
     Session-based shopping cart for guest users.
@@ -33,7 +33,7 @@ class Cart(BaseModel):
     def __str__(self):
         return f"Cart ({self.session_key[:10]}...)" if self.session_key else "Cart (No Session)"
 
-
+""" ==================== Cart Item Model ==================== """
 class CartItem(BaseModel):
     """
     Individual item inside a cart.
@@ -46,7 +46,7 @@ class CartItem(BaseModel):
 
     variant = models.ForeignKey(
         ProductVariant,
-        on_delete=models.PROTECT,  # 🛡️ Prevents deletion if in a cart
+        on_delete=models.PROTECT,  #  Prevents deletion if in a cart
         related_name="cart_items",
     )
 

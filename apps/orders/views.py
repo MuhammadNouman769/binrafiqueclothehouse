@@ -68,14 +68,14 @@ class CheckoutView(View):
         cart.is_active = False
         cart.save()
 
-        # ✅ Generate PDF Link
+        #  Generate PDF Link
         pdf_url = request.build_absolute_uri(reverse('orders:order_pdf', args=[order.order_id]))
 
         # Get WhatsApp number from SiteSettings
         site_settings = SiteSetting.get_settings()
         whatsapp_number = site_settings.whatsapp_number
 
-        # ✅ Generate WhatsApp Message (Text + PDF Link)
+        #  Generate WhatsApp Message (Text + PDF Link)
         message = order.whatsapp_message
         message += f"\n\n📄 Download Receipt: {pdf_url}"
 
@@ -85,7 +85,7 @@ class CheckoutView(View):
         return redirect(whatsapp_url)
 
 
-# ✅ PDF Download View (For Receipt)
+#  PDF Download View (For Receipt)
 class OrderPDFView(View):
     def get(self, request, order_id):
         order = get_object_or_404(Order, order_id=order_id)

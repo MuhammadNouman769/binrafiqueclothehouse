@@ -11,9 +11,8 @@ from apps.products.models.product_variant import ProductVariant
 from apps.products.models.variant_image import VariantImage
 from apps.testimonials.models.testimonial import Testimonial
 
+
 """ ========================= Home View ========================= """
-
-
 class HomeView(TemplateView):
     template_name = "pages/index.html"
 
@@ -164,8 +163,6 @@ class HomeView(TemplateView):
 
 
 """ ========================= Product List View ========================= """
-
-
 class ProductListView(ListView):
     model = Product
     template_name = "products/product_list.html"
@@ -247,8 +244,6 @@ class ProductListView(ListView):
 
 
 """ ========================= Product Detail View ========================= """
-
-
 class ProductDetailView(DetailView):
     model = Product
     template_name = "products/product_detail.html"
@@ -324,8 +319,6 @@ class ProductDetailView(DetailView):
 
 
 """ ========================= AJAX Search Suggestions View ========================="""
-
-
 @require_GET
 def search_suggestions(request):
     """

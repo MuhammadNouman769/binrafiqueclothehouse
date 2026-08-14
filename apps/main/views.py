@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from .models import NewsletterSubscriber
 
 
+""" ================= NewsLetterViews ================ """
 @csrf_exempt
 @require_POST
 def newsletter_subscribe(request):
@@ -21,38 +22,8 @@ def newsletter_subscribe(request):
     return JsonResponse({"success": True, "message": "Subscribed successfully!"})
 
 
-class TermsOfUseView(TemplateView):
-    template_name = "pages/terms-of-use.html"
 
-
-class PrivacyPolicyView(TemplateView):
-    template_name = "pages/privacy-policy.html"
-
-
-class FAQsView(TemplateView):
-    template_name = "pages/faqs.html"
-
-
-class CartView(TemplateView):
-    template_name = "cart/cart.html"
-
-
-class CheckoutView(TemplateView):
-    template_name = "orders/checkout.html"
-
-
-class TestimonialView(TemplateView):
-    template_name = "testimonials/testimonial.html"
-
-
-class ErrorView(TemplateView):
-    template_name = "errors/404.html"
-
-
-class Error500View(TemplateView):
-    template_name = "errors/500.html"
-
-
+""" ================== SiteMApViews ================== """
 class SitemapView(TemplateView):
     template_name = "pages/sitemap.html"
 
@@ -221,3 +192,26 @@ class SitemapView(TemplateView):
         ]
 
         return context
+
+
+""" ================== StaticViews =================== """
+class TermsOfUseView(TemplateView):
+    template_name = "pages/terms-of-use.html"
+class PrivacyPolicyView(TemplateView):
+    template_name = "pages/privacy-policy.html"
+class FAQsView(TemplateView):
+    template_name = "pages/faqs.html"
+class CartView(TemplateView):
+    template_name = "cart/cart.html"
+class CheckoutView(TemplateView):
+    template_name = "orders/checkout.html"
+
+class TestimonialView(TemplateView):
+    template_name = "testimonials/testimonial.html"
+
+""" ====================== ErrorsHandlerViews ===================== """
+class ErrorView(TemplateView):
+    template_name = "errors/404.html"
+class Error500View(TemplateView):
+    template_name = "errors/500.html"
+

@@ -1,8 +1,6 @@
 from django.core.exceptions import ValidationError
 
 """ ================= Validators =============== """
-
-
 def validate_image_size(image):
     max_size = 5 * 1024 * 1024
 

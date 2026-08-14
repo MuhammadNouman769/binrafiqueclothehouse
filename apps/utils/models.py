@@ -7,8 +7,6 @@ from django.utils.text import slugify
 from .managers import AllObjectsManager, BaseManager
 
 """ ==================== Base Models ================= """
-
-
 class BaseModel(models.Model):
     id = models.BigAutoField(primary_key=True)
 

@@ -1,8 +1,6 @@
 from django.db import models
 
 """ ==================== Managers ================= """
-
-
 class SoftDeleteQuerySet(models.QuerySet):
     def active(self):
         return self.filter(is_active=True)

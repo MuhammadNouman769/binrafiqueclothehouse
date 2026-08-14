@@ -10,6 +10,7 @@ from django.shortcuts import render
 logger = logging.getLogger(__name__)
 
 
+""" ===================== Production Level Errors Handel View ================"""
 def custom_404(request, exception):
     """Custom 404 page handler"""
     logger.error(f"404 Error: {exception}")
@@ -40,6 +41,7 @@ def custom_500(request):
     return render(request, "500.html", {"site_settings": site_settings}, status=500)
 
 
+""" ================= Production Level Media serve View ================= """
 def serve_media(request, path):
     """Serve media files in production with DEBUG=False"""
     file_path = os.path.join(settings.MEDIA_ROOT, path)

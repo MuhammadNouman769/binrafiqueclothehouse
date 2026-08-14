@@ -2,40 +2,33 @@ from django.db import models
 
 from apps.utils.models import BaseModel
 
-
+""" =================== SiteSittng ================= """
 class SiteSetting(BaseModel):
     """
     Site-wide settings that can be configured from admin
     """
-
     # WhatsApp Settings
     whatsapp_number = models.CharField(
         max_length=20,
         default="923285774948",
         help_text="WhatsApp number with country code (e.g., 923285774948 for +92 328 5774948)",
     )
-
     whatsapp_message_template = models.TextField(
         default="Hello! I'm interested in this product: {product_name}\nPrice: {price}\n\nCan you provide more details?",
         help_text="Message template for WhatsApp. Use {product_name}, {price}, {product_url} as variables.",
     )
-
     # Site Information
     site_name = models.CharField(max_length=100, default="Tahir Rafique Clothe House", help_text="Name of the site")
-
     site_email = models.EmailField(
         default="info@tahirrafiqueclothehouse.com",
         help_text="Email address for contact form submissions",
     )
-
     site_phone = models.CharField(
         max_length=20, default="+92 300 1234567", help_text="Contact phone number"
     )
-
     site_address = models.TextField(
         default="Shekhah Wala Bazar, Nazad HabibBank, Farooqabad, Pakistan"
     )
-
     class Meta:
         verbose_name = "Site Setting"
         verbose_name_plural = "Site Settings"

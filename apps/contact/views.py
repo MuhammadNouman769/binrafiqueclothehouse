@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from apps.whatspp.models.whatsapp_setting import SiteSetting
 
 
+""" ================ ContactView =============== """
 class ContactView(TemplateView):
     template_name = "pages/contact.html"
 
@@ -107,7 +108,7 @@ class ContactView(TemplateView):
 
             messages.success(
                 request,
-                "✅ Thank you for your message! We will get back to you shortly.",
+                " Thank you for your message! We will get back to you shortly.",
             )
 
         except Exception as e:
@@ -118,7 +119,7 @@ class ContactView(TemplateView):
 
             messages.error(
                 request,
-                "❌ There was an error sending your message. Please try again later.",
+                " There was an error sending your message. Please try again later.",
             )
 
         return self.get(request, *args, **kwargs)

@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from .models import Cart, CartItem
 from apps.products.models.product_variant import ProductVariant
 
-
+""" =================== CartView =================== """
 class CartView(View):
     """Display the current user's cart"""
     template_name = "cart/cart.html"
@@ -33,7 +33,7 @@ class CartView(View):
         return render(request, self.template_name, context)
 
     def get_or_create_cart(self, request):
-        # ✅ FIX: Ensure session key exists before creating cart
+        # FIX: Ensure session key exists before creating cart
         if not request.session.session_key:
             request.session.save()  # This forces a new session key
         session_key = request.session.session_key
@@ -41,13 +41,14 @@ class CartView(View):
         return cart
 
 
+""" ==================== CartItemViw =================== """
 class AddToCartView(View):
     """Add a variant to the cart (handles quantity from POST)"""
     def post(self, request, variant_id):
         cart = self.get_or_create_cart(request)
         variant = get_object_or_404(ProductVariant, id=variant_id, is_active=True)
 
-        # ✅ GET QUANTITY FROM FORM (Sent from product detail page)
+        #  GET QUANTITY FROM FORM (Sent from product detail page)
         quantity = int(request.POST.get('quantity', 1))
 
         cart_item, created = CartItem.objects.get_or_create(cart=cart, variant=variant)
@@ -65,13 +66,15 @@ class AddToCartView(View):
         return redirect('cart:view')
 
     def get_or_create_cart(self, request):
-        # ✅ FIX: Ensure session key exists before creating cart
+        #  FIX: Ensure session key exists before creating cart
         if not request.session.session_key:
             request.session.save()  # This forces a new session key
         session_key = request.session.session_key
         cart, created = Cart.objects.get_or_create(session_key=session_key)
         return cart
 
+
+""" =================== UpdateCartView ================ """
 class UpdateCartView(View):
     """Increase, decrease, or remove items from cart with AJAX"""
     def post(self, request, item_id):
@@ -90,7 +93,7 @@ class UpdateCartView(View):
         elif action == 'remove':
             cart_item.delete()
 
-        # ✅ Check if it's an AJAX request
+        #  Check if it's an AJAX request
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             cart = cart_item.cart
             return JsonResponse({
@@ -98,12 +101,13 @@ class UpdateCartView(View):
                 'new_quantity': cart_item.quantity if cart_item.pk else 0,
                 'item_total': float(cart_item.total_price) if cart_item.pk else 0,
                 'cart_total': float(cart.total_price),
-                'total_items': cart.total_items,  # ✅ This will be caught by header
+                'total_items': cart.total_items,  #  This will be caught by header
             })
 
         # Fallback for non-AJAX (just in case)
         return redirect('cart:view')
 
+""" ================= GEtCountViw ================ """
 class GetCartCountView(View):
     """AJAX endpoint to return total items in cart"""
     def get(self, request):

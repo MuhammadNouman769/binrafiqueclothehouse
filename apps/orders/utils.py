@@ -7,7 +7,7 @@ def render_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
     
-    # ✅ FIX: Encode to UTF-8 to avoid Unicode errors
+    #  FIX: Encode to UTF-8 to avoid Unicode errors
     html = html.encode('utf-8')
     
     result = BytesIO()
