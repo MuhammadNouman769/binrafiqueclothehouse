@@ -1,11 +1,11 @@
-# 🏆 Bin Rafique Clothe House - Premium Clothing E-Commerce Platform
+# 🏆 Tahir Rafique Clothe House - Premium Clothing E-Commerce Platform
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-5.x-success.svg)](https://www.djangoproject.com/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple.svg)](https://getbootstrap.com/)
 [![Status](https://img.shields.io/badge/Status-Production-orange.svg)]()
 
-**Bin Rafique Clothe House** is a modern, premium fashion and clothing e-commerce platform developed with Django. Customers can browse the latest collections (Trending, New Arrivals, Unstitched, Formals), add items to their shopping cart, and place orders directly through WhatsApp without creating an account.
+**Tahir Rafique Clothe House** is a modern, premium fashion and clothing e-commerce platform developed with Django. Customers can browse the latest collections (Trending, New Arrivals, Unstitched, Formals), add items to their shopping cart, and place orders directly through WhatsApp without creating an account.
 
 ---
 
@@ -68,7 +68,7 @@
 # 📂 Project Structure
 
 ```text
-binrafiqueclothehouse/
+Tahirrafiqueclothehouse/
 │
 ├── apps/
 │   ├── main/
@@ -109,8 +109,8 @@ ProductOptionValue  VariantImage
 ⚙️ Installation
 Clone Repository
 
-git clone https://github.com/MuhammadNouman769/binrafiqueclothehouse.git
-cd binrafiqueclothehouse
+git clone https://github.com/MuhammadNouman769/Tahirrafiqueclothehouse.git
+cd Tahirrafiqueclothehouse
 
 Create Virtual Environment
 

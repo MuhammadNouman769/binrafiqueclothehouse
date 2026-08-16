@@ -20,9 +20,9 @@
     .tr-nav-right a:hover, .tr-nav-right button:hover { color: #000000; }
     .tr-nav-right button i { font-size: 16px; }
     
-    /* ✅ Live Bag Counter */
+    /* Live Bag Counter */
     .tr-bag-count {
-        color: #ffffff;
+        color: #000000;
         border-radius: 50%;
         padding: 0 6px;
         font-size: 10px;
@@ -180,7 +180,7 @@
                         SEARCH <i class="fas fa-search"></i>
                     </button>
                     <a href="{% url 'cart:view' %}" id="trBagLink">
-                        BAG 
+                        
                         <i class="fas fa-shopping-bag" style="position:relative;">
                             <span class="tr-bag-count" id="trBagCount">0</span>
                         </i>
@@ -209,8 +209,8 @@
                     <a href="{% url 'products:product-list' %}">All Collection</a>
                     <a href="{% url 'products:product-list' %}?category=unstitched">Unstitched</a>
                     <a href="{% url 'products:product-list' %}?category=formals">Formals</a>
-                    <a href="{% url 'products:product-list' %}?category=special-kurta">SPECIAL KURTA</a>
-                    <a href="{% url 'products:product-list' %}?category=sherwani">SHERWANI</a>
+                    <a href="{% url 'products:product-list' %}?category=abaya">ABAYA</a>
+                    <a href="{% url 'products:product-list' %}?category=shawl">Shawl</a>
                 </nav>
                 <div style="width: 50px;"></div>
             </div>
