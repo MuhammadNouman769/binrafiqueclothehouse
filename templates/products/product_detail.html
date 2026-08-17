@@ -81,12 +81,13 @@
    BUTTONS
 ========================================================== */
 .tr-actions { display: flex; gap: 12px; margin: 18px 0; flex-wrap: wrap; }
-.tr-btn-addbag, .tr-btn-ordernow { flex: 1; padding: 14px 25px; border-radius: 50px; font-weight: 600; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 15px; min-width: 160px; cursor: pointer; }
+.tr-btn-addbag, .tr-btn-whatsapp { flex: 1; padding: 14px 25px; border-radius: 50px; font-weight: 600; border: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 15px; min-width: 160px; cursor: pointer; }
 .tr-btn-addbag { background: #111111; color: #ffffff; }
 .tr-btn-addbag:hover { background: #333333; color: #ffffff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
-.tr-btn-ordernow { background: #c9a84c; color: #111111; }
-.tr-btn-ordernow:hover { background: #b8973a; color: #111111; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201, 168, 76, 0.35); }
-.tr-btn-addbag i, .tr-btn-ordernow i { font-size: 18px; }
+.tr-btn-whatsapp { background: #25D366; color: #ffffff; }
+.tr-btn-whatsapp:hover { background: #128C7E; color: #ffffff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3); }
+.tr-btn-addbag i { font-size: 18px; }
+.tr-btn-whatsapp i { font-size: 20px; }
 .tr-delivery-note { color: #999; font-size: 12px; margin-top: 8px; }
 .tr-delivery-note i { margin-right: 4px; }
 /* ==========================================================
@@ -130,7 +131,7 @@
 /* ==========================================================
    RESPONSIVE - 992px
 ========================================================== */
-@media (max-width: 992px) { .tr-product-wrapper { padding: 35px 20px 50px; } .tr-product-card { padding: 25px; } .tr-image-wrapper { height: 420px; } .tr-zoom-preview, .tr-zoom-lens { display: none !important; } .tr-image-main { cursor: default; } .tr-actions { flex-direction: column; } .tr-btn-addbag, .tr-btn-ordernow { width: 100%; } .tr-related-grid { grid-template-columns: repeat(2, 1fr); } .tr-related-img-wrap { height: 300px; } }
+@media (max-width: 992px) { .tr-product-wrapper { padding: 35px 20px 50px; } .tr-product-card { padding: 25px; } .tr-image-wrapper { height: 420px; } .tr-zoom-preview, .tr-zoom-lens { display: none !important; } .tr-image-main { cursor: default; } .tr-actions { flex-direction: column; } .tr-btn-addbag, .tr-btn-whatsapp { width: 100%; } .tr-related-grid { grid-template-columns: repeat(2, 1fr); } .tr-related-img-wrap { height: 300px; } }
 /* ==========================================================
    RESPONSIVE - 768px
 ========================================================== */
@@ -138,7 +139,7 @@
 /* ==========================================================
    RESPONSIVE - 576px
 ========================================================== */
-@media (max-width: 576px) { .tr-product-wrapper { padding: 20px 10px 40px; } .tr-product-card { padding: 15px 10px; border-radius: 12px; } .tr-image-wrapper { height: 360px; border-radius: 10px; } .tr-product-name { font-size: 19px; } .tr-product-category { font-size: 12px; } .tr-product-price { font-size: 21px; } .tr-original-price { font-size: 14px !important; } .tr-total-price { font-size: 18px; } .tr-product-description { font-size: 13px; } .tr-quantity { justify-content: center; } .tr-actions { gap: 8px; } .tr-btn-addbag, .tr-btn-ordernow { min-width: 100%; padding: 13px 20px; } .tr-thumbnails { gap: 8px; } .tr-thumbnails img { width: 65px; height: 75px; } .tr-related { margin-top: 30px; } .tr-related-title { font-size: 18px; } .tr-related-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .tr-related-img-wrap { height: 210px; } .tr-related-name { font-size: 12px; min-height: 34px; } .tr-related-price { font-size: 13px; gap: 6px; } .tr-related-old { font-size: 12px; } .tr-related-btn { font-size: 11px; padding: 8px 0; } }
+@media (max-width: 576px) { .tr-product-wrapper { padding: 20px 10px 40px; } .tr-product-card { padding: 15px 10px; border-radius: 12px; } .tr-image-wrapper { height: 360px; border-radius: 10px; } .tr-product-name { font-size: 19px; } .tr-product-category { font-size: 12px; } .tr-product-price { font-size: 21px; } .tr-original-price { font-size: 14px !important; } .tr-total-price { font-size: 18px; } .tr-product-description { font-size: 13px; } .tr-quantity { justify-content: center; } .tr-actions { gap: 8px; } .tr-btn-addbag, .tr-btn-whatsapp { min-width: 100%; padding: 13px 20px; } .tr-thumbnails { gap: 8px; } .tr-thumbnails img { width: 65px; height: 75px; } .tr-related { margin-top: 30px; } .tr-related-title { font-size: 18px; } .tr-related-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .tr-related-img-wrap { height: 210px; } .tr-related-name { font-size: 12px; min-height: 34px; } .tr-related-price { font-size: 13px; gap: 6px; } .tr-related-old { font-size: 12px; } .tr-related-btn { font-size: 11px; padding: 8px 0; } }
 /* ==========================================================
    RESPONSIVE - 480px
 ========================================================== */
@@ -146,7 +147,7 @@
 /* ==========================================================
    RESPONSIVE - 375px
 ========================================================== */
-@media (max-width: 375px) { .tr-product-wrapper { padding: 12px 6px 30px; } .tr-product-card { padding: 10px 6px; border-radius: 10px; } .tr-image-wrapper { height: 270px; border-radius: 8px; } .tr-product-name { font-size: 16px; } .tr-product-category { font-size: 11px; } .tr-product-price { font-size: 18px; } .tr-product-price .tr-original-price { font-size: 12px !important; margin-left: 5px; } .tr-total-price { font-size: 16px; } .tr-total-price .tr-total-label { font-size: 13px; } .tr-product-description { font-size: 12px; line-height: 1.7; } .tr-meta-grid { padding: 10px; margin: 10px 0; } .tr-meta-item { padding: 4px 0; } .tr-meta-label, .tr-meta-value { font-size: 11px; } .tr-qty-btn { width: 34px; height: 34px; } .tr-qty-input { width: 48px; padding: 6px; font-size: 14px; } .tr-btn-addbag, .tr-btn-ordernow { font-size: 13px; padding: 12px 15px; } .tr-thumbnails img { width: 58px; height: 65px; } .tr-tabs { margin-top: 25px; padding-top: 18px; } .tr-tab-btn { padding: 8px 9px; font-size: 11px; } .tr-related-title { font-size: 16px; } .tr-related-img-wrap { height: 165px; } .tr-related-name { font-size: 11px; } .tr-related-price { font-size: 11px; } .tr-related-old { font-size: 10px; } .tr-related-btn { font-size: 10px; margin-top: 8px; padding: 7px 0; } }
+@media (max-width: 375px) { .tr-product-wrapper { padding: 12px 6px 30px; } .tr-product-card { padding: 10px 6px; border-radius: 10px; } .tr-image-wrapper { height: 270px; border-radius: 8px; } .tr-product-name { font-size: 16px; } .tr-product-category { font-size: 11px; } .tr-product-price { font-size: 18px; } .tr-product-price .tr-original-price { font-size: 12px !important; margin-left: 5px; } .tr-total-price { font-size: 16px; } .tr-total-price .tr-total-label { font-size: 13px; } .tr-product-description { font-size: 12px; line-height: 1.7; } .tr-meta-grid { padding: 10px; margin: 10px 0; } .tr-meta-item { padding: 4px 0; } .tr-meta-label, .tr-meta-value { font-size: 11px; } .tr-qty-btn { width: 34px; height: 34px; } .tr-qty-input { width: 48px; padding: 6px; font-size: 14px; } .tr-btn-addbag, .tr-btn-whatsapp { font-size: 13px; padding: 12px 15px; } .tr-thumbnails img { width: 58px; height: 65px; } .tr-tabs { margin-top: 25px; padding-top: 18px; } .tr-tab-btn { padding: 8px 9px; font-size: 11px; } .tr-related-title { font-size: 16px; } .tr-related-img-wrap { height: 165px; } .tr-related-name { font-size: 11px; } .tr-related-price { font-size: 11px; } .tr-related-old { font-size: 10px; } .tr-related-btn { font-size: 10px; margin-top: 8px; padding: 7px 0; } }
 /* ==========================================================
    TOUCH DEVICES
 ========================================================== */
@@ -275,10 +276,10 @@
                                     Add to Bag
                                 </button>
                             </form>
-                            <!-- Order Now Button - Goes to Checkout -->
-                            <a href="{% url 'orders:checkout' %}" class="tr-btn-ordernow" style="flex:1; text-align:center;">
-                                <i class="fas fa-credit-card"></i>
-                                Order Now
+                            <!-- WhatsApp Button - Sends Product Details + Image -->
+                            <a href="#" class="tr-btn-whatsapp" id="trWhatsappBtn" target="_blank" style="flex:1; text-align:center;">
+                                <i class="fab fa-whatsapp"></i>
+                                Order on WhatsApp
                             </a>
                         </div>
                         <div class="tr-delivery-note">
@@ -463,6 +464,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const cartQuantity = document.getElementById('trCartQuantity');
         if (cartQuantity) { cartQuantity.value = value; }
         trUpdateTotalPrice(value);
+        trUpdateWhatsApp();
     };
     /* ========================================================== TOTAL PRICE ========================================================== */
     function trUpdateTotalPrice(quantity) {
@@ -474,6 +476,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const total = unitPrice * quantity;
         totalDisplay.textContent = 'PKR ' + total.toLocaleString();
     }
+    /* ========================================================== WHATSAPP WITH IMAGE ========================================================== */
+    function trUpdateWhatsApp() {
+        const quantity = document.getElementById('trQtyInput').value;
+        const btn = document.getElementById('trWhatsappBtn');
+        if (!btn) { return; }
+        const productName = "{{ product.name|escapejs }}";
+        {% with product.default_variant as variant %}
+        const price = "{{ variant.price|default:'0' }}";
+        const productId = "{{ product.id|default:'0' }}";
+        {% endwith %}
+        // Get the main product image URL
+        const mainImage = document.getElementById('trMainImage');
+        let imageUrl = '';
+        if (mainImage) {
+            imageUrl = mainImage.src;
+        }
+        // Create message with product details and image
+        const message = 'Hello! I am interested in this product:\n\n' +
+            '📦 *Product:* ' + productName + '\n' +
+            '💰 *Price:* PKR ' + price + '\n' +
+            '🔢 *Quantity:* ' + quantity + '\n' +
+            '🆔 *Product ID:* #' + productId + '\n\n' +
+            '🖼️ *Product Image:* ' + imageUrl + '\n\n' +
+            'Please provide more details.';
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappNumber = "{{ site_settings.whatsapp_number|default:'923089272829' }}";
+        const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
+        btn.href = 'https://wa.me/' + cleanNumber + '?text=' + encodedMessage;
+    }
+    // Initial WhatsApp link
+    trUpdateWhatsApp();
     /* ========================================================== TABS ========================================================== */
     const tabBtns = document.querySelectorAll('.tr-tab-btn');
     tabBtns.forEach(function (btn) {
